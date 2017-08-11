@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ev
+set -e
 
 echo -e "\n\033[0;34m*** BUILD ***\n\033[0m"
 set -o pipefail && \
@@ -7,7 +7,7 @@ xcodebuild archive \
   -project Cooldown.xcodeproj \
   -scheme Cooldown \
   -configuration Release \
-  -archivePath artifacts/cooldown.xcarchive | xcpretty --color
+  -archivePath artifacts/Cooldown.xcarchive | xcpretty --color
 
 echo -e "\n\033[0;34m*** EXPORT ***\n\033[0m"
 set -o pipefail && \
