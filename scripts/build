@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ev
 
 echo -e "\n\033[0;34m*** BUILD ***\n\033[0m"
 set -o pipefail && \
@@ -16,3 +16,6 @@ xcodebuild \
   -exportOptionsPlist signing/appstore.plist \
   -archivePath "artifacts/cooldown.xcarchive" \
   -exportPath "artifacts" | xcpretty --color
+
+echo -e "\n\033[0;34m*** COMPRESSING ARTIFACTS ***\n\033[0m"
+tar -zcvf artifacts.tar.gz artifacts/
