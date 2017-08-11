@@ -37,10 +37,11 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shadowView.layer.shadowOffset = CGSize(width: 0, height: -2)
-        shadowView.layer.shadowColor = UIColor.black.cgColor
-        shadowView.layer.shadowOpacity = 0.15
-        shadowView.layer.shadowRadius = 2
+        // TODO: Uncomment when ready for iOS 11
+//        shadowView.layer.shadowOffset = CGSize(width: 0, height: -2)
+//        shadowView.layer.shadowColor = UIColor.black.cgColor
+//        shadowView.layer.shadowOpacity = 0.15
+//        shadowView.layer.shadowRadius = 2
     }
     
     override func viewWillAppear(_ animated: Bool) {

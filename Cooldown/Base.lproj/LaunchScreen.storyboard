@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13156.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GIG-EI-kJC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="npb-b6-m77">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13137.5"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="sdb-2x-hLC">
+        <scene sceneID="Ans-ud-c7X">
             <objects>
-                <viewController id="GIG-EI-kJC" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="YES" id="QrQ-jV-xhD">
+                <viewController id="npb-b6-m77" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CAI-T9-BBe"/>
+                        <viewControllerLayoutGuide type="bottom" id="xY2-j7-FOv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="teb-cj-4O9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aec-di-rZn">
-                                <rect key="frame" x="0.0" y="20" width="375" height="616.5"/>
-                                <gestureRecognizers/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyD-0A-kYJ">
+                                <rect key="frame" x="16" y="20" width="343" height="611"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="120"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="0.14999999999999999" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="-2" height="2"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ucn-gx-rgW">
-                                <rect key="frame" x="153.5" y="535" width="67" height="132"/>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="260" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAR-o8-jGm">
+                                <rect key="frame" x="154.5" y="535" width="65" height="132"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="titleShadowOffset" width="-2" height="2"/>
@@ -39,19 +44,20 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1019607843" green="0.79918619790000001" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="UEb-9g-Sbw" firstAttribute="trailing" secondItem="Aec-di-rZn" secondAttribute="trailing" id="B9u-7I-Pag"/>
-                            <constraint firstItem="Aec-di-rZn" firstAttribute="top" secondItem="UEb-9g-Sbw" secondAttribute="top" id="BbR-WZ-jgS"/>
-                            <constraint firstItem="Aec-di-rZn" firstAttribute="leading" secondItem="UEb-9g-Sbw" secondAttribute="leading" id="KNk-nL-aBT"/>
-                            <constraint firstItem="Ucn-gx-rgW" firstAttribute="firstBaseline" secondItem="Aec-di-rZn" secondAttribute="bottom" id="MLV-lb-bL4"/>
-                            <constraint firstItem="Ucn-gx-rgW" firstAttribute="centerX" secondItem="QrQ-jV-xhD" secondAttribute="centerX" id="NAu-SI-MFJ"/>
-                            <constraint firstItem="UEb-9g-Sbw" firstAttribute="bottom" secondItem="Ucn-gx-rgW" secondAttribute="bottom" id="o8K-aG-CQ3"/>
+                            <constraint firstItem="VyD-0A-kYJ" firstAttribute="top" secondItem="CAI-T9-BBe" secondAttribute="bottom" id="6fP-0n-BeJ"/>
+                            <constraint firstItem="VyD-0A-kYJ" firstAttribute="bottom" secondItem="IAR-o8-jGm" secondAttribute="firstBaseline" id="Jqq-17-Qk3"/>
+                            <constraint firstItem="VyD-0A-kYJ" firstAttribute="leading" secondItem="teb-cj-4O9" secondAttribute="leadingMargin" id="PHo-F3-CQn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VyD-0A-kYJ" secondAttribute="trailing" id="g3M-Uw-mJt"/>
+                            <constraint firstItem="IAR-o8-jGm" firstAttribute="centerX" secondItem="teb-cj-4O9" secondAttribute="centerX" id="i50-xN-7ym"/>
+                            <constraint firstItem="xY2-j7-FOv" firstAttribute="top" secondItem="IAR-o8-jGm" secondAttribute="bottom" id="lja-f6-CTh"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="UEb-9g-Sbw"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ok7-rU-krU" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="chm-sY-wrR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="264.80000000000001" y="-186.65667166416793"/>
         </scene>
     </scenes>
 </document>

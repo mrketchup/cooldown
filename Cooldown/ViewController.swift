@@ -22,13 +22,14 @@ extension Cooldown {
     
     // TODO: Remove when going back to Swift 4 Codable
     var jsonData: Data {
-        let json: [String: Any] = ["created": created, "remaining": remaining]
+        let json: [String: Any] = ["created": created.timeIntervalSinceReferenceDate, "remaining": remaining]
         return try! JSONSerialization.data(withJSONObject: json, options: [])
     }
     
     // TODO: Remove when going back to Swift 4 Codable
     init(json: [String: Any]) {
-        let created = json["created"] as! Date
+        let createdInterval = json["created"] as! TimeInterval
+        let created = Date(timeIntervalSinceReferenceDate: createdInterval)
         let remaining = json["remaining"] as! TimeInterval
         self.init(created: created, remaining: remaining)
     }
