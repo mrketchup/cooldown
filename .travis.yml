@@ -1,0 +1,10 @@
+osx_image: xcode9
+language: objective-c
+script:
+- ./scripts/install-signing
+- ./scripts/version
+- ./scripts/build
+branches:
+  only:
+  - develop
+  - /^\d+.\d+.\d+$/

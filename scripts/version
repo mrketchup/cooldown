@@ -1,0 +1,3 @@
+#!/bin/bash
+echo -e "\n\033[0;34m*** UPDATE BUILD NUMBER ***\n\033[0m"
+agvtool new-version -all $TRAVIS_BUILD_NUMBER
