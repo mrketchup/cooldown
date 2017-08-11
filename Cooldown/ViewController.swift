@@ -9,7 +9,9 @@
 import UIKit
 import UserNotifications
 
-struct Cooldown: Codable {
+// TODO: Uncomment when going back to Swift 4 Codable
+//struct Cooldown: Codable {
+struct Cooldown {
     var created: Date
     var remaining: TimeInterval
 }
@@ -17,6 +19,19 @@ struct Cooldown: Codable {
 extension Cooldown {
     
     var target: Date { return created.addingTimeInterval(remaining) }
+    
+    // TODO: Remove when going back to Swift 4 Codable
+    var jsonData: Data {
+        let json: [String: Any] = ["created": created, "remaining": remaining]
+        return try! JSONSerialization.data(withJSONObject: json, options: [])
+    }
+    
+    // TODO: Remove when going back to Swift 4 Codable
+    init(json: [String: Any]) {
+        let created = json["created"] as! Date
+        let remaining = json["remaining"] as! TimeInterval
+        self.init(created: created, remaining: remaining)
+    }
     
     static func +(left: Cooldown, right: Cooldown) -> Cooldown {
         let delta = right.created.timeIntervalSince(left.created)
@@ -50,14 +65,19 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var cooldown: Cooldown {
         get {
             if _cooldown == nil, let data = UserDefaults.standard.data(forKey: "cooldown") {
-                _cooldown = try? JSONDecoder().decode(Cooldown.self, from: data)
+                // TODO: Switch back when going back to Swift 4 Codable
+//                _cooldown = try? JSONDecoder().decode(Cooldown.self, from: data)
+                if let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] {
+                    _cooldown = Cooldown(json: json)
+                }
             }
             
             return _cooldown ?? Cooldown(created: Date(), remaining: 0)
         }
         set {
             _cooldown = newValue
-            let data = try? JSONEncoder().encode(newValue)
+            // TODO: Switch back when going back to Swift 4 Codable
+            let data = newValue.jsonData //try? JSONEncoder().encode(newValue)
             UserDefaults.standard.set(data, forKey: "cooldown")
             
             let content = UNMutableNotificationContent()
@@ -77,7 +97,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cooldownLabel.font = .monospacedDigitSystemFont(ofSize: 120, weight: .light)
+        cooldownLabel.font = .monospacedDigitSystemFont(ofSize: 120, weight: UIFontWeightLight)
         displayLink = CADisplayLink(target: self, selector: #selector(updateUI))
         displayLink?.preferredFramesPerSecond = 4
         displayLink?.add(to: RunLoop.main, forMode: .commonModes)
