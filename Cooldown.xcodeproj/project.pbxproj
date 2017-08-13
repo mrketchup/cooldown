@@ -523,6 +523,7 @@
 				34432A331F40D2C8006BDE24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		344C1C871F3A451F0005BB10 /* Build configuration list for PBXProject "Cooldown" */ = {
 			isa = XCConfigurationList;
