@@ -13,6 +13,10 @@
 		34432A291F40D2C8006BDE24 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34432A281F40D2C8006BDE24 /* TodayViewController.swift */; };
 		34432A2C1F40D2C8006BDE24 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34432A2A1F40D2C8006BDE24 /* MainInterface.storyboard */; };
 		34432A311F40D2C8006BDE24 /* Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 34432A231F40D2C8006BDE24 /* Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		34432A3C1F40E673006BDE24 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34432A3B1F40E673006BDE24 /* State.swift */; };
+		34432A3D1F40E673006BDE24 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34432A3B1F40E673006BDE24 /* State.swift */; };
+		34432A3F1F40EAB2006BDE24 /* UIColor+Cooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34432A3E1F40EAB2006BDE24 /* UIColor+Cooldown.swift */; };
+		34432A401F40EAB2006BDE24 /* UIColor+Cooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34432A3E1F40EAB2006BDE24 /* UIColor+Cooldown.swift */; };
 		344C1C901F3A451F0005BB10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344C1C8F1F3A451F0005BB10 /* AppDelegate.swift */; };
 		344C1C921F3A451F0005BB10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344C1C911F3A451F0005BB10 /* ViewController.swift */; };
 		344C1C971F3A451F0005BB10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344C1C961F3A451F0005BB10 /* Assets.xcassets */; };
@@ -51,6 +55,12 @@
 		34432A281F40D2C8006BDE24 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		34432A2B1F40D2C8006BDE24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		34432A2D1F40D2C8006BDE24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34432A351F40E4FC006BDE24 /* Cooldown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cooldown.entitlements; sourceTree = "<group>"; };
+		34432A361F40E508006BDE24 /* Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Widget.entitlements; sourceTree = "<group>"; };
+		34432A371F40E5AC006BDE24 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
+		34432A381F40E5E5006BDE24 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
+		34432A3B1F40E673006BDE24 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		34432A3E1F40EAB2006BDE24 /* UIColor+Cooldown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Cooldown.swift"; sourceTree = "<group>"; };
 		344C1C8C1F3A451F0005BB10 /* Debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Debug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		344C1C8F1F3A451F0005BB10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		344C1C911F3A451F0005BB10 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,9 +101,31 @@
 			children = (
 				34432A281F40D2C8006BDE24 /* TodayViewController.swift */,
 				34432A2A1F40D2C8006BDE24 /* MainInterface.storyboard */,
-				34432A2D1F40D2C8006BDE24 /* Info.plist */,
+				34432A3A1F40E63E006BDE24 /* Resources */,
 			);
 			path = Widget;
+			sourceTree = "<group>";
+		};
+		34432A391F40E627006BDE24 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				34432A371F40E5AC006BDE24 /* Debug.entitlements */,
+				34432A351F40E4FC006BDE24 /* Cooldown.entitlements */,
+				344C1C961F3A451F0005BB10 /* Assets.xcassets */,
+				34084E291F3E4C6E00FEFB4D /* LaunchScreen.storyboard */,
+				344C1C9B1F3A451F0005BB10 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		34432A3A1F40E63E006BDE24 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				34432A381F40E5E5006BDE24 /* Debug.entitlements */,
+				34432A361F40E508006BDE24 /* Widget.entitlements */,
+				34432A2D1F40D2C8006BDE24 /* Info.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		344C1C831F3A451F0005BB10 = {
@@ -122,9 +154,9 @@
 				344C1C911F3A451F0005BB10 /* ViewController.swift */,
 				34DFE5F81F3B8A64007915D6 /* SettingsViewController.swift */,
 				341F6EB11F3E483A00E74712 /* Main.storyboard */,
-				344C1C961F3A451F0005BB10 /* Assets.xcassets */,
-				34084E291F3E4C6E00FEFB4D /* LaunchScreen.storyboard */,
-				344C1C9B1F3A451F0005BB10 /* Info.plist */,
+				34432A3B1F40E673006BDE24 /* State.swift */,
+				34432A3E1F40EAB2006BDE24 /* UIColor+Cooldown.swift */,
+				34432A391F40E627006BDE24 /* Resources */,
 			);
 			path = Cooldown;
 			sourceTree = "<group>";
@@ -181,9 +213,19 @@
 					34432A221F40D2C8006BDE24 = {
 						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					344C1C8B1F3A451F0005BB10 = {
 						CreatedOnToolsVersion = 9.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -233,6 +275,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				34432A291F40D2C8006BDE24 /* TodayViewController.swift in Sources */,
+				34432A401F40EAB2006BDE24 /* UIColor+Cooldown.swift in Sources */,
+				34432A3D1F40E673006BDE24 /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +287,8 @@
 				344C1C921F3A451F0005BB10 /* ViewController.swift in Sources */,
 				344C1C901F3A451F0005BB10 /* AppDelegate.swift in Sources */,
 				34DFE5F91F3B8A64007915D6 /* SettingsViewController.swift in Sources */,
+				34432A3C1F40E673006BDE24 /* State.swift in Sources */,
+				34432A3F1F40EAB2006BDE24 /* UIColor+Cooldown.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +334,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CODE_SIGN_ENTITLEMENTS = Widget/Debug.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = E5CQS5463W;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -305,6 +352,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CODE_SIGN_ENTITLEMENTS = Widget/Widget.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = E5CQS5463W;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -436,6 +484,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Cooldown/Debug.entitlements;
 				DEVELOPMENT_TEAM = E5CQS5463W;
 				INFOPLIST_FILE = Cooldown/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -452,6 +501,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Cooldown/Cooldown.entitlements;
 				DEVELOPMENT_TEAM = E5CQS5463W;
 				INFOPLIST_FILE = Cooldown/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

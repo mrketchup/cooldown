@@ -8,32 +8,10 @@
 
 import UIKit
 
-class Settings {
-    
-    static let shared = Settings()
-    
-    var _cooldownInterval: TimeInterval?
-    var cooldownInterval: TimeInterval {
-        get {
-            if _cooldownInterval == nil {
-                _cooldownInterval = UserDefaults.standard.object(forKey: "cooldownInterval") as? TimeInterval
-            }
-            
-            return _cooldownInterval ?? 60 * 60
-        }
-        set {
-            _cooldownInterval = newValue
-            UserDefaults.standard.set(_cooldownInterval, forKey: "cooldownInterval")
-        }
-    }
-    
-}
-
 class SettingsViewController: UIViewController {
     
     @IBOutlet var shadowView: UIView!
     @IBOutlet var cooldownDatePicker: UIDatePicker!
-    var settings: Settings = .shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +26,12 @@ class SettingsViewController: UIViewController {
         super.viewWillAppear(animated)
         DispatchQueue.main.async {
             // Workaround for a UIDatePicker bug not firing the first value change event
-            self.cooldownDatePicker.countDownDuration = self.settings.cooldownInterval
+            self.cooldownDatePicker.countDownDuration = State.shared.cooldownInterval
         }
     }
     
     @IBAction func cooldownDatePickerValueChanged(_ sender: UIDatePicker) {
-        settings.cooldownInterval = TimeInterval(sender.countDownDuration)
+        State.shared.cooldownInterval = TimeInterval(sender.countDownDuration)
     }
 
     @IBAction func dismiss() {
