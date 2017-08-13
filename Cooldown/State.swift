@@ -51,7 +51,11 @@ class State {
     
     static let shared = State()
     
+    #if DEBUG
     private let storage = UserDefaults(suiteName: "group.mattjones.cooldown.dev")!
+    #else
+    private let storage = UserDefaults(suiteName: "group.mattjones.cooldown")!
+    #endif
     
     private var _cooldown: Cooldown?
     var cooldown: Cooldown {
