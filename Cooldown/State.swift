@@ -57,21 +57,21 @@ class State {
     private let storage = UserDefaults(suiteName: "group.mattjones.cooldown")!
     #endif
     
-    private var _cooldown: Cooldown?
     var cooldown: Cooldown {
         get {
-            if _cooldown == nil, let data = storage.data(forKey: "cooldown") {
-                // TODO: Switch back when going back to Swift 4 Codable
-                //                _cooldown = try? JSONDecoder().decode(Cooldown.self, from: data)
-                if let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] {
-                    _cooldown = Cooldown(json: json)
-                }
+            guard let data = storage.data(forKey: "cooldown") else {
+                return Cooldown(created: Date(), remaining: 0)
             }
             
-            return _cooldown ?? Cooldown(created: Date(), remaining: 0)
+            // TODO: Switch back when going back to Swift 4 Codable
+            //                _cooldown = try? JSONDecoder().decode(Cooldown.self, from: data)
+            guard let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else {
+                return Cooldown(created: Date(), remaining: 0)
+            }
+            
+            return Cooldown(json: json)
         }
         set {
-            _cooldown = newValue
             // TODO: Switch back when going back to Swift 4 Codable
             let data = newValue.jsonData //try? JSONEncoder().encode(newValue)
             storage.set(data, forKey: "cooldown")
@@ -96,18 +96,12 @@ class State {
         }
     }
     
-    private var _cooldownInterval: TimeInterval?
     var cooldownInterval: TimeInterval {
         get {
-            if _cooldownInterval == nil {
-                _cooldownInterval = storage.object(forKey: "cooldownInterval") as? TimeInterval
-            }
-            
-            return _cooldownInterval ?? 60 * 60
+            return storage.object(forKey: "cooldownInterval") as? TimeInterval ?? 60 * 60
         }
         set {
-            _cooldownInterval = newValue
-            storage.set(_cooldownInterval, forKey: "cooldownInterval")
+            storage.set(newValue, forKey: "cooldownInterval")
         }
     }
     
