@@ -20,6 +20,8 @@
 		344C1C901F3A451F0005BB10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344C1C8F1F3A451F0005BB10 /* AppDelegate.swift */; };
 		344C1C921F3A451F0005BB10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344C1C911F3A451F0005BB10 /* ViewController.swift */; };
 		344C1C971F3A451F0005BB10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344C1C961F3A451F0005BB10 /* Assets.xcassets */; };
+		3465F5A51F424CD800AD9CBA /* UIColor+Cooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34432A3E1F40EAB2006BDE24 /* UIColor+Cooldown.swift */; };
+		3465F5A61F424CDC00AD9CBA /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34432A3B1F40E673006BDE24 /* State.swift */; };
 		34CD328A1F4127720045009B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34CD32881F4127720045009B /* Interface.storyboard */; };
 		34CD328C1F4127720045009B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34CD328B1F4127720045009B /* Assets.xcassets */; };
 		34CD32931F4127730045009B /* Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 34CD32921F4127720045009B /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -492,6 +494,8 @@
 			files = (
 				34CD329E1F4127730045009B /* NotificationController.swift in Sources */,
 				34CD329C1F4127730045009B /* ExtensionDelegate.swift in Sources */,
+				3465F5A51F424CD800AD9CBA /* UIColor+Cooldown.swift in Sources */,
+				3465F5A61F424CDC00AD9CBA /* State.swift in Sources */,
 				34CD329A1F4127730045009B /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,18 +14,38 @@
             <objects>
                 <controller spacing="0.0" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Watch" customModuleProvider="target">
                     <items>
-                        <group width="1" height="1" heightAdjustment="-44" alignment="left" layout="vertical" id="5cH-Pb-4oy">
+                        <group width="1" height="1" alignment="left" layout="vertical" radius="0.0" id="9qo-uO-J93">
                             <items>
-                                <timer width="1" alignment="center" verticalAlignment="center" textAlignment="center" numberOfLines="0" format="abbreviated" id="DZ7-GV-Y6N">
-                                    <fontDescription key="font" type="system" weight="medium" pointSize="40"/>
-                                </timer>
+                                <group width="1" height="1" heightAdjustment="-44" alignment="left" layout="vertical" id="5cH-Pb-4oy">
+                                    <items>
+                                        <timer width="1" alignment="center" verticalAlignment="center" textAlignment="center" numberOfLines="0" format="abbreviated" id="DZ7-GV-Y6N">
+                                            <fontDescription key="font" type="system" weight="medium" pointSize="40"/>
+                                        </timer>
+                                    </items>
+                                    <edgeInsets key="margins" left="8" right="8" top="0.0" bottom="0.0"/>
+                                </group>
+                                <button width="0.5" height="44" alignment="center" verticalAlignment="bottom" title="+" id="ygw-ey-8Ex">
+                                    <color key="backgroundColor" white="1" alpha="0.33000000000000002" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="40"/>
+                                    <connections>
+                                        <action selector="addButtonPressed:" destination="AgC-eL-Hgc" id="zhx-iP-LTj"/>
+                                    </connections>
+                                </button>
                             </items>
+                            <gestureRecognizers>
+                                <swipeGestureRecognizer direction="8" id="TWz-Ja-Nkj">
+                                    <connections>
+                                        <action selector="swipeDown:" destination="AgC-eL-Hgc" id="HS3-7p-uTy"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                            </gestureRecognizers>
+                            <color key="backgroundColor" red="0.1019607843" green="0.79918619790000001" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                         </group>
-                        <button width="0.5" height="44" alignment="center" verticalAlignment="bottom" title="+" id="ygw-ey-8Ex">
-                            <fontDescription key="font" type="boldSystem" pointSize="40"/>
-                        </button>
                     </items>
-                    <color key="backgroundColor" red="0.1019607843" green="0.79918619790000001" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="cooldownTimer" destination="DZ7-GV-Y6N" id="fQs-oM-dGY"/>
+                        <outlet property="interfaceGroup" destination="9qo-uO-J93" id="oHy-ND-m06"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>
