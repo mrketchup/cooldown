@@ -57,6 +57,10 @@ class State {
     private let storage = UserDefaults(suiteName: "group.mattjones.cooldown")!
     #endif
     
+    var message: [String: Any] {
+        return ["cooldown": cooldown.jsonData, "cooldownInterval": cooldownInterval]
+    }
+    
     var cooldown: Cooldown {
         get {
             guard let data = storage.data(forKey: "cooldown") else {

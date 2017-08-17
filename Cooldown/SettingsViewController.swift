@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WatchConnectivity
 
 class SettingsViewController: UIViewController {
     
@@ -32,6 +33,9 @@ class SettingsViewController: UIViewController {
     
     @IBAction func cooldownDatePickerValueChanged(_ sender: UIDatePicker) {
         State.shared.cooldownInterval = TimeInterval(sender.countDownDuration)
+        if WCSession.default().isReachable {
+            WCSession.default().sendMessage(State.shared.message, replyHandler: nil)
+        }
     }
 
     @IBAction func dismiss() {

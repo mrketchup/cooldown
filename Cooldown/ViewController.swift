@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WatchConnectivity
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
@@ -83,6 +84,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func bumpCooldown(multiplier: Double = 1) {
         State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
+        if WCSession.default().isReachable {
+            WCSession.default().sendMessage(State.shared.message, replyHandler: nil)
+        }
     }
 
 }

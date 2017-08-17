@@ -7,11 +7,13 @@
 //
 
 import WatchKit
+import WatchConnectivity
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
+class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 
     func applicationDidFinishLaunching() {
-        // Perform any final initialization of your application.
+        WCSession.default().delegate = self
+        WCSession.default().activate()
     }
 
     func applicationDidBecomeActive() {
@@ -43,6 +45,29 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             default:
                 // make sure to complete unhandled task types
                 task.setTaskCompleted()
+            }
+        }
+    }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if let error = error { print(error) }
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        guard let data = message["cooldown"] as? Data,
+            let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
+            let interval = message["cooldownInterval"] as? TimeInterval else
+        {
+            return
+        }
+        
+        State.shared.cooldown = Cooldown(json: json)
+        State.shared.cooldownInterval = interval
+        
+        DispatchQueue.main.async {
+            if let controller = WKExtension.shared().rootInterfaceController as? InterfaceController {
+                controller.updateUI()
+                controller.updateTimer()
             }
         }
     }

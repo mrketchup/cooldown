@@ -8,9 +8,10 @@
 
 import UIKit
 import UserNotifications
+import WatchConnectivity
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     
     var window: UIWindow?
     
@@ -20,7 +21,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if !granted, let error = error { print(error) }
         }
         
+        if WCSession.isSupported() {
+            WCSession.default().delegate = self
+            WCSession.default().activate()
+        }
+        
         return true
+    }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if let error = error { print(error) }
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        guard let data = message["cooldown"] as? Data,
+            let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
+            let interval = message["cooldownInterval"] as? TimeInterval else
+        {
+            return
+        }
+        
+        State.shared.cooldown = Cooldown(json: json)
+        State.shared.cooldownInterval = interval
+        
+        DispatchQueue.main.async {
+            if let controller = self.window?.rootViewController as? ViewController {
+                controller.updateUI()
+            }
+        }
     }
     
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import WatchKit
+import WatchConnectivity
 
 class InterfaceController: WKInterfaceController {
     
@@ -17,10 +18,7 @@ class InterfaceController: WKInterfaceController {
     
     override func willActivate() {
         super.willActivate()
-        if State.shared.cooldown.target > Date() {
-            cooldownTimer.setDate(State.shared.cooldown.target)
-            cooldownTimer.start()
-        }
+        updateTimer()
         
         let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
         RunLoop.main.add(timer, forMode: .commonModes)
@@ -37,20 +35,13 @@ class InterfaceController: WKInterfaceController {
     @IBAction func swipeDown(_ sender: WKSwipeGestureRecognizer) {
         bumpCooldown(multiplier: -1)
         updateUI()
-        if State.shared.cooldown.target > Date() {
-            cooldownTimer.setDate(State.shared.cooldown.target)
-            cooldownTimer.start()
-        } else {
-            cooldownTimer.setDate(Date())
-            cooldownTimer.stop()
-        }
+        updateTimer()
     }
     
     @IBAction func addButtonPressed(_ sender: WKInterfaceButton) {
         bumpCooldown()
         updateUI()
-        cooldownTimer.setDate(State.shared.cooldown.target)
-        cooldownTimer.start()
+        updateTimer()
     }
     
     @objc func updateUI() {
@@ -66,8 +57,19 @@ class InterfaceController: WKInterfaceController {
         interfaceGroup.setBackgroundColor(color)
     }
     
+    func updateTimer() {
+        if State.shared.cooldown.target > Date() {
+            cooldownTimer.setDate(State.shared.cooldown.target)
+            cooldownTimer.start()
+        } else {
+            cooldownTimer.setDate(Date())
+            cooldownTimer.stop()
+        }
+    }
+    
     func bumpCooldown(multiplier: Double = 1) {
         State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
+        WCSession.default().sendMessage(State.shared.message, replyHandler: nil)
     }
 
 }
