@@ -57,7 +57,7 @@ class State {
     private let storage = UserDefaults(suiteName: "group.mattjones.cooldown")!
     #endif
     
-    var message: [String: Any] {
+    var appContext: [String: Any] {
         return ["cooldown": cooldown.jsonData, "cooldownInterval": cooldownInterval]
     }
     

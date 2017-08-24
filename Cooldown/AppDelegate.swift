@@ -41,10 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         
     }
     
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        guard let data = message["cooldown"] as? Data,
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+        guard let data = applicationContext["cooldown"] as? Data,
             let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
-            let interval = message["cooldownInterval"] as? TimeInterval else
+            let interval = applicationContext["cooldownInterval"] as? TimeInterval else
         {
             return
         }
