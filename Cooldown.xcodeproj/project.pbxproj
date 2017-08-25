@@ -27,7 +27,6 @@
 		34CD32931F4127730045009B /* Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 34CD32921F4127720045009B /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		34CD329A1F4127730045009B /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CD32991F4127730045009B /* InterfaceController.swift */; };
 		34CD329C1F4127730045009B /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CD329B1F4127730045009B /* ExtensionDelegate.swift */; };
-		34CD329E1F4127730045009B /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CD329D1F4127730045009B /* NotificationController.swift */; };
 		34CD32A01F4127730045009B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34CD329F1F4127730045009B /* Assets.xcassets */; };
 		34CD32A41F4127730045009B /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 34CD32861F4127720045009B /* Watch.app */; };
 		34DFE5F91F3B8A64007915D6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DFE5F81F3B8A64007915D6 /* SettingsViewController.swift */; };
@@ -121,10 +120,8 @@
 		34CD328B1F4127720045009B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34CD328D1F4127720045009B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34CD32921F4127720045009B /* Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		34CD32981F4127730045009B /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		34CD32991F4127730045009B /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
 		34CD329B1F4127730045009B /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		34CD329D1F4127730045009B /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		34CD329F1F4127730045009B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34CD32A11F4127730045009B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34DFE5F81F3B8A64007915D6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -269,19 +266,9 @@
 			children = (
 				34CD32991F4127730045009B /* InterfaceController.swift */,
 				34CD329B1F4127730045009B /* ExtensionDelegate.swift */,
-				34CD329D1F4127730045009B /* NotificationController.swift */,
 				34A0E7611F4129D7004C3C88 /* Resources */,
-				34CD32971F4127730045009B /* Supporting Files */,
 			);
 			path = "Watch Extension";
-			sourceTree = "<group>";
-		};
-		34CD32971F4127730045009B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				34CD32981F4127730045009B /* PushNotificationPayload.apns */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -492,7 +479,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34CD329E1F4127730045009B /* NotificationController.swift in Sources */,
 				34CD329C1F4127730045009B /* ExtensionDelegate.swift in Sources */,
 				3465F5A51F424CD800AD9CBA /* UIColor+Cooldown.swift in Sources */,
 				3465F5A61F424CDC00AD9CBA /* State.swift in Sources */,
