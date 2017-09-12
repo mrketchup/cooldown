@@ -43,13 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
         guard let data = applicationContext["cooldown"] as? Data,
-            let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any],
+            let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data),
             let interval = applicationContext["cooldownInterval"] as? TimeInterval else
         {
             return
         }
         
-        State.shared.cooldown = Cooldown(json: json)
+        State.shared.cooldown = cooldown
         State.shared.cooldownInterval = interval
         
         DispatchQueue.main.async {

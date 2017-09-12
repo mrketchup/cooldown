@@ -9,9 +9,7 @@
 import Foundation
 import UserNotifications
 
-// TODO: Uncomment when going back to Swift 4 Codable
-//struct Cooldown: Codable {
-struct Cooldown {
+struct Cooldown: Codable {
     var created: Date
     var remaining: TimeInterval
 }
@@ -19,20 +17,6 @@ struct Cooldown {
 extension Cooldown {
     
     var target: Date { return created.addingTimeInterval(remaining) }
-    
-    // TODO: Remove when going back to Swift 4 Codable
-    var jsonData: Data {
-        let json: [String: Any] = ["created": created.timeIntervalSinceReferenceDate, "remaining": remaining]
-        return try! JSONSerialization.data(withJSONObject: json, options: [])
-    }
-    
-    // TODO: Remove when going back to Swift 4 Codable
-    init(json: [String: Any]) {
-        let createdInterval = json["created"] as! TimeInterval
-        let created = Date(timeIntervalSinceReferenceDate: createdInterval)
-        let remaining = json["remaining"] as! TimeInterval
-        self.init(created: created, remaining: remaining)
-    }
     
     static func +(left: Cooldown, right: Cooldown) -> Cooldown {
         let delta = right.created.timeIntervalSince(left.created)
@@ -58,26 +42,22 @@ class State {
     #endif
     
     var appContext: [String: Any] {
-        return ["cooldown": cooldown.jsonData, "cooldownInterval": cooldownInterval]
+        return ["cooldown": try! JSONEncoder().encode(cooldown), "cooldownInterval": cooldownInterval]
     }
     
     var cooldown: Cooldown {
         get {
-            guard let data = storage.data(forKey: "cooldown") else {
+            guard let data = storage.data(forKey: "cooldown"),
+                let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data)
+                else
+            {
                 return Cooldown(created: Date(), remaining: 0)
             }
             
-            // TODO: Switch back when going back to Swift 4 Codable
-            //                _cooldown = try? JSONDecoder().decode(Cooldown.self, from: data)
-            guard let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] else {
-                return Cooldown(created: Date(), remaining: 0)
-            }
-            
-            return Cooldown(json: json)
+            return cooldown
         }
         set {
-            // TODO: Switch back when going back to Swift 4 Codable
-            let data = newValue.jsonData //try? JSONEncoder().encode(newValue)
+            guard let data = try? JSONEncoder().encode(newValue) else { return }
             storage.set(data, forKey: "cooldown")
             
             let formatter = DateComponentsFormatter()
