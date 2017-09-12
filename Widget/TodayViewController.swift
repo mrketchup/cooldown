@@ -25,7 +25,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cooldownLabel.font = .monospacedDigitSystemFont(ofSize: 80, weight: UIFontWeightLight)
+        cooldownLabel.font = .monospacedDigitSystemFont(ofSize: 80, weight: .light)
         displayLink = CADisplayLink(target: self, selector: #selector(updateUI))
         displayLink?.preferredFramesPerSecond = 4
         displayLink?.add(to: RunLoop.main, forMode: .commonModes)

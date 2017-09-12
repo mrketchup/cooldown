@@ -26,7 +26,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cooldownLabel.font = .monospacedDigitSystemFont(ofSize: 120, weight: UIFontWeightLight)
+        cooldownLabel.font = .monospacedDigitSystemFont(ofSize: 120, weight: .light)
         displayLink = CADisplayLink(target: self, selector: #selector(updateUI))
         displayLink?.preferredFramesPerSecond = 4
         displayLink?.add(to: RunLoop.main, forMode: .commonModes)
@@ -84,7 +84,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func bumpCooldown(multiplier: Double = 1) {
         State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
-        do { try WCSession.default().updateApplicationContext(State.shared.appContext) }
+        do { try WCSession.default.updateApplicationContext(State.shared.appContext) }
         catch { print(error) }
     }
 

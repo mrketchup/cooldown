@@ -12,8 +12,8 @@ import WatchConnectivity
 class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 
     func applicationDidFinishLaunching() {
-        WCSession.default().delegate = self
-        WCSession.default().activate()
+        WCSession.default.delegate = self
+        WCSession.default.activate()
     }
 
     func applicationDidBecomeActive() {

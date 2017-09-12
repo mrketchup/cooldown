@@ -69,7 +69,7 @@ class InterfaceController: WKInterfaceController {
     
     func bumpCooldown(multiplier: Double = 1) {
         State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
-        do { try WCSession.default().updateApplicationContext(State.shared.appContext) }
+        do { try WCSession.default.updateApplicationContext(State.shared.appContext) }
         catch { print(error) }
     }
 

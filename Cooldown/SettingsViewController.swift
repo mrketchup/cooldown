@@ -33,7 +33,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func cooldownDatePickerValueChanged(_ sender: UIDatePicker) {
         State.shared.cooldownInterval = TimeInterval(sender.countDownDuration)
-        do { try WCSession.default().updateApplicationContext(State.shared.appContext) }
+        do { try WCSession.default.updateApplicationContext(State.shared.appContext) }
         catch { print(error) }
     }
 
