@@ -68,6 +68,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
             if let controller = WKExtension.shared().rootInterfaceController as? InterfaceController {
                 controller.updateUI()
                 controller.updateTimer()
+                controller.updateMenuItems()
             }
         }
     }

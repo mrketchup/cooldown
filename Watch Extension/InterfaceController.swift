@@ -16,9 +16,18 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var cooldownTimer: WKInterfaceTimer!
     weak var timer: Timer?
     
+    let formatter: DateComponentsFormatter = {
+        let f = DateComponentsFormatter()
+        f.unitsStyle = .abbreviated
+        f.allowedUnits = [.hour, .minute, .second]
+        f.maximumUnitCount = 2
+        return f
+    }()
+    
     override func willActivate() {
         super.willActivate()
         updateTimer()
+        updateMenuItems()
         
         let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
         RunLoop.main.add(timer, forMode: .commonModes)
@@ -33,13 +42,31 @@ class InterfaceController: WKInterfaceController {
     }
     
     @IBAction func swipeDown(_ sender: WKSwipeGestureRecognizer) {
-        bumpCooldown(multiplier: -1)
-        updateUI()
-        updateTimer()
+        updateCooldown(multiplier: -1)
+    }
+    
+    @objc func add2ButtonPressed(_ sender: WKInterfaceButton) {
+        updateCooldown(multiplier: 2)
+    }
+    
+    @objc func add15ButtonPressed(_ sender: WKInterfaceButton) {
+        updateCooldown(multiplier: 1.5)
+    }
+    
+    @objc func add05ButtonPressed(_ sender: WKInterfaceButton) {
+        updateCooldown(multiplier: 0.5)
+    }
+    
+    @objc func settingsButtonPressed() {
+        
     }
     
     @IBAction func addButtonPressed(_ sender: WKInterfaceButton) {
-        bumpCooldown()
+        updateCooldown()
+    }
+    
+    func updateCooldown(multiplier: Double = 1) {
+        bumpCooldown(multiplier: multiplier)
         updateUI()
         updateTimer()
     }
@@ -65,6 +92,17 @@ class InterfaceController: WKInterfaceController {
             cooldownTimer.setDate(Date())
             cooldownTimer.stop()
         }
+    }
+    
+    func updateMenuItems() {
+        clearAllMenuItems()
+        let title2 = formatter.string(from: State.shared.cooldownInterval * 2)!
+        let title15 = formatter.string(from: State.shared.cooldownInterval * 1.5)!
+        let title05 = formatter.string(from: State.shared.cooldownInterval * 0.5)!
+        addMenuItem(with: .add, title: title2, action: #selector(add2ButtonPressed))
+        addMenuItem(with: .add, title: title15, action: #selector(add15ButtonPressed))
+        addMenuItem(with: .add, title: title05, action: #selector(add05ButtonPressed))
+        addMenuItem(with: .more, title: "Edit Interval", action: #selector(settingsButtonPressed))
     }
     
     func bumpCooldown(multiplier: Double = 1) {
