@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		34084E2B1F3E4C6E00FEFB4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34084E291F3E4C6E00FEFB4D /* LaunchScreen.storyboard */; };
 		341F6EB31F3E483B00E74712 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 341F6EB11F3E483A00E74712 /* Main.storyboard */; };
+		3441FF381FA3BCFD0050CF48 /* SettingsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3441FF371FA3BCFD0050CF48 /* SettingsInterfaceController.swift */; };
 		34432A261F40D2C8006BDE24 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34432A251F40D2C8006BDE24 /* NotificationCenter.framework */; };
 		34432A291F40D2C8006BDE24 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34432A281F40D2C8006BDE24 /* TodayViewController.swift */; };
 		34432A2C1F40D2C8006BDE24 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34432A2A1F40D2C8006BDE24 /* MainInterface.storyboard */; };
@@ -95,6 +96,7 @@
 /* Begin PBXFileReference section */
 		34084E2A1F3E4C6E00FEFB4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		341F6EB21F3E483B00E74712 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3441FF371FA3BCFD0050CF48 /* SettingsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInterfaceController.swift; sourceTree = "<group>"; };
 		34432A231F40D2C8006BDE24 /* Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		34432A251F40D2C8006BDE24 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		34432A281F40D2C8006BDE24 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -264,8 +266,9 @@
 		34CD32961F4127730045009B /* Watch Extension */ = {
 			isa = PBXGroup;
 			children = (
-				34CD32991F4127730045009B /* InterfaceController.swift */,
 				34CD329B1F4127730045009B /* ExtensionDelegate.swift */,
+				34CD32991F4127730045009B /* InterfaceController.swift */,
+				3441FF371FA3BCFD0050CF48 /* SettingsInterfaceController.swift */,
 				34A0E7611F4129D7004C3C88 /* Resources */,
 			);
 			path = "Watch Extension";
@@ -483,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34CD329C1F4127730045009B /* ExtensionDelegate.swift in Sources */,
+				3441FF381FA3BCFD0050CF48 /* SettingsInterfaceController.swift in Sources */,
 				3465F5A51F424CD800AD9CBA /* UIColor+Cooldown.swift in Sources */,
 				3465F5A61F424CDC00AD9CBA /* State.swift in Sources */,
 				34CD329A1F4127730045009B /* InterfaceController.swift in Sources */,

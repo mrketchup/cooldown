@@ -58,7 +58,7 @@ class InterfaceController: WKInterfaceController {
     }
     
     @objc func settingsButtonPressed() {
-        
+        presentController(withName: "SettingsInterfaceController", context: nil)
     }
     
     @IBAction func addButtonPressed(_ sender: WKInterfaceButton) {

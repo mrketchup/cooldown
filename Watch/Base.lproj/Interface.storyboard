@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13529" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="12029"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="13507"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
@@ -49,6 +49,40 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>
+        </scene>
+        <!--Cooldown Interval-->
+        <scene sceneID="veR-5t-N4z">
+            <objects>
+                <controller identifier="SettingsInterfaceController" title="Cooldown Interval" hidesWhenLoading="NO" id="dG7-EY-zwi" customClass="SettingsInterfaceController" customModule="Watch_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="gol-CK-dci">
+                            <items>
+                                <picker width="0.5" height="100" alignment="left" focusStyle="stack" indicatorMode="shownWhileFocused" id="ioU-S2-zcM">
+                                    <connections>
+                                        <action selector="hourPickerAction:" destination="dG7-EY-zwi" id="HtW-7a-hw8"/>
+                                    </connections>
+                                </picker>
+                                <picker width="0.5" height="100" alignment="left" focusStyle="stack" indicatorMode="shownWhileFocused" id="Pyx-8u-ghM">
+                                    <connections>
+                                        <action selector="minutePickerAction:" destination="dG7-EY-zwi" id="YSN-IO-MhO"/>
+                                    </connections>
+                                </picker>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="hvF-4o-cX5">
+                            <items>
+                                <label width="0.5" alignment="left" text="Hours" textAlignment="center" id="X7L-28-pzS"/>
+                                <label width="0.5" alignment="left" text="Mins" textAlignment="center" id="qcX-OE-Rdf"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="hourPicker" destination="ioU-S2-zcM" id="6me-OD-2V7"/>
+                        <outlet property="minutePicker" destination="Pyx-8u-ghM" id="H8y-VU-bhW"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="479" y="345"/>
         </scene>
     </scenes>
 </document>
