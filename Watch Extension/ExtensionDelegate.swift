@@ -8,6 +8,7 @@
 
 import WatchKit
 import WatchConnectivity
+import Core_watchOS
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 

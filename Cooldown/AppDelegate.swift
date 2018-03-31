@@ -9,6 +9,7 @@
 import UIKit
 import UserNotifications
 import WatchConnectivity
+import Core_iOS
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {

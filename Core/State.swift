@@ -9,31 +9,35 @@
 import Foundation
 import UserNotifications
 
-struct Cooldown: Codable {
-    var created: Date
-    var remaining: TimeInterval
+public struct Cooldown: Codable {
+    public var created: Date
+    public var remaining: TimeInterval
+    public init(created: Date, remaining: TimeInterval) {
+        self.created = created
+        self.remaining = remaining
+    }
 }
 
-extension Cooldown {
+public extension Cooldown {
     
-    var target: Date { return created.addingTimeInterval(remaining) }
+    public var target: Date { return created.addingTimeInterval(remaining) }
     
-    static func +(left: Cooldown, right: Cooldown) -> Cooldown {
+    public static func +(left: Cooldown, right: Cooldown) -> Cooldown {
         let delta = right.created.timeIntervalSince(left.created)
         let remaining = max(left.remaining - delta, 0) + right.remaining
         return Cooldown(created: right.created, remaining: remaining)
     }
     
-    static func +=(left: inout Cooldown, right: Cooldown) {
+    public static func +=(left: inout Cooldown, right: Cooldown) {
         left = left + right
     }
     
 }
 
 
-class State {
+public class State {
     
-    static let shared = State()
+    public static let shared = State()
     
     #if DEBUG
     private let storage = UserDefaults(suiteName: "group.mattjones.cooldown.dev")!
@@ -41,11 +45,11 @@ class State {
     private let storage = UserDefaults(suiteName: "group.mattjones.cooldown")!
     #endif
     
-    var appContext: [String: Any] {
+    public var appContext: [String: Any] {
         return ["cooldown": try! JSONEncoder().encode(cooldown), "cooldownInterval": cooldownInterval]
     }
     
-    var cooldown: Cooldown {
+    public var cooldown: Cooldown {
         get {
             guard let data = storage.data(forKey: "cooldown"),
                 let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data)
@@ -80,7 +84,7 @@ class State {
         }
     }
     
-    var cooldownInterval: TimeInterval {
+    public var cooldownInterval: TimeInterval {
         get {
             return storage.object(forKey: "cooldownInterval") as? TimeInterval ?? 60 * 60
         }

@@ -8,6 +8,7 @@
 
 import UIKit
 import WatchConnectivity
+import Core_iOS
 
 class SettingsViewController: UIViewController {
     

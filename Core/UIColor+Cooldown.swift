@@ -8,13 +8,13 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     
-    static let cooldownGreen = UIColor(red: 0.1, green: 0.8, blue: 0.1, alpha: 1)
-    static let cooldownYellow = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
-    static let cooldownRed = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1)
+    public static let cooldownGreen = UIColor(red: 0.1, green: 0.8, blue: 0.1, alpha: 1)
+    public static let cooldownYellow = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
+    public static let cooldownRed = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1)
     
-    var rgba: (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) {
+    public var rgba: (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
@@ -23,7 +23,7 @@ extension UIColor {
         return (r, g, b, a)
     }
     
-    func blended(with color: UIColor, percent: CGFloat) -> UIColor {
+    public func blended(with color: UIColor, percent: CGFloat) -> UIColor {
         let rgba1 = rgba
         let rgba2 = color.rgba
         let r = rgba1.r * (1 - percent) + rgba2.r * percent
