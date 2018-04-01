@@ -16,14 +16,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet var plusButton: UIButton!
     var displayLink: CADisplayLink?
     
-    let formatter: DateComponentsFormatter = {
-        let f = DateComponentsFormatter()
-        f.unitsStyle = .abbreviated
-        f.allowedUnits = [.hour, .minute, .second]
-        f.maximumUnitCount = 2
-        return f
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         cooldownLabel.font = .monospacedDigitSystemFont(ofSize: 80, weight: .light)
@@ -39,7 +31,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     @objc func updateUI() {
         let interval = max(State.shared.cooldown.target.timeIntervalSinceNow, 0)
-        cooldownLabel.text = formatter.string(from: interval)
+        cooldownLabel.text = DateComponentsFormatter.cooldownFormatter.string(from: interval)
         
         let percent = min(interval / State.shared.cooldownInterval / 3, 1)
         if percent <= 0.5 {

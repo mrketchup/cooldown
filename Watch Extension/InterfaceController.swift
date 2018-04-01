@@ -17,14 +17,6 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var cooldownTimer: WKInterfaceTimer!
     weak var timer: Timer?
     
-    let formatter: DateComponentsFormatter = {
-        let f = DateComponentsFormatter()
-        f.unitsStyle = .abbreviated
-        f.allowedUnits = [.hour, .minute, .second]
-        f.maximumUnitCount = 2
-        return f
-    }()
-    
     override func willActivate() {
         super.willActivate()
         updateTimer()
@@ -97,6 +89,7 @@ class InterfaceController: WKInterfaceController {
     
     func updateMenuItems() {
         clearAllMenuItems()
+        let formatter = DateComponentsFormatter.cooldownFormatter
         let title2 = formatter.string(from: State.shared.cooldownInterval * 2)!
         let title15 = formatter.string(from: State.shared.cooldownInterval * 1.5)!
         let title05 = formatter.string(from: State.shared.cooldownInterval * 0.5)!

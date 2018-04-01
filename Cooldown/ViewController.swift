@@ -14,16 +14,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet var cooldownLabel: UILabel!
     @IBOutlet var plusButton: UIButton!
+    let formatter = DateComponentsFormatter.cooldownFormatter
     var displayLink: CADisplayLink?
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
-    
-    let formatter: DateComponentsFormatter = {
-        let f = DateComponentsFormatter()
-        f.unitsStyle = .abbreviated
-        f.allowedUnits = [.hour, .minute, .second]
-        f.maximumUnitCount = 2
-        return f
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,15 +47,20 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let title2 = formatter.string(from: State.shared.cooldownInterval * 2)!
             sheet.addAction(UIAlertAction(title: "+\(title2)", style: .default, handler: handler(2)))
+            
             let title15 = formatter.string(from: State.shared.cooldownInterval * 1.5)!
             sheet.addAction(UIAlertAction(title: "+\(title15)", style: .default, handler: handler(1.5)))
+            
             let title1 = formatter.string(from: State.shared.cooldownInterval)!
             sheet.addAction(UIAlertAction(title: "+\(title1)", style: .default, handler: handler(1)))
+            
             let title05 = formatter.string(from: State.shared.cooldownInterval * 0.5)!
             sheet.addAction(UIAlertAction(title: "+\(title05)", style: .default, handler: handler(0.5)))
+            
             sheet.addAction(UIAlertAction(title: "Edit Cooldown Interval...", style: .default, handler: { _ in
                 self.performSegue(withIdentifier: "settings", sender: nil)
             }))
+            
             sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
             sheet.popoverPresentationController?.sourceView = plusButton
