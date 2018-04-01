@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         
         DispatchQueue.main.async {
             if let controller = self.window?.rootViewController as? ViewController {
-                controller.updateUI()
+                controller.refresh()
             }
         }
     }

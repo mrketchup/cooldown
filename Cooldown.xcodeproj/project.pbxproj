@@ -30,6 +30,8 @@
 		344C1C971F3A451F0005BB10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344C1C961F3A451F0005BB10 /* Assets.xcassets */; };
 		34B28E4C2070567100DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B28E4A2070566A00DFD853 /* DateComponentsFormatter+Cooldown.swift */; };
 		34B28E4D2070567200DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B28E4A2070566A00DFD853 /* DateComponentsFormatter+Cooldown.swift */; };
+		34B28E5A20706D9F00DFD853 /* CooldownPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B28E5920706D9F00DFD853 /* CooldownPresenter.swift */; };
+		34B28E5B20706D9F00DFD853 /* CooldownPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B28E5920706D9F00DFD853 /* CooldownPresenter.swift */; };
 		34CD328A1F4127720045009B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34CD32881F4127720045009B /* Interface.storyboard */; };
 		34CD328C1F4127720045009B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34CD328B1F4127720045009B /* Assets.xcassets */; };
 		34CD32931F4127730045009B /* Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 34CD32921F4127720045009B /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -172,6 +174,7 @@
 		34A0E7601F4129AF004C3C88 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		34A0E7621F412A35004C3C88 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		34B28E4A2070566A00DFD853 /* DateComponentsFormatter+Cooldown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Cooldown.swift"; sourceTree = "<group>"; };
+		34B28E5920706D9F00DFD853 /* CooldownPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooldownPresenter.swift; sourceTree = "<group>"; };
 		34CD32861F4127720045009B /* Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34CD32891F4127720045009B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		34CD328B1F4127720045009B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -232,6 +235,7 @@
 			children = (
 				3422845C206FD94F00EE9548 /* Core.h */,
 				3422845D206FD94F00EE9548 /* Info.plist */,
+				34B28E5920706D9F00DFD853 /* CooldownPresenter.swift */,
 				34432A3B1F40E673006BDE24 /* State.swift */,
 				34432A3E1F40EAB2006BDE24 /* UIColor+Cooldown.swift */,
 				34B28E4A2070566A00DFD853 /* DateComponentsFormatter+Cooldown.swift */,
@@ -634,6 +638,7 @@
 				34228467206FD9E900EE9548 /* UIColor+Cooldown.swift in Sources */,
 				34B28E4C2070567100DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */,
 				34228468206FD9EB00EE9548 /* State.swift in Sources */,
+				34B28E5A20706D9F00DFD853 /* CooldownPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +649,7 @@
 				3422848A20700ABD00EE9548 /* UIColor+Cooldown.swift in Sources */,
 				34B28E4D2070567200DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */,
 				3422848B20700ABD00EE9548 /* State.swift in Sources */,
+				34B28E5B20706D9F00DFD853 /* CooldownPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
