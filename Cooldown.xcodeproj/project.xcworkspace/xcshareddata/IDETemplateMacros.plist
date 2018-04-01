@@ -1,5 +1,10 @@
-//
-// Copyright © 2018 Matt Jones. All rights reserved.
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FILEHEADER</key>
+	<string>
+// ___COPYRIGHT___
 //
 // This file is part of Cooldown.
 //
@@ -14,19 +19,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Cooldown.  If not, see <http://www.gnu.org/licenses/>.
-//
-
-import Foundation
-
-public extension DateComponentsFormatter {
-    
-    public static let cooldownFormatter: DateComponentsFormatter = {
-        let f = DateComponentsFormatter()
-        f.unitsStyle = .abbreviated
-        f.allowedUnits = [.hour, .minute, .second]
-        f.maximumUnitCount = 2
-        return f
-    }()
-    
-}
+// along with Cooldown.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+//</string>
+</dict>
+</plist>
