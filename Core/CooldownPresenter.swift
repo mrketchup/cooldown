@@ -28,6 +28,7 @@ public protocol CooldownView: class {
     func render(timeRemaining: String, backgroundColor: UIColor)
     func presentIntervalOptions(_ options: [IntervalOption])
     func presentSettings()
+    func issueRedZoneWarning()
 }
 
 public class CooldownPresenter {
@@ -62,6 +63,12 @@ public class CooldownPresenter {
     private func bumpCooldown(multipliedBy multiplier: Double) {
         State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
         refresh()
+        
+        let interval = max(State.shared.cooldown.target.timeIntervalSinceNow, 0)
+        let percent = interval / State.shared.cooldownInterval / 3
+        if percent >= 1 && multiplier > 0 {
+            view?.issueRedZoneWarning()
+        }
     }
     
     public func loadIntervalOptions() {

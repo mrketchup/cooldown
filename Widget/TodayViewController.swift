@@ -54,9 +54,17 @@ extension TodayViewController: CooldownView {
         view.backgroundColor = backgroundColor
     }
     
-    func presentIntervalOptions(_ options: [IntervalOption]) {}
+    func presentIntervalOptions(_ options: [IntervalOption]) {
+        // TODO: one day maybe?
+    }
     
-    func presentSettings() {}
+    func presentSettings() {
+        // TODO: one day maybe?
+    }
+    
+    func issueRedZoneWarning() {
+        UINotificationFeedbackGenerator().notificationOccurred(.warning)
+    }
     
 }
 

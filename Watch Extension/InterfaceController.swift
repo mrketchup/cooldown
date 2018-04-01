@@ -114,6 +114,12 @@ class InterfaceController: WKInterfaceController {
         State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
         do { try WCSession.default.updateApplicationContext(State.shared.appContext) }
         catch { print(error) }
+        
+        let interval = max(State.shared.cooldown.target.timeIntervalSinceNow, 0)
+        let percent = interval / State.shared.cooldownInterval / 3
+        if percent >= 1 && multiplier > 0 {
+            WKInterfaceDevice.current().play(.notification)
+        }
     }
 
 }

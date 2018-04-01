@@ -52,6 +52,7 @@ class ViewController: UIViewController {
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
         if case .began = sender.state {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
             presenter.loadIntervalOptions()
         }
     }
@@ -90,6 +91,10 @@ extension ViewController: CooldownView {
     
     func presentSettings() {
         performSegue(withIdentifier: "settings", sender: nil)
+    }
+    
+    func issueRedZoneWarning() {
+        UINotificationFeedbackGenerator().notificationOccurred(.warning)
     }
     
 }
