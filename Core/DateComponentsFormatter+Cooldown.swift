@@ -22,11 +22,11 @@ import Foundation
 public extension DateComponentsFormatter {
     
     public static let cooldownFormatter: DateComponentsFormatter = {
-        let f = DateComponentsFormatter()
-        f.unitsStyle = .abbreviated
-        f.allowedUnits = [.hour, .minute, .second]
-        f.maximumUnitCount = 2
-        return f
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .abbreviated
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.maximumUnitCount = 2
+        return formatter
     }()
     
 }

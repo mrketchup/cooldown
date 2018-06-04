@@ -21,27 +21,36 @@ import UIKit
 
 public extension UIColor {
     
+    // swiftlint:disable identifier_name
+    public struct RGBA {
+        var r: CGFloat
+        var g: CGFloat
+        var b: CGFloat
+        var a: CGFloat
+    }
+    // swiftlint:enable identifier_name
+    
     public static let cooldownGreen = UIColor(red: 0.1, green: 0.8, blue: 0.1, alpha: 1)
     public static let cooldownYellow = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
     public static let cooldownRed = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1)
     
-    public var rgba: (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) {
-        var r: CGFloat = 0
-        var g: CGFloat = 0
-        var b: CGFloat = 0
-        var a: CGFloat = 0
-        getRed(&r, green: &g, blue: &b, alpha: &a)
-        return (r, g, b, a)
+    public var rgba: RGBA {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        return RGBA(r: red, g: green, b: blue, a: alpha)
     }
     
     public func blended(with color: UIColor, percent: CGFloat) -> UIColor {
         let rgba1 = rgba
         let rgba2 = color.rgba
-        let r = rgba1.r * (1 - percent) + rgba2.r * percent
-        let g = rgba1.g * (1 - percent) + rgba2.g * percent
-        let b = rgba1.b * (1 - percent) + rgba2.b * percent
-        let a = rgba1.a * (1 - percent) + rgba2.a * percent
-        return UIColor(red: r, green: g, blue: b, alpha: a)
+        let red = rgba1.r * (1 - percent) + rgba2.r * percent
+        let green = rgba1.g * (1 - percent) + rgba2.g * percent
+        let blue = rgba1.b * (1 - percent) + rgba2.b * percent
+        let alpha = rgba1.a * (1 - percent) + rgba2.a * percent
+        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
     
 }

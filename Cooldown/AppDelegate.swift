@@ -54,12 +54,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate, UNUser
         
     }
     
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
         guard let data = applicationContext["cooldown"] as? Data,
             let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data),
-            let interval = applicationContext["cooldownInterval"] as? TimeInterval else
-        {
-            return
+            let interval = applicationContext["cooldownInterval"] as? TimeInterval
+            else {
+                return
         }
         
         State.shared.cooldown = cooldown
@@ -72,7 +72,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate, UNUser
         }
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler(.sound)
     }
     

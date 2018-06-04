@@ -40,14 +40,20 @@ class ViewController: UIViewController {
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
         presenter.incrementCooldown()
-        do { try WCSession.default.updateApplicationContext(State.shared.appContext) }
-        catch { print(error) }
+        do {
+            try WCSession.default.updateApplicationContext(State.shared.appContext)
+        } catch {
+            print(error)
+        }
     }
     
     @IBAction func swipeDown(_ sender: UISwipeGestureRecognizer) {
-       presenter.decrementCooldown()
-        do { try WCSession.default.updateApplicationContext(State.shared.appContext) }
-        catch { print(error) }
+        presenter.decrementCooldown()
+        do {
+            try WCSession.default.updateApplicationContext(State.shared.appContext)
+        } catch {
+            print(error)
+        }
     }
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
@@ -60,7 +66,7 @@ class ViewController: UIViewController {
     @objc func refresh() {
         presenter.refresh()
     }
-
+    
 }
 
 extension ViewController: CooldownView {
@@ -76,8 +82,11 @@ extension ViewController: CooldownView {
         for option in options {
             let handler: (UIAlertAction) -> Void = { _ in
                 option.action()
-                do { try WCSession.default.updateApplicationContext(State.shared.appContext) }
-                catch { print(error) }
+                do {
+                    try WCSession.default.updateApplicationContext(State.shared.appContext)
+                } catch {
+                    print(error)
+                }
             }
             sheet.addAction(UIAlertAction(title: option.title, style: .default, handler: handler))
         }

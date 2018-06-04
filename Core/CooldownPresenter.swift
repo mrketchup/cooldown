@@ -80,7 +80,7 @@ public class CooldownPresenter {
                     title: "+\(formatter.string(from: State.shared.cooldownInterval * multiplier)!)",
                     action: { self.bumpCooldown(multipliedBy: multiplier) }
                 )
-            }
+        }
         
         options.append(IntervalOption(title: "Edit Cooldown Interval...", action: { self.view?.presentSettings() }))
         view?.presentIntervalOptions(options)

@@ -55,11 +55,11 @@ extension TodayViewController: CooldownView {
     }
     
     func presentIntervalOptions(_ options: [IntervalOption]) {
-        // TODO: one day maybe?
+        // Currently NOOP
     }
     
     func presentSettings() {
-        // TODO: one day maybe?
+        // Currently NOOP
     }
     
     func issueRedZoneWarning() {

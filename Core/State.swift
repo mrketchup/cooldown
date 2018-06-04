@@ -33,18 +33,21 @@ public extension Cooldown {
     
     public var target: Date { return created.addingTimeInterval(remaining) }
     
-    public static func +(left: Cooldown, right: Cooldown) -> Cooldown {
+    public static func + (left: Cooldown, right: Cooldown) -> Cooldown {
+        return add(left: left, right: right)
+    }
+    
+    public static func += (left: inout Cooldown, right: Cooldown) {
+        left = add(left: left, right: right)
+    }
+    
+    private static func add(left: Cooldown, right: Cooldown) -> Cooldown {
         let delta = right.created.timeIntervalSince(left.created)
         let remaining = max(left.remaining - delta, 0) + right.remaining
         return Cooldown(created: right.created, remaining: remaining)
     }
     
-    public static func +=(left: inout Cooldown, right: Cooldown) {
-        left = left + right
-    }
-    
 }
-
 
 public class State {
     
@@ -57,16 +60,18 @@ public class State {
     #endif
     
     public var appContext: [String: Any] {
-        return ["cooldown": try! JSONEncoder().encode(cooldown), "cooldownInterval": cooldownInterval]
+        return [
+            "cooldown": try! JSONEncoder().encode(cooldown), // swiftlint:disable:this force_try
+            "cooldownInterval": cooldownInterval
+        ]
     }
     
     public var cooldown: Cooldown {
         get {
             guard let data = storage.data(forKey: "cooldown"),
                 let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data)
-                else
-            {
-                return Cooldown(created: Date(), remaining: 0)
+                else {
+                    return Cooldown(created: Date(), remaining: 0)
             }
             
             return cooldown
@@ -85,7 +90,7 @@ public class State {
             content.body = "Time elapsed: \(formatter.string(from: newValue.remaining) ?? "???")"
             content.sound = UNNotificationSound.default()
             
-            let components = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: newValue.target)
+            let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: newValue.target)
             let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
             
             let request = UNNotificationRequest(identifier: "cooldown-complete", content: content, trigger: trigger)

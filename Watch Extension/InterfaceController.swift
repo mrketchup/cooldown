@@ -112,8 +112,11 @@ class InterfaceController: WKInterfaceController {
     
     func bumpCooldown(multiplier: Double = 1) {
         State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
-        do { try WCSession.default.updateApplicationContext(State.shared.appContext) }
-        catch { print(error) }
+        do {
+            try WCSession.default.updateApplicationContext(State.shared.appContext)
+        } catch {
+            print(error)
+        }
         
         let interval = max(State.shared.cooldown.target.timeIntervalSinceNow, 0)
         let percent = interval / State.shared.cooldownInterval / 3
@@ -121,5 +124,5 @@ class InterfaceController: WKInterfaceController {
             WKInterfaceDevice.current().play(.notification)
         }
     }
-
+    
 }
