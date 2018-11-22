@@ -18,7 +18,6 @@
 //
 
 import Foundation
-import UserNotifications
 
 public struct Cooldown: Codable {
     public var created: Date
@@ -79,24 +78,7 @@ public class State {
         set {
             guard let data = try? JSONEncoder().encode(newValue) else { return }
             storage.set(data, forKey: "cooldown")
-            
-            let formatter = DateComponentsFormatter()
-            formatter.unitsStyle = .brief
-            formatter.allowedUnits = [.hour, .minute, .second]
-            formatter.maximumUnitCount = 2
-            
-            let content = UNMutableNotificationContent()
-            content.title = "Cooldown complete"
-            content.body = "Time elapsed: \(formatter.string(from: newValue.remaining) ?? "???")"
-            content.sound = UNNotificationSound.default()
-            
-            let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: newValue.target)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-            
-            let request = UNNotificationRequest(identifier: "cooldown-complete", content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request) { error in
-                if let error = error { print(error) }
-            }
+            NotificationService.shared.scheduleNotification(for: newValue)
         }
     }
     

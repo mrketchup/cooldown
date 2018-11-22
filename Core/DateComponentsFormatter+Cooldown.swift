@@ -29,4 +29,12 @@ public extension DateComponentsFormatter {
         return formatter
     }()
     
+    public static let notificationFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .brief
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.maximumUnitCount = 2
+        return formatter
+    }()
+    
 }

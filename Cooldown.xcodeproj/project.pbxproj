@@ -28,6 +28,8 @@
 		344C1C901F3A451F0005BB10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344C1C8F1F3A451F0005BB10 /* AppDelegate.swift */; };
 		344C1C921F3A451F0005BB10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344C1C911F3A451F0005BB10 /* ViewController.swift */; };
 		344C1C971F3A451F0005BB10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344C1C961F3A451F0005BB10 /* Assets.xcassets */; };
+		344E706821A728BB00B2B655 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E706721A728BB00B2B655 /* NotificationService.swift */; };
+		344E706921A728BB00B2B655 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E706721A728BB00B2B655 /* NotificationService.swift */; };
 		34B28E4C2070567100DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B28E4A2070566A00DFD853 /* DateComponentsFormatter+Cooldown.swift */; };
 		34B28E4D2070567200DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B28E4A2070566A00DFD853 /* DateComponentsFormatter+Cooldown.swift */; };
 		34B28E5A20706D9F00DFD853 /* CooldownPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B28E5920706D9F00DFD853 /* CooldownPresenter.swift */; };
@@ -169,6 +171,7 @@
 		344C1C911F3A451F0005BB10 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		344C1C961F3A451F0005BB10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		344C1C9B1F3A451F0005BB10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		344E706721A728BB00B2B655 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		34A0E75D1F41296D004C3C88 /* Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Watch.entitlements; sourceTree = "<group>"; };
 		34A0E75E1F41297B004C3C88 /* Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Watch Extension.entitlements"; sourceTree = "<group>"; };
 		34A0E7601F4129AF004C3C88 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
@@ -239,6 +242,7 @@
 				34432A3B1F40E673006BDE24 /* State.swift */,
 				34432A3E1F40EAB2006BDE24 /* UIColor+Cooldown.swift */,
 				34B28E4A2070566A00DFD853 /* DateComponentsFormatter+Cooldown.swift */,
+				344E706721A728BB00B2B655 /* NotificationService.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -658,6 +662,7 @@
 				34228467206FD9E900EE9548 /* UIColor+Cooldown.swift in Sources */,
 				34B28E4C2070567100DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */,
 				34228468206FD9EB00EE9548 /* State.swift in Sources */,
+				344E706821A728BB00B2B655 /* NotificationService.swift in Sources */,
 				34B28E5A20706D9F00DFD853 /* CooldownPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -669,6 +674,7 @@
 				3422848A20700ABD00EE9548 /* UIColor+Cooldown.swift in Sources */,
 				34B28E4D2070567200DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */,
 				3422848B20700ABD00EE9548 /* State.swift in Sources */,
+				344E706921A728BB00B2B655 /* NotificationService.swift in Sources */,
 				34B28E5B20706D9F00DFD853 /* CooldownPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
