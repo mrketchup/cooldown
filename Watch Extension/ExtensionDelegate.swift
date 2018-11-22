@@ -18,15 +18,11 @@
 //
 
 import WatchKit
-import WatchConnectivity
 import Core_watchOS
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
+class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
-    func applicationDidFinishLaunching() {
-        WCSession.default.delegate = self
-        WCSession.default.activate()
-    }
+    func applicationDidFinishLaunching() {}
     
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
         // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a
@@ -49,28 +45,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
             default:
                 // make sure to complete unhandled task types
                 task.setTaskCompleted()
-            }
-        }
-    }
-    
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        if let error = error { print(error) }
-    }
-    
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        guard let data = applicationContext["cooldown"] as? Data,
-            let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data),
-            let interval = applicationContext["cooldownInterval"] as? TimeInterval
-            else {
-                return
-        }
-        
-        State.shared.cooldown = cooldown
-        State.shared.cooldownInterval = interval
-        
-        DispatchQueue.main.async {
-            if let controller = WKExtension.shared().rootInterfaceController as? InterfaceController {
-                controller.stateChanged()
             }
         }
     }

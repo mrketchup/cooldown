@@ -19,7 +19,6 @@
 
 import Foundation
 import WatchKit
-import WatchConnectivity
 import Core_watchOS
 
 class InterfaceController: WKInterfaceController {
@@ -27,7 +26,7 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var interfaceGroup: WKInterfaceGroup!
     @IBOutlet var cooldownTimer: WKInterfaceTimer!
     weak var timer: Timer?
-    let presenter = CooldownPresenter()
+    let presenter = CooldownPresenter(supportsWatch: true)
     var actions: [() -> Void] = []
     
     override func willActivate() {
@@ -47,11 +46,6 @@ class InterfaceController: WKInterfaceController {
         timer?.invalidate()
     }
     
-    func stateChanged() {
-        presenter.refresh()
-        presenter.loadIntervalOptions()
-    }
-    
     @objc private func action1ButtonPressed() { actions[0]() }
     @objc private func action2ButtonPressed() { actions[1]() }
     @objc private func action3ButtonPressed() { actions[2]() }
@@ -63,20 +57,10 @@ class InterfaceController: WKInterfaceController {
     
     @IBAction private func swipeDown(_ sender: WKSwipeGestureRecognizer) {
         presenter.decrementCooldown()
-        updateSession()
     }
     
     @IBAction private func addButtonPressed(_ sender: WKInterfaceButton) {
         presenter.incrementCooldown()
-        updateSession()
-    }
-    
-    private func updateSession() {
-        do {
-            try WCSession.default.updateApplicationContext(State.shared.appContext)
-        } catch {
-            print(error)
-        }
     }
     
 }
@@ -96,7 +80,7 @@ extension InterfaceController: CooldownView {
     
     func updateIntervalOptions(_ options: [IntervalOption]) {
         clearAllMenuItems()
-        actions = options.prefix(4).map { option in { option.action(); self.updateSession() } }
+        actions = options.prefix(4).map { $0.action }
         
         let selectors = [
             #selector(action1ButtonPressed),
@@ -121,7 +105,7 @@ extension InterfaceController: CooldownView {
     }
     
     func issueRedZoneWarning() {
-        WKInterfaceDevice.current().play(.notification)
+        WKInterfaceDevice.current().play(.failure)
     }
     
 }

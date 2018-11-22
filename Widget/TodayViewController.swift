@@ -26,7 +26,7 @@ class TodayViewController: UIViewController {
     @IBOutlet var cooldownLabel: UILabel!
     @IBOutlet var plusButton: UIButton!
     var displayLink: CADisplayLink?
-    let presenter = CooldownPresenter()
+    let presenter = CooldownPresenter(supportsWatch: false)
     
     override func viewDidLoad() {
         super.viewDidLoad()

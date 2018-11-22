@@ -18,53 +18,16 @@
 //
 
 import UIKit
-import WatchConnectivity
 import Core_iOS
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window?.tintColor = UIColor(red: 0.1, green: 0.8, blue: 0.1, alpha: 1)
-        
-        if WCSession.isSupported() {
-            WCSession.default.delegate = self
-            WCSession.default.activate()
-        }
-        
+        window?.tintColor = .cooldownGreen
         return true
-    }
-    
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        if let error = error { print(error) }
-    }
-    
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        
-    }
-    
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        guard let data = applicationContext["cooldown"] as? Data,
-            let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data),
-            let interval = applicationContext["cooldownInterval"] as? TimeInterval
-            else {
-                return
-        }
-        
-        State.shared.cooldown = cooldown
-        State.shared.cooldownInterval = interval
-        
-        DispatchQueue.main.async {
-            if let controller = self.window?.rootViewController as? ViewController {
-                controller.refresh()
-            }
-        }
     }
     
 }

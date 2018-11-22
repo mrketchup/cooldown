@@ -40,13 +40,26 @@ public protocol CooldownView: class {
 
 public class CooldownPresenter {
     
-    public weak var view: CooldownView?
+    public weak var view: CooldownView? {
+        didSet {
+            WatchService.shared.stateChanged = {
+                self.refresh()
+                #if os(watchOS)
+                self.loadIntervalOptions()
+                #endif
+            }
+        }
+    }
     
-    public init() {}
+    private let supportsWatch: Bool
+    
+    public init(supportsWatch: Bool) {
+        self.supportsWatch = supportsWatch
+        if supportsWatch { WatchService.shared.activate() }
+    }
     
     public func refresh() {
         let interval = max(State.shared.cooldown.target.timeIntervalSinceNow, 0)
-        let timeRemaining = DateComponentsFormatter.cooldownFormatter.string(from: interval)!
         
         let backgroundColor: UIColor
         let percent = min(interval / State.shared.cooldownInterval / 3, 1)
@@ -59,6 +72,7 @@ public class CooldownPresenter {
         #if os(watchOS)
         view?.render(target: State.shared.cooldown.target, backgroundColor: backgroundColor)
         #else
+        let timeRemaining = DateComponentsFormatter.cooldownFormatter.string(from: interval)!
         view?.render(timeRemaining: timeRemaining, backgroundColor: backgroundColor)
         #endif
     }
@@ -73,17 +87,16 @@ public class CooldownPresenter {
     
     private func bumpCooldown(multipliedBy multiplier: Double) {
         State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
+        NotificationService.shared.scheduleNotification(for: State.shared.cooldown)
         refresh()
+        
+        if supportsWatch { WatchService.shared.stateUpdated(State.shared) }
         
         let interval = max(State.shared.cooldown.target.timeIntervalSinceNow, 0)
         let percent = interval / State.shared.cooldownInterval / 3
         if percent >= 1 && multiplier > 0 {
             view?.issueRedZoneWarning()
         }
-        
-        #if os(watchOS)
-        loadIntervalOptions()
-        #endif
     }
     
     public func loadIntervalOptions() {

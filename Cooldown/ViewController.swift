@@ -18,7 +18,6 @@
 //
 
 import UIKit
-import WatchConnectivity
 import Core_iOS
 
 class ViewController: UIViewController {
@@ -27,7 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet var plusButton: UIButton!
     var displayLink: CADisplayLink?
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
-    let presenter = CooldownPresenter()
+    let presenter = CooldownPresenter(supportsWatch: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,20 +39,10 @@ class ViewController: UIViewController {
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
         presenter.incrementCooldown()
-        do {
-            try WCSession.default.updateApplicationContext(State.shared.appContext)
-        } catch {
-            print(error)
-        }
     }
     
     @IBAction func swipeDown(_ sender: UISwipeGestureRecognizer) {
         presenter.decrementCooldown()
-        do {
-            try WCSession.default.updateApplicationContext(State.shared.appContext)
-        } catch {
-            print(error)
-        }
     }
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
@@ -82,11 +71,6 @@ extension ViewController: CooldownView {
         for option in options {
             let handler: (UIAlertAction) -> Void = { _ in
                 option.action()
-                do {
-                    try WCSession.default.updateApplicationContext(State.shared.appContext)
-                } catch {
-                    print(error)
-                }
             }
             sheet.addAction(UIAlertAction(title: option.title, style: .default, handler: handler))
         }

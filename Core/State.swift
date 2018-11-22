@@ -78,7 +78,6 @@ public class State {
         set {
             guard let data = try? JSONEncoder().encode(newValue) else { return }
             storage.set(data, forKey: "cooldown")
-            NotificationService.shared.scheduleNotification(for: newValue)
         }
     }
     
