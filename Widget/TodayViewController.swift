@@ -34,7 +34,7 @@ class TodayViewController: UIViewController {
         cooldownLabel.font = .monospacedDigitSystemFont(ofSize: 80, weight: .light)
         displayLink = CADisplayLink(target: self, selector: #selector(refresh))
         displayLink?.preferredFramesPerSecond = 4
-        displayLink?.add(to: RunLoop.main, forMode: .commonModes)
+        displayLink?.add(to: RunLoop.main, forMode: .common)
     }
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
