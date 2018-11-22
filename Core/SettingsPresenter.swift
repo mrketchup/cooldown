@@ -19,8 +19,14 @@
 
 import Foundation
 
+public struct Shortcut {
+    public let title: String
+    public let multiplier: Double
+}
+
 public protocol SettingsView: class {
     func render(interval: TimeInterval)
+    func updateAppShortcuts(_ shortcuts: [Shortcut])
 }
 
 public class SettingsPresenter {
@@ -38,5 +44,15 @@ public class SettingsPresenter {
     public func update(interval: TimeInterval) {
         State.shared.cooldownInterval = interval
         WatchService.shared.stateUpdated(State.shared)
+        
+        let formatter = DateComponentsFormatter.cooldownFormatter
+        let shortcuts = [2.0, 1.5, 0.5].map { multiplier in
+            Shortcut(
+                title: "Add \(formatter.string(from: State.shared.cooldownInterval * multiplier)!)",
+                multiplier: multiplier
+            )
+        }
+        
+        view?.updateAppShortcuts(shortcuts)
     }
 }

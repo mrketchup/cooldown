@@ -30,4 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(_ application: UIApplication,
+                     performActionFor shortcutItem: UIApplicationShortcutItem,
+                     completionHandler: @escaping (Bool) -> Void) {
+        guard let multiplier = shortcutItem.userInfo?["multiplier"] as? NSNumber,
+            let controller = window?.rootViewController as? ViewController
+            else { return }
+        controller.presenter.incrementCooldown(multipliedBy: multiplier.doubleValue)
+    }
+    
 }
