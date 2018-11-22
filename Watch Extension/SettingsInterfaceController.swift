@@ -19,19 +19,22 @@
 
 import Foundation
 import WatchKit
-import WatchConnectivity
 import Core_watchOS
 
 class SettingsInterfaceController: WKInterfaceController {
     
     @IBOutlet var hourPicker: WKInterfacePicker!
     @IBOutlet var minutePicker: WKInterfacePicker!
-    var hours = Int(State.shared.cooldownInterval / 3600)
-    var minutes = Int(State.shared.cooldownInterval / 60) % 60
+    
+    private let presenter = SettingsPresenter()
+    
+    var hours = 0
+    var minutes = 0
     var pendingCorrection: DispatchWorkItem?
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+        presenter.view = self
         
         hourPicker.setItems((0..<24).map { hour -> WKPickerItem in
             let item = WKPickerItem()
@@ -45,18 +48,12 @@ class SettingsInterfaceController: WKInterfaceController {
             return item
         })
         
-        hourPicker.setSelectedItemIndex(hours)
-        minutePicker.setSelectedItemIndex(minutes)
+        presenter.refresh()
     }
     
     override func willDisappear() {
         super.willDisappear()
-        State.shared.cooldownInterval = TimeInterval(3600 * hours + 60 * minutes)
-        do {
-            try WCSession.default.updateApplicationContext(State.shared.appContext)
-        } catch {
-            print(error)
-        }
+        presenter.update(interval: TimeInterval(3600 * hours + 60 * minutes))
     }
     
     @IBAction func hourPickerAction(_ index: Int) {
@@ -82,6 +79,17 @@ class SettingsInterfaceController: WKInterfaceController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: item)
         pendingCorrection = item
+    }
+    
+}
+
+extension SettingsInterfaceController: SettingsView {
+    
+    func render(interval: TimeInterval) {
+        hours = Int(interval / 3600)
+        minutes = Int(interval / 60) % 60
+        hourPicker.setSelectedItemIndex(hours)
+        minutePicker.setSelectedItemIndex(minutes)
     }
     
 }

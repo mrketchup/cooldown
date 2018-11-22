@@ -40,8 +40,14 @@ public protocol CooldownView: class {
 
 public class CooldownPresenter {
     
-    public weak var view: CooldownView? {
-        didSet {
+    public weak var view: CooldownView?
+    
+    private let supportsWatch: Bool
+    
+    public init(supportsWatch: Bool) {
+        self.supportsWatch = supportsWatch
+        if supportsWatch {
+            WatchService.shared.activate()
             WatchService.shared.stateChanged = {
                 self.refresh()
                 #if os(watchOS)
@@ -49,13 +55,6 @@ public class CooldownPresenter {
                 #endif
             }
         }
-    }
-    
-    private let supportsWatch: Bool
-    
-    public init(supportsWatch: Bool) {
-        self.supportsWatch = supportsWatch
-        if supportsWatch { WatchService.shared.activate() }
     }
     
     public func refresh() {
