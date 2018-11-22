@@ -30,6 +30,10 @@ class WatchService: NSObject {
         return WCSession.isSupported() && WCSession.default.activationState == .activated
     }
     
+    private var canSendMessage: Bool {
+        return canUpdateContext && WCSession.default.isReachable
+    }
+    
     func activate() {
         if WCSession.isSupported() && WCSession.default.activationState == .notActivated {
             WCSession.default.delegate = self
@@ -38,11 +42,14 @@ class WatchService: NSObject {
     }
     
     func stateUpdated(_ state: State) {
-        guard canUpdateContext else { return }
-        do {
-            try WCSession.default.updateApplicationContext(state.appContext)
-        } catch {
-            print(error)
+        if canSendMessage {
+            WCSession.default.sendMessage(state.appContext, replyHandler: nil)
+        } else if canUpdateContext {
+            do {
+                try WCSession.default.updateApplicationContext(state.appContext)
+            } catch {
+                print(error)
+            }
         }
     }
     
@@ -63,6 +70,19 @@ extension WatchService: WCSessionDelegate {
         guard let data = applicationContext["cooldown"] as? Data,
             let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data),
             let interval = applicationContext["cooldownInterval"] as? TimeInterval
+            else {
+                return
+        }
+        
+        State.shared.cooldown = cooldown
+        State.shared.cooldownInterval = interval
+        DispatchQueue.main.async(execute: stateChanged ?? {})
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        guard let data = message["cooldown"] as? Data,
+            let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data),
+            let interval = message["cooldownInterval"] as? TimeInterval
             else {
                 return
         }
