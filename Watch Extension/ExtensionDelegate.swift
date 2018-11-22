@@ -70,9 +70,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
         
         DispatchQueue.main.async {
             if let controller = WKExtension.shared().rootInterfaceController as? InterfaceController {
-                controller.updateUI()
-                controller.updateTimer()
-                controller.updateMenuItems()
+                controller.stateChanged()
             }
         }
     }

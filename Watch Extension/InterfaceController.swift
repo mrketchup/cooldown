@@ -27,14 +27,16 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var interfaceGroup: WKInterfaceGroup!
     @IBOutlet var cooldownTimer: WKInterfaceTimer!
     weak var timer: Timer?
+    let presenter = CooldownPresenter()
+    var actions: [() -> Void] = []
     
     override func willActivate() {
         super.willActivate()
-        updateTimer()
-        updateMenuItems()
+        presenter.view = self
+        presenter.loadIntervalOptions()
         
-        let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(updateUI), userInfo: nil, repeats: true)
-        RunLoop.main.add(timer, forMode: .commonModes)
+        let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(refresh), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer, forMode: .common)
         self.timer = timer
         self.timer?.fire()
     }
@@ -45,52 +47,46 @@ class InterfaceController: WKInterfaceController {
         timer?.invalidate()
     }
     
-    @IBAction func swipeDown(_ sender: WKSwipeGestureRecognizer) {
-        updateCooldown(multiplier: -1)
+    func stateChanged() {
+        presenter.refresh()
+        presenter.loadIntervalOptions()
     }
     
-    @objc func add2ButtonPressed(_ sender: WKInterfaceButton) {
-        updateCooldown(multiplier: 2)
+    @objc private func action1ButtonPressed() { actions[0]() }
+    @objc private func action2ButtonPressed() { actions[1]() }
+    @objc private func action3ButtonPressed() { actions[2]() }
+    @objc private func action4ButtonPressed() { actions[3]() }
+    
+    @objc private func refresh() {
+        presenter.refresh()
     }
     
-    @objc func add15ButtonPressed(_ sender: WKInterfaceButton) {
-        updateCooldown(multiplier: 1.5)
+    @IBAction private func swipeDown(_ sender: WKSwipeGestureRecognizer) {
+        presenter.decrementCooldown()
+        updateSession()
     }
     
-    @objc func add05ButtonPressed(_ sender: WKInterfaceButton) {
-        updateCooldown(multiplier: 0.5)
+    @IBAction private func addButtonPressed(_ sender: WKInterfaceButton) {
+        presenter.incrementCooldown()
+        updateSession()
     }
     
-    @objc func settingsButtonPressed() {
-        presentController(withName: "SettingsInterfaceController", context: nil)
-    }
-    
-    @IBAction func addButtonPressed(_ sender: WKInterfaceButton) {
-        updateCooldown()
-    }
-    
-    func updateCooldown(multiplier: Double = 1) {
-        bumpCooldown(multiplier: multiplier)
-        updateUI()
-        updateTimer()
-    }
-    
-    @objc func updateUI() {
-        let interval = max(State.shared.cooldown.target.timeIntervalSinceNow, 0)
-        let percent = min(interval / State.shared.cooldownInterval / 3, 1)
-        let color: UIColor
-        if percent <= 0.5 {
-            color = UIColor.cooldownGreen.blended(with: .cooldownYellow, percent: CGFloat(percent * 2))
-        } else {
-            color = UIColor.cooldownYellow.blended(with: .cooldownRed, percent: CGFloat((percent - 0.5) * 2))
+    private func updateSession() {
+        do {
+            try WCSession.default.updateApplicationContext(State.shared.appContext)
+        } catch {
+            print(error)
         }
-        
-        interfaceGroup.setBackgroundColor(color)
     }
     
-    func updateTimer() {
-        if State.shared.cooldown.target > Date() {
-            cooldownTimer.setDate(State.shared.cooldown.target)
+}
+
+extension InterfaceController: CooldownView {
+    
+    func render(target: Date, backgroundColor: UIColor) {
+        interfaceGroup.setBackgroundColor(backgroundColor)
+        if target > Date() {
+            cooldownTimer.setDate(target)
             cooldownTimer.start()
         } else {
             cooldownTimer.setDate(Date())
@@ -98,31 +94,34 @@ class InterfaceController: WKInterfaceController {
         }
     }
     
-    func updateMenuItems() {
+    func updateIntervalOptions(_ options: [IntervalOption]) {
         clearAllMenuItems()
-        let formatter = DateComponentsFormatter.cooldownFormatter
-        let title2 = formatter.string(from: State.shared.cooldownInterval * 2)!
-        let title15 = formatter.string(from: State.shared.cooldownInterval * 1.5)!
-        let title05 = formatter.string(from: State.shared.cooldownInterval * 0.5)!
-        addMenuItem(with: .add, title: title2, action: #selector(add2ButtonPressed))
-        addMenuItem(with: .add, title: title15, action: #selector(add15ButtonPressed))
-        addMenuItem(with: .add, title: title05, action: #selector(add05ButtonPressed))
-        addMenuItem(with: .more, title: "Edit Interval", action: #selector(settingsButtonPressed))
+        actions = options.prefix(4).map { option in { option.action(); self.updateSession() } }
+        
+        let selectors = [
+            #selector(action1ButtonPressed),
+            #selector(action2ButtonPressed),
+            #selector(action3ButtonPressed),
+            #selector(action4ButtonPressed)
+        ]
+        
+        for index in 0..<4 {
+            let icon: WKMenuItemIcon
+            switch options[index].optionType {
+            case .bump: icon = .add
+            case .edit: icon = .more
+            }
+            
+            addMenuItem(with: icon, title: options[index].title, action: selectors[index])
+        }
     }
     
-    func bumpCooldown(multiplier: Double = 1) {
-        State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
-        do {
-            try WCSession.default.updateApplicationContext(State.shared.appContext)
-        } catch {
-            print(error)
-        }
-        
-        let interval = max(State.shared.cooldown.target.timeIntervalSinceNow, 0)
-        let percent = interval / State.shared.cooldownInterval / 3
-        if percent >= 1 && multiplier > 0 {
-            WKInterfaceDevice.current().play(.notification)
-        }
+    func presentSettings() {
+        presentController(withName: "SettingsInterfaceController", context: nil)
+    }
+    
+    func issueRedZoneWarning() {
+        WKInterfaceDevice.current().play(.notification)
     }
     
 }

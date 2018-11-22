@@ -20,13 +20,20 @@
 import UIKit
 
 public struct IntervalOption {
+    public enum OptionType { case bump, edit }
     public let title: String
     public let action: () -> Void
+    public let optionType: OptionType
 }
 
 public protocol CooldownView: class {
+    #if os(watchOS)
+    func render(target: Date, backgroundColor: UIColor)
+    func updateIntervalOptions(_ options: [IntervalOption])
+    #else
     func render(timeRemaining: String, backgroundColor: UIColor)
     func presentIntervalOptions(_ options: [IntervalOption])
+    #endif
     func presentSettings()
     func issueRedZoneWarning()
 }
@@ -49,7 +56,11 @@ public class CooldownPresenter {
             backgroundColor = UIColor.cooldownYellow.blended(with: .cooldownRed, percent: CGFloat((percent - 0.5) * 2))
         }
         
+        #if os(watchOS)
+        view?.render(target: State.shared.cooldown.target, backgroundColor: backgroundColor)
+        #else
         view?.render(timeRemaining: timeRemaining, backgroundColor: backgroundColor)
+        #endif
     }
     
     public func incrementCooldown(multipliedBy multiplier: Double = 1) {
@@ -69,21 +80,45 @@ public class CooldownPresenter {
         if percent >= 1 && multiplier > 0 {
             view?.issueRedZoneWarning()
         }
+        
+        #if os(watchOS)
+        loadIntervalOptions()
+        #endif
     }
     
     public func loadIntervalOptions() {
+        #if os(watchOS)
+        view?.updateIntervalOptions(createIntervalOptions())
+        #else
+        view?.presentIntervalOptions(createIntervalOptions())
+        #endif
+    }
+    
+    private func createIntervalOptions() -> [IntervalOption] {
         let formatter = DateComponentsFormatter.cooldownFormatter
+
+        #if os(watchOS)
+        let prefix = ""
+        #else
+        let prefix = "+"
+        #endif
         
         var options = [2.0, 1.5, 0.5]
             .map { multiplier in
                 IntervalOption(
-                    title: "+\(formatter.string(from: State.shared.cooldownInterval * multiplier)!)",
-                    action: { self.bumpCooldown(multipliedBy: multiplier) }
+                    title: "\(prefix)\(formatter.string(from: State.shared.cooldownInterval * multiplier)!)",
+                    action: { self.bumpCooldown(multipliedBy: multiplier) },
+                    optionType: .bump
                 )
         }
         
-        options.append(IntervalOption(title: "Edit Cooldown Interval...", action: { self.view?.presentSettings() }))
-        view?.presentIntervalOptions(options)
+        #if os(watchOS)
+        let title = "Edit Interval"
+        #else
+        let title = "Edit Cooldown Interval..."
+        #endif
+        options.append(IntervalOption(title: title, action: { self.view?.presentSettings() }, optionType: .edit))
+        return options
     }
     
 }
