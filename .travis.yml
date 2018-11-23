@@ -1,0 +1,17 @@
+osx_image: xcode10.1
+language: objective-c
+script:
+- "./scripts/install-signing"
+- "./scripts/version"
+- "./scripts/build"
+branches:
+  only:
+  - develop
+  - "/^\\d+\\.\\d+\\.\\d+$/"
+deploy:
+  provider: releases
+  api_key:
+    secure: gRRtlXZTMQKrAjLZXx0WkQUXFwaCmO1hPI6/h8C2gkN/l+l/cIV2AcgI1cm6+x8kEu3OKFI8iJ3dbxKvKc44mvXnOZSTYiNGsjNjA4DJO84OVt8/QhnCt+bj3ilFoKejiiZ+p0WEtUcO35iutA3R2OMHJ+0irz5Mg4hVs/zUambIQEF6WJaPTpDRZ1Bdj9j18532fe9WtcBPRXNw05EzUDxzP1b9/B14Qtltkfl7nxinzp8RnW4cxxVATAeTq/2shTBPUstPBht8wnfhfgXizrZ+Z6oYsPVC1ALcwPMw63GnRh9oJktZhqGu/2U+b0TSGgEAhasM0mF1q1cpRTaSdRnPd67B5Q+HKJw9IGd2+Azt6ovz6o89B3rygA8/sJqacJ2doDpcFqcNjwfRj8JHINB8vAlNHir9j5zFggb0qN2kmMg6nb5fjIQ/6+Nrfi76KVcK05op3s1OACQaiUT726DOVu3Xzo09+2VEm8tbNHd3z/AXpi710NknzafHc+mEurnVR69b7GzHKGH/YDKbAxXx3SYBW4KH89+H2Iz2y8oCD1KM9Er4AW0fOb/yXBZ9USHjKvslkl3D9/1jOkorugFm6Ir7HnyGPj41UAyjwih0RYaQWKFFEcs9dEyNI7EsGOIJhJlT1LfoXgQTt7Ur4nZqWpHA3+XJA9LB+rphfvo=
+  file: artifacts.tar.gz
+  on:
+    tags: true
