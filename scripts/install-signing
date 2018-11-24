@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo -e "\n\033[0;34m*** INSTALL SIGNING ***\n\033[0m"
+echo -e "\n\033[0;34m*** CREATE KEYCHAIN ***\n\033[0m"
 
 # Create a custom keychain
 security create-keychain -p travis ios-build.keychain
@@ -19,6 +19,8 @@ security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
 # Add certificates to keychain and allow codesign to access them
 security import ./signing/distribution.p12 -k ~/Library/Keychains/ios-build.keychain -P $P12_PASSWORD -T /usr/bin/codesign
 
+echo -e "\n\033[0;34m*** COPY PROFILES ***\n\033[0m"
+
 # Put the provisioning profile in place
-mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-cp ./signing/*.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+mkdir -pv ~/Library/MobileDevice/Provisioning\ Profiles
+cp -v ./signing/*.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
