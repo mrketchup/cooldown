@@ -1,17 +1,14 @@
 #!/bin/bash
 set -e
 
-if [ ! -z "$TRAVIS_TAG" ]
-then
-	echo -e "\n\033[0;34m*** UPDATE VERSION NUMBER ***\n\033[0m"
+echo -e "\n\033[0;34m*** UPDATE VERSION NUMBER ***\n\033[0m"
 
-	if [[ $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
-	then
-    	agvtool new-marketing-version $TRAVIS_TAG
-    else
-    	echo -e "\033[0;91m'$TRAVIS_TAG' is not a valid version number!\n\033[0m"
-    	exit 1
-	fi
+if [[ $TRAVIS_TAG =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+then
+	agvtool new-marketing-version $TRAVIS_TAG
+else
+	echo -e "\033[0;91m'$TRAVIS_TAG' is not a valid version number!\n\033[0m"
+	exit 1
 fi
 
 echo -e "\n\033[0;34m*** UPDATE BUILD NUMBER ***\n\033[0m"
