@@ -10,13 +10,5 @@ xcodebuild archive \
   -configuration Release \
   -archivePath artifacts/Cooldown.xcarchive | xcpretty --color
 
-echo -e "\n\033[0;34m*** EXPORT ***\n\033[0m"
-set -o pipefail && \
-xcodebuild \
-  -exportArchive \
-  -exportOptionsPlist signing/appstore.plist \
-  -archivePath "artifacts/cooldown.xcarchive" \
-  -exportPath "artifacts/ipa" | xcpretty --color
-
 echo -e "\n\033[0;34m*** COMPRESSING ARTIFACTS ***\n\033[0m"
 tar -zcvf artifacts.tar.gz artifacts/
