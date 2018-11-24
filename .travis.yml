@@ -6,7 +6,6 @@ script:
 - "./scripts/build"
 branches:
   only:
-  - develop
   - "/^\\d+\\.\\d+\\.\\d+$/"
 deploy:
   provider: releases
