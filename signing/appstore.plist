@@ -6,8 +6,21 @@
 	<string>export</string>
 	<key>method</key>
 	<string>app-store</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>com.mattjones.cooldown</key>
+		<string>Cooldown AS</string>
+		<key>com.mattjones.cooldown.watch</key>
+		<string>Cooldown Watch AS</string>
+		<key>com.mattjones.cooldown.watch.extension</key>
+		<string>Cooldown Watch Extension AS</string>
+		<key>com.mattjones.cooldown.widget</key>
+		<string>Cooldown Widget AS</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>iPhone Distribution</string>
 	<key>signingStyle</key>
-	<string>automatic</string>
+	<string>manual</string>
 	<key>stripSwiftSymbols</key>
 	<true/>
 	<key>teamID</key>
