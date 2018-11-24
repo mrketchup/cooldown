@@ -19,8 +19,11 @@ security set-keychain-settings -t 3600 -l ~/Library/Keychains/ios-build.keychain
 # Add certificates to keychain and allow codesign to access them
 security import ./signing/distribution.p12 -k ~/Library/Keychains/ios-build.keychain -P $P12_PASSWORD -T /usr/bin/codesign
 
+# See https://stackoverflow.com/a/40039594/1181439
+security set-key-partition-list -S apple-tool:,apple: -s -k travis ios-build.keychain > /dev/null
+
 echo -e "\n\033[0;34m*** COPY PROFILES ***\n\033[0m"
 
 # Put the provisioning profile in place
 mkdir -pv ~/Library/MobileDevice/Provisioning\ Profiles
-cp -v ./signing/*.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+rsync -av ./signing/*.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
