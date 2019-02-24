@@ -86,7 +86,9 @@ public class CooldownPresenter {
     
     private func bumpCooldown(multipliedBy multiplier: Double) {
         State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
+        #if !os(watchOS)
         NotificationService.shared.scheduleNotification(for: State.shared.cooldown)
+        #endif
         refresh()
         
         if supportsWatch { WatchService.shared.stateUpdated(State.shared) }

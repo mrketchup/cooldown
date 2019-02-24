@@ -38,12 +38,13 @@ class NotificationService: NSObject {
             let content = UNMutableNotificationContent()
             content.title = "Cooldown complete"
             content.body = "Time elapsed: \(DateComponentsFormatter.notificationFormatter.string(from: cooldown.remaining) ?? "???")"
-            content.sound = .default
-            
+            content.sound = UNNotificationSound(named: UNNotificationSoundName("ding.wav"))
+
             let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: cooldown.target)
             let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
             
-            let request = UNNotificationRequest(identifier: "cooldown-complete", content: content, trigger: trigger)
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request) { error in
                 if let error = error { print(error) }
             }
@@ -58,7 +59,7 @@ extension NotificationService: UNUserNotificationCenterDelegate {
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler(.sound)
+        completionHandler([.sound, .alert])
     }
     
 }

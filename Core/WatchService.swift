@@ -26,8 +26,16 @@ class WatchService: NSObject {
     
     var stateChanged: (() -> Void)?
     
+    private var isConnected: Bool {
+        #if os(watchOS)
+        return true
+        #else
+        return WCSession.default.isPaired && WCSession.default.isWatchAppInstalled
+        #endif
+    }
+    
     private var canUpdateContext: Bool {
-        return WCSession.isSupported() && WCSession.default.activationState == .activated
+        return WCSession.isSupported() && WCSession.default.activationState == .activated && isConnected
     }
     
     private var canSendMessage: Bool {
@@ -90,6 +98,10 @@ extension WatchService: WCSessionDelegate {
         State.shared.cooldown = cooldown
         State.shared.cooldownInterval = interval
         DispatchQueue.main.async(execute: stateChanged ?? {})
+        
+        #if !os(watchOS)
+        NotificationService.shared.scheduleNotification(for: State.shared.cooldown)
+        #endif
     }
     
 }
