@@ -20,11 +20,11 @@
 import Foundation
 import WatchConnectivity
 
-class WatchService: NSObject {
+public class WatchService: NSObject {
     
-    static let shared = WatchService()
+    public static let shared = WatchService()
     
-    var stateChanged: (() -> Void)?
+    private var isProcessing = false
     
     private var isConnected: Bool {
         #if os(watchOS)
@@ -42,14 +42,57 @@ class WatchService: NSObject {
         return canUpdateContext && WCSession.default.isReachable
     }
     
-    func activate() {
+    public func activate() {
         if WCSession.isSupported() && WCSession.default.activationState == .notActivated {
             WCSession.default.delegate = self
             WCSession.default.activate()
         }
     }
     
-    func stateUpdated(_ state: State) {
+}
+
+extension WatchService: WCSessionDelegate {
+    
+    #if !os(watchOS)
+    public func sessionDidBecomeInactive(_ session: WCSession) {}
+    public func sessionDidDeactivate(_ session: WCSession) {}
+    #endif
+    
+    public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if let error = error { print(error) }
+    }
+    
+    public func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+        process(applicationContext)
+    }
+    
+    public func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        process(message)
+    }
+    
+    private func process(_ dictionary: [String: Any]) {
+        guard let data = dictionary["cooldown"] as? Data,
+            let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data),
+            let interval = dictionary["cooldownInterval"] as? TimeInterval
+            else {
+                return
+        }
+        
+        DispatchQueue.main.sync {
+            self.isProcessing = true
+            State.shared.cooldown = cooldown
+            State.shared.cooldownInterval = interval
+            self.isProcessing = false
+        }
+    }
+    
+}
+
+extension WatchService: StateObserver {
+    
+    public func stateUpdated(_ state: State) {
+        guard !isProcessing else { return }
+        
         if canSendMessage {
             WCSession.default.sendMessage(state.appContext, replyHandler: nil)
         } else if canUpdateContext {
@@ -59,49 +102,6 @@ class WatchService: NSObject {
                 print(error)
             }
         }
-    }
-    
-}
-
-extension WatchService: WCSessionDelegate {
-    
-    #if !os(watchOS)
-    func sessionDidBecomeInactive(_ session: WCSession) {}
-    func sessionDidDeactivate(_ session: WCSession) {}
-    #endif
-    
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        if let error = error { print(error) }
-    }
-    
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        guard let data = applicationContext["cooldown"] as? Data,
-            let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data),
-            let interval = applicationContext["cooldownInterval"] as? TimeInterval
-            else {
-                return
-        }
-        
-        State.shared.cooldown = cooldown
-        State.shared.cooldownInterval = interval
-        DispatchQueue.main.async(execute: stateChanged ?? {})
-    }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        guard let data = message["cooldown"] as? Data,
-            let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data),
-            let interval = message["cooldownInterval"] as? TimeInterval
-            else {
-                return
-        }
-        
-        State.shared.cooldown = cooldown
-        State.shared.cooldownInterval = interval
-        DispatchQueue.main.async(execute: stateChanged ?? {})
-        
-        #if !os(watchOS)
-        NotificationService.shared.scheduleNotification(for: State.shared.cooldown)
-        #endif
     }
     
 }

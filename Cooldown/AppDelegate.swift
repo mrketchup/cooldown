@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window?.tintColor = .cooldownGreen
+        WatchService.shared.activate()
+        State.shared.register(ShortcutService.shared)
+        State.shared.register(NotificationService.shared)
+        State.shared.register(WatchService.shared)
         return true
     }
     

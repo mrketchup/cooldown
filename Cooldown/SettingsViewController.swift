@@ -60,16 +60,4 @@ extension SettingsViewController: SettingsView {
         }
     }
     
-    func updateAppShortcuts(_ shortcuts: [Shortcut]) {
-        UIApplication.shared.shortcutItems = shortcuts.map { shortcut in
-            UIApplicationShortcutItem(
-                type: "bump",
-                localizedTitle: shortcut.title,
-                localizedSubtitle: nil,
-                icon: UIApplicationShortcutIcon(type: .add),
-                userInfo: ["multiplier": NSNumber(value: shortcut.multiplier)]
-            )
-        }
-    }
-    
 }

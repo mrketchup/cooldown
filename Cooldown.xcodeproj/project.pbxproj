@@ -45,6 +45,7 @@
 		34CD32A01F4127730045009B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34CD329F1F4127730045009B /* Assets.xcassets */; };
 		34CD32A41F4127730045009B /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 34CD32861F4127720045009B /* Watch.app */; };
 		34DFE5F91F3B8A64007915D6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DFE5F81F3B8A64007915D6 /* SettingsViewController.swift */; };
+		F3308292222327FA0025C9C5 /* ShortcutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3308291222327FA0025C9C5 /* ShortcutService.swift */; };
 		F3708CE72221A31500CFA763 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F3708CE62221A31500CFA763 /* Settings.bundle */; };
 		F3708CF222222D1400CFA763 /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = F3708CEC2221AF1B00CFA763 /* ding.wav */; };
 /* End PBXBuildFile section */
@@ -195,6 +196,7 @@
 		34CD329F1F4127730045009B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34CD32A11F4127730045009B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34DFE5F81F3B8A64007915D6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F3308291222327FA0025C9C5 /* ShortcutService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutService.swift; sourceTree = "<group>"; };
 		F3708CE62221A31500CFA763 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F3708CEC2221AF1B00CFA763 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -332,6 +334,7 @@
 				344C1C8F1F3A451F0005BB10 /* AppDelegate.swift */,
 				344C1C911F3A451F0005BB10 /* ViewController.swift */,
 				34DFE5F81F3B8A64007915D6 /* SettingsViewController.swift */,
+				F3308291222327FA0025C9C5 /* ShortcutService.swift */,
 				341F6EB11F3E483A00E74712 /* Main.storyboard */,
 				34432A391F40E627006BDE24 /* Resources */,
 			);
@@ -711,6 +714,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				344C1C921F3A451F0005BB10 /* ViewController.swift in Sources */,
+				F3308292222327FA0025C9C5 /* ShortcutService.swift in Sources */,
 				344C1C901F3A451F0005BB10 /* AppDelegate.swift in Sources */,
 				34DFE5F91F3B8A64007915D6 /* SettingsViewController.swift in Sources */,
 			);

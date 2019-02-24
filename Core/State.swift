@@ -48,7 +48,23 @@ public extension Cooldown {
     
 }
 
+public protocol StateObserver: AnyObject {
+    func stateUpdated(_ state: State)
+    func cooldownUpdated(_ cooldown: Cooldown)
+    func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval)
+}
+
+public extension StateObserver {
+    func stateUpdated(_ state: State) {}
+    func cooldownUpdated(_ cooldown: Cooldown) {}
+    func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval) {}
+}
+
 public class State {
+    
+    private struct WeakObserver {
+        weak var ref: StateObserver?
+    }
     
     public static let shared = State()
     
@@ -57,6 +73,8 @@ public class State {
     #else
     private let storage = UserDefaults(suiteName: "group.mattjones.cooldown")!
     #endif
+    
+    private var observers: [WeakObserver] = []
     
     public var appContext: [String: Any] {
         return [
@@ -78,6 +96,7 @@ public class State {
         set {
             guard let data = try? JSONEncoder().encode(newValue) else { return }
             storage.set(data, forKey: "cooldown")
+            notify { $0.cooldownUpdated(newValue) }
         }
     }
     
@@ -87,7 +106,26 @@ public class State {
         }
         set {
             storage.set(newValue, forKey: "cooldownInterval")
+            notify { $0.cooldownIntervalUpdated(newValue) }
         }
     }
     
+    public func register(_ observer: StateObserver) {
+        guard !observers.contains(where: { $0.ref === observer }) else { return }
+        observers.append(WeakObserver(ref: observer))
+        observer.cooldownUpdated(cooldown)
+        observer.cooldownIntervalUpdated(cooldownInterval)
+        observer.stateUpdated(self)
+    }
+    
+    public func unregister(_ observer: StateObserver) {
+        observers.removeAll { $0.ref === observer }
+    }
+    
+    private func notify(_ notifyChange: @escaping (StateObserver) -> Void) {
+        observers.removeAll { $0.ref == nil }
+        observers
+            .compactMap { $0.ref }
+            .forEach { notifyChange($0); $0.stateUpdated(self) }
+    }
 }

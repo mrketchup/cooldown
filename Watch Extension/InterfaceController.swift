@@ -26,7 +26,7 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var interfaceGroup: WKInterfaceGroup!
     @IBOutlet var cooldownTimer: WKInterfaceTimer!
     weak var timer: Timer?
-    let presenter = CooldownPresenter(supportsWatch: true)
+    let presenter = CooldownPresenter()
     var actions: [() -> Void] = []
     
     override func willActivate() {

@@ -19,16 +19,33 @@
 
 import UserNotifications
 
-class NotificationService: NSObject {
+public class NotificationService: NSObject {
     
-    static let shared = NotificationService()
+    public static let shared = NotificationService()
     
-    override init() {
+    private override init() {
         super.init()
         UNUserNotificationCenter.current().delegate = self
     }
     
-    func scheduleNotification(for cooldown: Cooldown) {
+}
+
+extension NotificationService: UNUserNotificationCenterDelegate {
+    
+    public func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.sound, .alert])
+    }
+    
+}
+
+extension NotificationService: StateObserver {
+    
+    public func cooldownUpdated(_ cooldown: Cooldown) {
+        guard cooldown.target > Date() else { return }
+        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
             if !granted, let error = error {
                 print(error)
@@ -39,7 +56,7 @@ class NotificationService: NSObject {
             content.title = "Cooldown complete"
             content.body = "Time elapsed: \(DateComponentsFormatter.notificationFormatter.string(from: cooldown.remaining) ?? "???")"
             content.sound = UNNotificationSound(named: UNNotificationSoundName("ding.wav"))
-
+            
             let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: cooldown.target)
             let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
             
@@ -49,17 +66,6 @@ class NotificationService: NSObject {
                 if let error = error { print(error) }
             }
         }
-    }
-    
-}
-
-extension NotificationService: UNUserNotificationCenterDelegate {
-    
-    func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.sound, .alert])
     }
     
 }

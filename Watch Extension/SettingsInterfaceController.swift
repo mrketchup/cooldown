@@ -92,6 +92,4 @@ extension SettingsInterfaceController: SettingsView {
         minutePicker.setSelectedItemIndex(minutes)
     }
     
-    func updateAppShortcuts(_ shortcuts: [Shortcut]) {}
-    
 }

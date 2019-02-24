@@ -42,19 +42,8 @@ public class CooldownPresenter {
     
     public weak var view: CooldownView?
     
-    private let supportsWatch: Bool
-    
-    public init(supportsWatch: Bool) {
-        self.supportsWatch = supportsWatch
-        if supportsWatch {
-            WatchService.shared.activate()
-            WatchService.shared.stateChanged = {
-                self.refresh()
-                #if os(watchOS)
-                self.loadIntervalOptions()
-                #endif
-            }
-        }
+    public init() {
+        State.shared.register(self)
     }
     
     public func refresh() {
@@ -86,12 +75,6 @@ public class CooldownPresenter {
     
     private func bumpCooldown(multipliedBy multiplier: Double) {
         State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
-        #if !os(watchOS)
-        NotificationService.shared.scheduleNotification(for: State.shared.cooldown)
-        #endif
-        refresh()
-        
-        if supportsWatch { WatchService.shared.stateUpdated(State.shared) }
         
         let interval = max(State.shared.cooldown.target.timeIntervalSinceNow, 0)
         let percent = interval / State.shared.cooldownInterval / 3
@@ -133,6 +116,21 @@ public class CooldownPresenter {
         #endif
         options.append(IntervalOption(title: title, action: { self.view?.presentSettings() }, optionType: .edit))
         return options
+    }
+    
+}
+
+extension CooldownPresenter: StateObserver {
+    
+    public func cooldownUpdated(_ cooldown: Cooldown) {
+        refresh()
+    }
+    
+    public func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval) {
+        refresh()
+        #if os(watchOS)
+        loadIntervalOptions()
+        #endif
     }
     
 }
