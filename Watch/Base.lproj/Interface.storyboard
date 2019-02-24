@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13529" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
-    <device id="watch38" orientation="portrait">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14460.31" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch44" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="13507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14460.16"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller spacing="0.0" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Watch" customModuleProvider="target">
+                <controller spacing="0.0" fullBounds="YES" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Watch" customModuleProvider="target">
                     <items>
-                        <group width="1" height="1" alignment="left" layout="vertical" radius="0.0" id="9qo-uO-J93">
+                        <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="9qo-uO-J93">
                             <items>
                                 <group width="1" height="1" heightAdjustment="-44" alignment="left" layout="vertical" id="5cH-Pb-4oy">
                                     <items>
@@ -53,26 +52,26 @@
         <!--Cooldown Interval-->
         <scene sceneID="veR-5t-N4z">
             <objects>
-                <controller identifier="SettingsInterfaceController" title="Cooldown Interval" hidesWhenLoading="NO" id="dG7-EY-zwi" customClass="SettingsInterfaceController" customModule="Watch_Extension">
+                <controller identifier="SettingsInterfaceController" title="Cooldown Interval" hidesWhenLoading="NO" fullBounds="YES" id="dG7-EY-zwi" customClass="SettingsInterfaceController" customModule="Watch_Extension">
                     <items>
-                        <group width="1" alignment="left" id="gol-CK-dci">
+                        <group width="1" alignment="center" id="gol-CK-dci">
                             <items>
-                                <picker width="0.5" height="100" alignment="left" focusStyle="stack" indicatorMode="shownWhileFocused" id="ioU-S2-zcM">
+                                <picker width="0.5" height="100" alignment="left" verticalAlignment="center" focusStyle="stack" indicatorMode="shownWhileFocused" id="ioU-S2-zcM">
                                     <connections>
                                         <action selector="hourPickerAction:" destination="dG7-EY-zwi" id="HtW-7a-hw8"/>
                                     </connections>
                                 </picker>
-                                <picker width="0.5" height="100" alignment="left" focusStyle="stack" indicatorMode="shownWhileFocused" id="Pyx-8u-ghM">
+                                <picker width="0.5" height="100" alignment="center" verticalAlignment="center" focusStyle="stack" indicatorMode="shownWhileFocused" id="Pyx-8u-ghM">
                                     <connections>
                                         <action selector="minutePickerAction:" destination="dG7-EY-zwi" id="YSN-IO-MhO"/>
                                     </connections>
                                 </picker>
                             </items>
                         </group>
-                        <group width="1" alignment="left" id="hvF-4o-cX5">
+                        <group width="1" alignment="center" id="hvF-4o-cX5">
                             <items>
                                 <label width="0.5" alignment="left" text="Hours" textAlignment="center" id="X7L-28-pzS"/>
-                                <label width="0.5" alignment="left" text="Mins" textAlignment="center" id="qcX-OE-Rdf"/>
+                                <label width="0.5" alignment="right" text="Mins" textAlignment="center" id="qcX-OE-Rdf"/>
                             </items>
                         </group>
                     </items>
