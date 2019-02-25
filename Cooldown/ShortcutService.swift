@@ -36,7 +36,7 @@ extension ShortcutService: StateObserver {
         UIApplication.shared.shortcutItems =  [2.0, 1.5, 0.5].map { multiplier in
             UIApplicationShortcutItem(
                 type: "bump",
-                localizedTitle: "Add \(formatter.string(from: cooldownInterval * multiplier)!)",
+                localizedTitle: formatter.string(from: cooldownInterval * multiplier)!,
                 localizedSubtitle: nil,
                 icon: UIApplicationShortcutIcon(type: .add),
                 userInfo: ["multiplier": NSNumber(value: multiplier)]

@@ -39,6 +39,16 @@ extension NotificationService: UNUserNotificationCenterDelegate {
         completionHandler([.sound, .alert])
     }
     
+    public func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void) {
+        defer { completionHandler() }
+        
+        guard let multiplier = Double(response.actionIdentifier) else { return }
+        State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
+    }
+    
 }
 
 extension NotificationService: StateObserver {
@@ -52,7 +62,11 @@ extension NotificationService: StateObserver {
                 return
             }
             
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+            
             let content = UNMutableNotificationContent()
+            content.categoryIdentifier = "cooldown_complete"
             content.title = "Cooldown complete"
             content.body = "Time elapsed: \(DateComponentsFormatter.notificationFormatter.string(from: cooldown.remaining) ?? "???")"
             content.sound = UNNotificationSound(named: UNNotificationSoundName("ding.wav"))
@@ -60,12 +74,26 @@ extension NotificationService: StateObserver {
             let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: cooldown.target)
             let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
             
-            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request) { error in
                 if let error = error { print(error) }
             }
         }
+    }
+    
+    public func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval) {
+        let formatter = DateComponentsFormatter.cooldownFormatter
+        
+        let actions =  [2.0, 1.5, 1.0, 0.5].map { multiplier in
+            UNNotificationAction(
+                identifier: "\(multiplier)",
+                title: "+\(formatter.string(from: cooldownInterval * multiplier)!)",
+                options: []
+            )
+        }
+        
+        let category = UNNotificationCategory(identifier: "cooldown_complete", actions: actions, intentIdentifiers: [], options: [])
+        UNUserNotificationCenter.current().setNotificationCategories([category])
     }
     
 }
