@@ -22,7 +22,7 @@ import UIKit
 public extension UIColor {
     
     // swiftlint:disable identifier_name
-    public struct RGBA {
+    struct RGBA {
         var r: CGFloat
         var g: CGFloat
         var b: CGFloat
@@ -30,11 +30,11 @@ public extension UIColor {
     }
     // swiftlint:enable identifier_name
     
-    public static let cooldownGreen = UIColor(red: 0.1, green: 0.8, blue: 0.1, alpha: 1)
-    public static let cooldownYellow = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
-    public static let cooldownRed = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1)
+    static let cooldownGreen = UIColor(red: 0.1, green: 0.8, blue: 0.1, alpha: 1)
+    static let cooldownYellow = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
+    static let cooldownRed = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1)
     
-    public var rgba: RGBA {
+    var rgba: RGBA {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
@@ -43,7 +43,7 @@ public extension UIColor {
         return RGBA(r: red, g: green, b: blue, a: alpha)
     }
     
-    public func blended(with color: UIColor, percent: CGFloat) -> UIColor {
+    func blended(with color: UIColor, percent: CGFloat) -> UIColor {
         let rgba1 = rgba
         let rgba2 = color.rgba
         let red = rgba1.r * (1 - percent) + rgba2.r * percent

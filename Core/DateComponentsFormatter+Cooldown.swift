@@ -21,7 +21,7 @@ import Foundation
 
 public extension DateComponentsFormatter {
     
-    public static let cooldownFormatter: DateComponentsFormatter = {
+    static let cooldownFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .abbreviated
         formatter.allowedUnits = [.hour, .minute, .second]
@@ -29,7 +29,7 @@ public extension DateComponentsFormatter {
         return formatter
     }()
     
-    public static let notificationFormatter: DateComponentsFormatter = {
+    static let notificationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .brief
         formatter.allowedUnits = [.hour, .minute, .second]

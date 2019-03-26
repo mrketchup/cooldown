@@ -30,13 +30,13 @@ public struct Cooldown: Codable {
 
 public extension Cooldown {
     
-    public var target: Date { return created.addingTimeInterval(remaining) }
+    var target: Date { return created.addingTimeInterval(remaining) }
     
-    public static func + (left: Cooldown, right: Cooldown) -> Cooldown {
+    static func + (left: Cooldown, right: Cooldown) -> Cooldown {
         return add(left: left, right: right)
     }
     
-    public static func += (left: inout Cooldown, right: Cooldown) {
+    static func += (left: inout Cooldown, right: Cooldown) {
         left = add(left: left, right: right)
     }
     
