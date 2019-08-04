@@ -45,6 +45,12 @@
 		34CD32A01F4127730045009B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34CD329F1F4127730045009B /* Assets.xcassets */; };
 		34CD32A41F4127730045009B /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 34CD32861F4127720045009B /* Watch.app */; };
 		34DFE5F91F3B8A64007915D6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DFE5F81F3B8A64007915D6 /* SettingsViewController.swift */; };
+		F32A97BD22F757A700FB4721 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F32A97BC22F757A700FB4721 /* UserNotifications.framework */; };
+		F32A97BF22F757A700FB4721 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F32A97BE22F757A700FB4721 /* UserNotificationsUI.framework */; };
+		F32A97C222F757A700FB4721 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A97C122F757A700FB4721 /* NotificationViewController.swift */; };
+		F32A97C522F757A700FB4721 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F32A97C322F757A700FB4721 /* MainInterface.storyboard */; };
+		F32A97C922F757A700FB4721 /* Notification Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F32A97BB22F757A700FB4721 /* Notification Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F32A97D122F76ACB00FB4721 /* Core_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3422845A206FD94F00EE9548 /* Core_iOS.framework */; };
 		F3308292222327FA0025C9C5 /* ShortcutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3308291222327FA0025C9C5 /* ShortcutService.swift */; };
 		F3708CE72221A31500CFA763 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F3708CE62221A31500CFA763 /* Settings.bundle */; };
 		F3708CF222222D1400CFA763 /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = F3708CEC2221AF1B00CFA763 /* ding.wav */; };
@@ -93,6 +99,13 @@
 			remoteGlobalIDString = 34CD32851F4127720045009B;
 			remoteInfo = Watch;
 		};
+		F32A97C722F757A700FB4721 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 344C1C841F3A451F0005BB10 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F32A97BA22F757A700FB4721;
+			remoteInfo = "Notification Extension";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -124,6 +137,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				F32A97C922F757A700FB4721 /* Notification Extension.appex in Embed App Extensions */,
 				34432A311F40D2C8006BDE24 /* Widget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -196,6 +210,14 @@
 		34CD329F1F4127730045009B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34CD32A11F4127730045009B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34DFE5F81F3B8A64007915D6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F32A97BB22F757A700FB4721 /* Notification Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Notification Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F32A97BC22F757A700FB4721 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		F32A97BE22F757A700FB4721 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		F32A97C122F757A700FB4721 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		F32A97C422F757A700FB4721 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		F32A97C622F757A700FB4721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F32A97CF22F76A3F00FB4721 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
+		F32A97D022F76A3F00FB4721 /* Notification Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Notification Extension.entitlements"; sourceTree = "<group>"; };
 		F3308291222327FA0025C9C5 /* ShortcutService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutService.swift; sourceTree = "<group>"; };
 		F3708CE62221A31500CFA763 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F3708CEC2221AF1B00CFA763 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
@@ -241,6 +263,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F32A97B822F757A700FB4721 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F32A97D122F76ACB00FB4721 /* Core_iOS.framework in Frameworks */,
+				F32A97BF22F757A700FB4721 /* UserNotificationsUI.framework in Frameworks */,
+				F32A97BD22F757A700FB4721 /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -265,6 +297,8 @@
 			isa = PBXGroup;
 			children = (
 				34432A251F40D2C8006BDE24 /* NotificationCenter.framework */,
+				F32A97BC22F757A700FB4721 /* UserNotifications.framework */,
+				F32A97BE22F757A700FB4721 /* UserNotificationsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -309,6 +343,7 @@
 				34432A271F40D2C8006BDE24 /* Widget */,
 				34CD32871F4127720045009B /* Watch */,
 				34CD32961F4127730045009B /* Watch Extension */,
+				F32A97C022F757A700FB4721 /* Notification Extension */,
 				3422845B206FD94F00EE9548 /* Core */,
 				34432A241F40D2C8006BDE24 /* Frameworks */,
 				344C1C8D1F3A451F0005BB10 /* Products */,
@@ -324,6 +359,7 @@
 				34CD32921F4127720045009B /* Watch Extension.appex */,
 				3422845A206FD94F00EE9548 /* Core_iOS.framework */,
 				3422849320700ABD00EE9548 /* Core_watchOS.framework */,
+				F32A97BB22F757A700FB4721 /* Notification Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -381,6 +417,26 @@
 				34A0E7611F4129D7004C3C88 /* Resources */,
 			);
 			path = "Watch Extension";
+			sourceTree = "<group>";
+		};
+		F32A97C022F757A700FB4721 /* Notification Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F32A97C122F757A700FB4721 /* NotificationViewController.swift */,
+				F32A97C322F757A700FB4721 /* MainInterface.storyboard */,
+				F32A97CE22F76A0100FB4721 /* Resources */,
+			);
+			path = "Notification Extension";
+			sourceTree = "<group>";
+		};
+		F32A97CE22F76A0100FB4721 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F32A97CF22F76A3F00FB4721 /* Debug.entitlements */,
+				F32A97D022F76A3F00FB4721 /* Notification Extension.entitlements */,
+				F32A97C622F757A700FB4721 /* Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -477,6 +533,7 @@
 				34432A2F1F40D2C8006BDE24 /* PBXTargetDependency */,
 				34CD32A31F4127730045009B /* PBXTargetDependency */,
 				34228460206FD94F00EE9548 /* PBXTargetDependency */,
+				F32A97C822F757A700FB4721 /* PBXTargetDependency */,
 			);
 			name = Cooldown;
 			productName = Cooldown;
@@ -519,13 +576,30 @@
 			productReference = 34CD32921F4127720045009B /* Watch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
+		F32A97BA22F757A700FB4721 /* Notification Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F32A97CC22F757A700FB4721 /* Build configuration list for PBXNativeTarget "Notification Extension" */;
+			buildPhases = (
+				F32A97B722F757A700FB4721 /* Sources */,
+				F32A97B822F757A700FB4721 /* Frameworks */,
+				F32A97B922F757A700FB4721 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Notification Extension";
+			productName = "Notification Extension";
+			productReference = F32A97BB22F757A700FB4721 /* Notification Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		344C1C841F3A451F0005BB10 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 1030;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Matt Jones";
 				TargetAttributes = {
@@ -577,6 +651,15 @@
 							};
 						};
 					};
+					F32A97BA22F757A700FB4721 = {
+						CreatedOnToolsVersion = 10.3;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 344C1C871F3A451F0005BB10 /* Build configuration list for PBXProject "Cooldown" */;
@@ -596,6 +679,7 @@
 				34432A221F40D2C8006BDE24 /* Widget */,
 				34CD32851F4127720045009B /* Watch */,
 				34CD32911F4127720045009B /* Watch Extension */,
+				F32A97BA22F757A700FB4721 /* Notification Extension */,
 				34228459206FD94F00EE9548 /* Core iOS */,
 				3422848820700ABD00EE9548 /* Core watchOS */,
 			);
@@ -651,6 +735,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				34CD32A01F4127730045009B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F32A97B922F757A700FB4721 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F32A97C522F757A700FB4721 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,6 +822,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F32A97B722F757A700FB4721 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F32A97C222F757A700FB4721 /* NotificationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -762,6 +862,11 @@
 			isa = PBXTargetDependency;
 			target = 34CD32851F4127720045009B /* Watch */;
 			targetProxy = 34CD32A21F4127730045009B /* PBXContainerItemProxy */;
+		};
+		F32A97C822F757A700FB4721 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F32A97BA22F757A700FB4721 /* Notification Extension */;
+			targetProxy = F32A97C722F757A700FB4721 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -796,6 +901,14 @@
 				34CD32891F4127720045009B /* Base */,
 			);
 			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		F32A97C322F757A700FB4721 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F32A97C422F757A700FB4721 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -898,7 +1011,9 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CODE_SIGN_ENTITLEMENTS = Widget/Debug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E5CQS5463W;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = Widget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -917,6 +1032,7 @@
 				CODE_SIGN_ENTITLEMENTS = Widget/Widget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E5CQS5463W;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = Widget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1053,7 +1169,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Cooldown/Debug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E5CQS5463W;
 				INFOPLIST_FILE = Cooldown/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1073,6 +1191,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cooldown/Cooldown.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E5CQS5463W;
 				INFOPLIST_FILE = Cooldown/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1093,6 +1212,7 @@
 				CODE_SIGN_ENTITLEMENTS = Watch/Debug.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				COMPANION_ID = com.mattjones.cooldown.dev;
+				DEVELOPMENT_TEAM = E5CQS5463W;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
@@ -1115,6 +1235,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COMPANION_ID = com.mattjones.cooldown;
+				DEVELOPMENT_TEAM = E5CQS5463W;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
@@ -1165,6 +1286,48 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Release;
+		};
+		F32A97CA22F757A700FB4721 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = "Notification Extension/Resources/Debug.entitlements";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E5CQS5463W;
+				INFOPLIST_FILE = "Notification Extension/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mattjones.cooldown.dev.notification.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Cooldown Notification Extension Dev";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F32A97CB22F757A700FB4721 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = "Notification Extension/Resources/Notification Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = E5CQS5463W;
+				INFOPLIST_FILE = "Notification Extension/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mattjones.cooldown.notification.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Cooldown Notification Extension";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1230,6 +1393,15 @@
 			buildConfigurations = (
 				34CD32A51F4127730045009B /* Debug */,
 				34CD32A61F4127730045009B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F32A97CC22F757A700FB4721 /* Build configuration list for PBXNativeTarget "Notification Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F32A97CA22F757A700FB4721 /* Debug */,
+				F32A97CB22F757A700FB4721 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

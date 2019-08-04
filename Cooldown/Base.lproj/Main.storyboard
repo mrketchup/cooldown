@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xMa-aJ-Mmm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xMa-aJ-Mmm">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,10 +13,6 @@
         <scene sceneID="Fs7-rW-qjC">
             <objects>
                 <viewController id="xMa-aJ-Mmm" customClass="ViewController" customModule="Cooldown" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5rY-de-EO9"/>
-                        <viewControllerLayoutGuide type="bottom" id="NUU-VN-W2q"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Axt-hh-Z9l">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,12 +44,13 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="fwk-yr-LrD" firstAttribute="leading" secondItem="Axt-hh-Z9l" secondAttribute="leadingMargin" id="EXx-QJ-Z36"/>
-                            <constraint firstItem="evQ-r8-Bjd" firstAttribute="centerX" secondItem="Axt-hh-Z9l" secondAttribute="centerX" id="WZ6-DJ-s8o"/>
+                            <constraint firstItem="evQ-r8-Bjd" firstAttribute="centerX" secondItem="1Vv-Xn-rSK" secondAttribute="centerX" id="WZ6-DJ-s8o"/>
+                            <constraint firstItem="fwk-yr-LrD" firstAttribute="top" secondItem="1Vv-Xn-rSK" secondAttribute="top" id="i2n-bR-6fK"/>
                             <constraint firstItem="fwk-yr-LrD" firstAttribute="bottom" secondItem="evQ-r8-Bjd" secondAttribute="firstBaseline" id="l65-QN-9tf"/>
-                            <constraint firstItem="NUU-VN-W2q" firstAttribute="top" secondItem="evQ-r8-Bjd" secondAttribute="bottom" id="mdc-nv-YUq"/>
-                            <constraint firstItem="fwk-yr-LrD" firstAttribute="top" secondItem="5rY-de-EO9" secondAttribute="bottom" id="rjO-F8-IQC"/>
+                            <constraint firstItem="1Vv-Xn-rSK" firstAttribute="bottom" secondItem="evQ-r8-Bjd" secondAttribute="bottom" id="mdc-nv-YUq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fwk-yr-LrD" secondAttribute="trailing" id="uEg-N1-ARS"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="1Vv-Xn-rSK"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="CdI-wZ-raI" appends="YES" id="jbk-sK-hTI"/>
                             <outletCollection property="gestureRecognizers" destination="0We-WC-mR8" appends="YES" id="Vd4-m3-ZsW"/>
@@ -86,10 +84,6 @@
         <scene sceneID="eKA-OK-iAh">
             <objects>
                 <viewController id="DVs-gN-uFl" customClass="SettingsViewController" customModule="Cooldown" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="WMR-Go-bFq"/>
-                        <viewControllerLayoutGuide type="bottom" id="cnC-oo-yAu"/>
-                    </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="xBc-2d-9Qk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -134,16 +128,17 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="0dl-vg-V9J" firstAttribute="centerX" secondItem="xBc-2d-9Qk" secondAttribute="centerX" id="6EU-9A-Jfl"/>
-                            <constraint firstItem="cnC-oo-yAu" firstAttribute="top" secondItem="0dl-vg-V9J" secondAttribute="bottom" id="Cre-RO-f56"/>
+                            <constraint firstItem="0dl-vg-V9J" firstAttribute="centerX" secondItem="KnC-nu-SsX" secondAttribute="centerX" id="6EU-9A-Jfl"/>
+                            <constraint firstItem="KnC-nu-SsX" firstAttribute="bottom" secondItem="0dl-vg-V9J" secondAttribute="bottom" id="Cre-RO-f56"/>
                             <constraint firstItem="0dl-vg-V9J" firstAttribute="top" secondItem="gVV-mI-Cf3" secondAttribute="bottom" id="Jex-85-am4"/>
-                            <constraint firstAttribute="trailing" secondItem="gVV-mI-Cf3" secondAttribute="trailing" constant="16" id="Nd5-rh-RlF"/>
-                            <constraint firstItem="gVV-mI-Cf3" firstAttribute="leading" secondItem="xBc-2d-9Qk" secondAttribute="leading" constant="16" id="SVw-sP-aSg"/>
-                            <constraint firstAttribute="trailing" secondItem="b6b-vp-sHP" secondAttribute="trailing" id="V7F-xR-cQz"/>
+                            <constraint firstItem="KnC-nu-SsX" firstAttribute="trailing" secondItem="gVV-mI-Cf3" secondAttribute="trailing" constant="16" id="Nd5-rh-RlF"/>
+                            <constraint firstItem="gVV-mI-Cf3" firstAttribute="leading" secondItem="KnC-nu-SsX" secondAttribute="leading" constant="16" id="SVw-sP-aSg"/>
+                            <constraint firstItem="KnC-nu-SsX" firstAttribute="trailing" secondItem="b6b-vp-sHP" secondAttribute="trailing" id="V7F-xR-cQz"/>
                             <constraint firstAttribute="bottom" secondItem="b6b-vp-sHP" secondAttribute="bottom" id="aiz-JO-7hf"/>
-                            <constraint firstItem="b6b-vp-sHP" firstAttribute="leading" secondItem="xBc-2d-9Qk" secondAttribute="leading" id="cdW-Ic-E5f"/>
+                            <constraint firstItem="b6b-vp-sHP" firstAttribute="leading" secondItem="KnC-nu-SsX" secondAttribute="leading" id="cdW-Ic-E5f"/>
                             <constraint firstItem="gVV-mI-Cf3" firstAttribute="top" secondItem="b6b-vp-sHP" secondAttribute="top" constant="8" id="eiS-si-tHn"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="KnC-nu-SsX"/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="aXz-ue-ltk" appends="YES" id="TvH-zN-A3x"/>
                         </connections>

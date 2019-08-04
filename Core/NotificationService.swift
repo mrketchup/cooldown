@@ -71,8 +71,7 @@ extension NotificationService: StateObserver {
             content.body = "Time elapsed: \(DateComponentsFormatter.notificationFormatter.string(from: cooldown.remaining) ?? "???")"
             content.sound = UNNotificationSound(named: UNNotificationSoundName("ding.wav"))
             
-            let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: cooldown.target)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: cooldown.remaining, repeats: false)
             
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request) { error in
