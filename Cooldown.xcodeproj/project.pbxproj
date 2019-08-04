@@ -1301,9 +1301,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mattjones.cooldown.dev.notification.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mattjones.cooldown.dev.notification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Cooldown Notification Extension Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "Cooldown Notification Dev";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1322,9 +1322,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mattjones.cooldown.notification.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mattjones.cooldown.notification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Cooldown Notification Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "Cooldown Notification AS";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
