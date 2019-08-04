@@ -180,8 +180,8 @@
 		34432A281F40D2C8006BDE24 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		34432A2B1F40D2C8006BDE24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		34432A2D1F40D2C8006BDE24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		34432A351F40E4FC006BDE24 /* Cooldown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cooldown.entitlements; sourceTree = "<group>"; };
-		34432A361F40E508006BDE24 /* Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Widget.entitlements; sourceTree = "<group>"; };
+		34432A351F40E4FC006BDE24 /* Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
+		34432A361F40E508006BDE24 /* Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
 		34432A371F40E5AC006BDE24 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		34432A381F40E5E5006BDE24 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		34432A3B1F40E673006BDE24 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -194,8 +194,8 @@
 		344E706721A728BB00B2B655 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		344E706A21A7294500B2B655 /* WatchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchService.swift; sourceTree = "<group>"; };
 		344E706D21A743ED00B2B655 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
-		34A0E75D1F41296D004C3C88 /* Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Watch.entitlements; sourceTree = "<group>"; };
-		34A0E75E1F41297B004C3C88 /* Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Watch Extension.entitlements"; sourceTree = "<group>"; };
+		34A0E75D1F41296D004C3C88 /* Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
+		34A0E75E1F41297B004C3C88 /* Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
 		34A0E7601F4129AF004C3C88 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		34A0E7621F412A35004C3C88 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		34B28E4A2070566A00DFD853 /* DateComponentsFormatter+Cooldown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Cooldown.swift"; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 		F32A97C422F757A700FB4721 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		F32A97C622F757A700FB4721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F32A97CF22F76A3F00FB4721 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
-		F32A97D022F76A3F00FB4721 /* Notification Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Notification Extension.entitlements"; sourceTree = "<group>"; };
+		F32A97D022F76A3F00FB4721 /* Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
 		F3308291222327FA0025C9C5 /* ShortcutService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutService.swift; sourceTree = "<group>"; };
 		F3708CE62221A31500CFA763 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F3708CEC2221AF1B00CFA763 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
@@ -317,7 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				34432A371F40E5AC006BDE24 /* Debug.entitlements */,
-				34432A351F40E4FC006BDE24 /* Cooldown.entitlements */,
+				34432A351F40E4FC006BDE24 /* Release.entitlements */,
 				344C1C961F3A451F0005BB10 /* Assets.xcassets */,
 				34084E291F3E4C6E00FEFB4D /* LaunchScreen.storyboard */,
 				344C1C9B1F3A451F0005BB10 /* Info.plist */,
@@ -330,7 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				34432A381F40E5E5006BDE24 /* Debug.entitlements */,
-				34432A361F40E508006BDE24 /* Widget.entitlements */,
+				34432A361F40E508006BDE24 /* Release.entitlements */,
 				34432A2D1F40D2C8006BDE24 /* Info.plist */,
 			);
 			name = Resources;
@@ -381,7 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				34A0E7601F4129AF004C3C88 /* Debug.entitlements */,
-				34A0E75D1F41296D004C3C88 /* Watch.entitlements */,
+				34A0E75D1F41296D004C3C88 /* Release.entitlements */,
 				34CD328B1F4127720045009B /* Assets.xcassets */,
 				34CD328D1F4127720045009B /* Info.plist */,
 			);
@@ -392,7 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				34A0E7621F412A35004C3C88 /* Debug.entitlements */,
-				34A0E75E1F41297B004C3C88 /* Watch Extension.entitlements */,
+				34A0E75E1F41297B004C3C88 /* Release.entitlements */,
 				34CD329F1F4127730045009B /* Assets.xcassets */,
 				34CD32A11F4127730045009B /* Info.plist */,
 			);
@@ -433,7 +433,7 @@
 			isa = PBXGroup;
 			children = (
 				F32A97CF22F76A3F00FB4721 /* Debug.entitlements */,
-				F32A97D022F76A3F00FB4721 /* Notification Extension.entitlements */,
+				F32A97D022F76A3F00FB4721 /* Release.entitlements */,
 				F32A97C622F757A700FB4721 /* Info.plist */,
 			);
 			path = Resources;
@@ -1029,7 +1029,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CODE_SIGN_ENTITLEMENTS = Widget/Widget.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Widget/Release.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E5CQS5463W;
@@ -1188,7 +1188,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Cooldown/Cooldown.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Cooldown/Release.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E5CQS5463W;
@@ -1231,7 +1231,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CODE_SIGN_ENTITLEMENTS = Watch/Watch.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Watch/Release.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COMPANION_ID = com.mattjones.cooldown;
@@ -1274,7 +1274,7 @@
 				APP_ID = com.mattjones.cooldown.watch;
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CODE_SIGN_ENTITLEMENTS = "Watch Extension/Watch Extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Watch Extension/Release.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1314,7 +1314,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_ENTITLEMENTS = "Notification Extension/Resources/Notification Extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Notification Extension/Resources/Release.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = E5CQS5463W;
