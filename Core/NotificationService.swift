@@ -55,8 +55,6 @@ extension NotificationService: UNUserNotificationCenterDelegate {
 extension NotificationService: StateObserver {
     
     public func cooldownUpdated(_ cooldown: Cooldown) {
-        guard cooldown.target > Date() else { return }
-        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
             if !granted, let error = error {
                 print(error)
@@ -65,6 +63,8 @@ extension NotificationService: StateObserver {
             
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+            
+            guard cooldown.target > Date() else { return }
             
             let content = UNMutableNotificationContent()
             content.categoryIdentifier = "cooldown_complete"
