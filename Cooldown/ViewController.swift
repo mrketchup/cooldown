@@ -25,7 +25,7 @@ final class ViewController: UIViewController {
     @IBOutlet private var cooldownLabel: UILabel!
     @IBOutlet private var plusButton: UIButton!
     private var displayLink: CADisplayLink?
-    let presenter = Container.cooldownPresenter()
+    private let presenter = Container.cooldownPresenter()
     
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
     

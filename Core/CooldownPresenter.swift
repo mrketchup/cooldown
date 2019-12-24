@@ -43,6 +43,7 @@ public final class CooldownPresenter {
     public weak var view: CooldownView?
     
     private let state: State
+    private var shouldWarnOnNextUpdateIfNeeded = false
     
     public init(state: State) {
         self.state = state
@@ -77,13 +78,8 @@ public final class CooldownPresenter {
     }
     
     private func bumpCooldown(multipliedBy multiplier: Double) {
+        shouldWarnOnNextUpdateIfNeeded = multiplier > 0
         state.cooldown += Cooldown(created: Date(), remaining: state.cooldownInterval * multiplier)
-        
-        let interval = max(state.cooldown.target.timeIntervalSinceNow, 0)
-        let percent = interval / state.cooldownInterval / 3
-        if percent >= 1 && multiplier > 0 {
-            view?.issueRedZoneWarning()
-        }
     }
     
     public func loadIntervalOptions() {
@@ -127,6 +123,13 @@ extension CooldownPresenter: StateObserver {
     
     public func cooldownUpdated(_ cooldown: Cooldown) {
         refresh()
+        
+        let interval = max(cooldown.target.timeIntervalSinceNow, 0)
+        let percent = interval / state.cooldownInterval / 3
+        if percent >= 1 && shouldWarnOnNextUpdateIfNeeded {
+            shouldWarnOnNextUpdateIfNeeded = false
+            view?.issueRedZoneWarning()
+        }
     }
     
     public func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval) {

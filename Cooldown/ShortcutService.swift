@@ -22,12 +22,23 @@ import Core_iOS
 
 final class ShortcutService: NSObject {
     
+    private let state: State
     private let application: UIApplication
     private let formatter: DateComponentsFormatter
     
-    init(application: UIApplication, formatter: DateComponentsFormatter) {
+    init(state: State, application: UIApplication, formatter: DateComponentsFormatter) {
+        self.state = state
         self.application = application
         self.formatter = formatter
+    }
+    
+    func performAction(for shortcutItem: UIApplicationShortcutItem) -> Bool {
+        guard let multiplier = shortcutItem.userInfo?["multiplier"] as? NSNumber else {
+            return false
+        }
+        
+        state.cooldown += Cooldown(created: Date(), remaining: state.cooldownInterval * multiplier.doubleValue)
+        return true
     }
     
 }
