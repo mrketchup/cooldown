@@ -20,12 +20,12 @@
 import UIKit
 import Core_iOS
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: UIViewController {
     
-    @IBOutlet var shadowView: UIView!
-    @IBOutlet var cooldownDatePicker: UIDatePicker!
+    @IBOutlet private var shadowView: UIView!
+    @IBOutlet private var cooldownDatePicker: UIDatePicker!
     
-    private let presenter = SettingsPresenter()
+    private let presenter = Container.settingsPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +41,11 @@ class SettingsViewController: UIViewController {
         presenter.refresh()
     }
     
-    @IBAction func cooldownDatePickerValueChanged(_ sender: UIDatePicker) {
+    @IBAction private func cooldownDatePickerValueChanged(_ sender: UIDatePicker) {
         presenter.update(interval: sender.countDownDuration)
     }
     
-    @IBAction func dismiss() {
+    @IBAction private func dismiss() {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     

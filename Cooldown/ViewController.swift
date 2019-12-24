@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     @IBOutlet var plusButton: UIButton!
     var displayLink: CADisplayLink?
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
-    let presenter = CooldownPresenter()
+    let presenter = Container.cooldownPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()

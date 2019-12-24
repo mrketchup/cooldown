@@ -26,7 +26,7 @@ class SettingsInterfaceController: WKInterfaceController {
     @IBOutlet var hourPicker: WKInterfacePicker!
     @IBOutlet var minutePicker: WKInterfacePicker!
     
-    private let presenter = SettingsPresenter()
+    private let presenter = Container.settingsPresenter()
     
     var hours = 0
     var minutes = 0

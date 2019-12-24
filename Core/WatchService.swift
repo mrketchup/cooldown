@@ -22,8 +22,7 @@ import WatchConnectivity
 
 public class WatchService: NSObject {
     
-    public static let shared = WatchService()
-    
+    private let state: State
     private var isProcessing = false
     
     private var isConnected: Bool {
@@ -42,9 +41,13 @@ public class WatchService: NSObject {
         return canUpdateContext && WCSession.default.isReachable
     }
     
+    init(state: State) {
+        self.state = state
+    }
+    
     public func activate() {
+        WCSession.default.delegate = self
         if WCSession.isSupported() && WCSession.default.activationState == .notActivated {
-            WCSession.default.delegate = self
             WCSession.default.activate()
         }
     }
@@ -80,8 +83,8 @@ extension WatchService: WCSessionDelegate {
         
         DispatchQueue.main.sync {
             self.isProcessing = true
-            State.shared.cooldown = cooldown
-            State.shared.cooldownInterval = interval
+            state.cooldown = cooldown
+            state.cooldownInterval = interval
             self.isProcessing = false
         }
     }

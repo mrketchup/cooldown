@@ -25,13 +25,14 @@ import Core_iOS
 class NotificationViewController: UIViewController, UNNotificationContentExtension {
 
     @IBOutlet var cooldownLabel: UILabel!
+    private let state = Container.state
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let interval = State.shared.cooldown.remaining
+        let interval = state.cooldown.remaining
         cooldownLabel.text = DateComponentsFormatter.cooldownFormatter.string(from: interval)
         
-        let percent = min(interval / State.shared.cooldownInterval / 3, 1)
+        let percent = min(interval / state.cooldownInterval / 3, 1)
         if percent <= 0.5 {
             view.backgroundColor = UIColor.cooldownGreen.blended(with: .cooldownYellow, percent: CGFloat(percent * 2))
         } else {

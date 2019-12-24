@@ -42,15 +42,18 @@ public class CooldownPresenter {
     
     public weak var view: CooldownView?
     
-    public init() {
-        State.shared.register(self)
+    private let state: State
+    
+    public init(state: State) {
+        self.state = state
+        state.register(self)
     }
     
     public func refresh() {
-        let interval = max(State.shared.cooldown.target.timeIntervalSinceNow, 0)
+        let interval = max(state.cooldown.target.timeIntervalSinceNow, 0)
         
         let backgroundColor: UIColor
-        let percent = min(interval / State.shared.cooldownInterval / 3, 1)
+        let percent = min(interval / state.cooldownInterval / 3, 1)
         if percent <= 0.5 {
             backgroundColor = UIColor.cooldownGreen.blended(with: .cooldownYellow, percent: CGFloat(percent * 2))
         } else {
@@ -58,7 +61,7 @@ public class CooldownPresenter {
         }
         
         #if os(watchOS)
-        view?.render(target: State.shared.cooldown.target, backgroundColor: backgroundColor)
+        view?.render(target: state.cooldown.target, backgroundColor: backgroundColor)
         #else
         let timeRemaining = DateComponentsFormatter.cooldownFormatter.string(from: interval)!
         view?.render(timeRemaining: timeRemaining, backgroundColor: backgroundColor)
@@ -74,10 +77,10 @@ public class CooldownPresenter {
     }
     
     private func bumpCooldown(multipliedBy multiplier: Double) {
-        State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
+        state.cooldown += Cooldown(created: Date(), remaining: state.cooldownInterval * multiplier)
         
-        let interval = max(State.shared.cooldown.target.timeIntervalSinceNow, 0)
-        let percent = interval / State.shared.cooldownInterval / 3
+        let interval = max(state.cooldown.target.timeIntervalSinceNow, 0)
+        let percent = interval / state.cooldownInterval / 3
         if percent >= 1 && multiplier > 0 {
             view?.issueRedZoneWarning()
         }
@@ -103,7 +106,7 @@ public class CooldownPresenter {
         var options = [2.0, 1.5, 0.5]
             .map { multiplier in
                 IntervalOption(
-                    title: "\(prefix)\(formatter.string(from: State.shared.cooldownInterval * multiplier)!)",
+                    title: "\(prefix)\(formatter.string(from: state.cooldownInterval * multiplier)!)",
                     action: { self.bumpCooldown(multipliedBy: multiplier) },
                     optionType: .bump
                 )

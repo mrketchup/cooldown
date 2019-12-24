@@ -45,6 +45,9 @@
 		34CD32A01F4127730045009B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34CD329F1F4127730045009B /* Assets.xcassets */; };
 		34CD32A41F4127730045009B /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 34CD32861F4127720045009B /* Watch.app */; };
 		34DFE5F91F3B8A64007915D6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DFE5F81F3B8A64007915D6 /* SettingsViewController.swift */; };
+		F30123E423AC410C0095A815 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30123E323AC410C0095A815 /* Container.swift */; };
+		F30123E523AC410C0095A815 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30123E323AC410C0095A815 /* Container.swift */; };
+		F30123E723AC5A740095A815 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30123E623AC5A740095A815 /* Container.swift */; };
 		F32A97BD22F757A700FB4721 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F32A97BC22F757A700FB4721 /* UserNotifications.framework */; };
 		F32A97BF22F757A700FB4721 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F32A97BE22F757A700FB4721 /* UserNotificationsUI.framework */; };
 		F32A97C222F757A700FB4721 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A97C122F757A700FB4721 /* NotificationViewController.swift */; };
@@ -210,6 +213,8 @@
 		34CD329F1F4127730045009B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34CD32A11F4127730045009B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34DFE5F81F3B8A64007915D6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F30123E323AC410C0095A815 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		F30123E623AC5A740095A815 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		F32A97BB22F757A700FB4721 /* Notification Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Notification Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32A97BC22F757A700FB4721 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		F32A97BE22F757A700FB4721 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -281,6 +286,7 @@
 			children = (
 				3422845C206FD94F00EE9548 /* Core.h */,
 				3422845D206FD94F00EE9548 /* Info.plist */,
+				F30123E323AC410C0095A815 /* Container.swift */,
 				34B28E5920706D9F00DFD853 /* CooldownPresenter.swift */,
 				344E706D21A743ED00B2B655 /* SettingsPresenter.swift */,
 				34432A3B1F40E673006BDE24 /* State.swift */,
@@ -367,6 +373,7 @@
 		344C1C8E1F3A451F0005BB10 /* Cooldown */ = {
 			isa = PBXGroup;
 			children = (
+				F30123E623AC5A740095A815 /* Container.swift */,
 				344C1C8F1F3A451F0005BB10 /* AppDelegate.swift */,
 				344C1C911F3A451F0005BB10 /* ViewController.swift */,
 				34DFE5F81F3B8A64007915D6 /* SettingsViewController.swift */,
@@ -775,6 +782,7 @@
 				34228468206FD9EB00EE9548 /* State.swift in Sources */,
 				344E706821A728BB00B2B655 /* NotificationService.swift in Sources */,
 				34B28E5A20706D9F00DFD853 /* CooldownPresenter.swift in Sources */,
+				F30123E423AC410C0095A815 /* Container.swift in Sources */,
 				344E706B21A7294500B2B655 /* WatchService.swift in Sources */,
 				344E706E21A743ED00B2B655 /* SettingsPresenter.swift in Sources */,
 			);
@@ -788,6 +796,7 @@
 				34B28E4D2070567200DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */,
 				3422848B20700ABD00EE9548 /* State.swift in Sources */,
 				34B28E5B20706D9F00DFD853 /* CooldownPresenter.swift in Sources */,
+				F30123E523AC410C0095A815 /* Container.swift in Sources */,
 				344E706C21A7294500B2B655 /* WatchService.swift in Sources */,
 				344E706F21A743ED00B2B655 /* SettingsPresenter.swift in Sources */,
 			);
@@ -807,6 +816,7 @@
 			files = (
 				344C1C921F3A451F0005BB10 /* ViewController.swift in Sources */,
 				F3308292222327FA0025C9C5 /* ShortcutService.swift in Sources */,
+				F30123E723AC5A740095A815 /* Container.swift in Sources */,
 				344C1C901F3A451F0005BB10 /* AppDelegate.swift in Sources */,
 				34DFE5F91F3B8A64007915D6 /* SettingsViewController.swift in Sources */,
 			);

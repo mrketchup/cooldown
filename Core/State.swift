@@ -66,8 +66,6 @@ public class State {
         weak var ref: StateObserver?
     }
     
-    public static let shared = State()
-    
     #if DEBUG
     private let storage = UserDefaults(suiteName: "group.mattjones.cooldown.dev")!
     #else

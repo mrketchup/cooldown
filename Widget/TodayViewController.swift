@@ -26,7 +26,7 @@ class TodayViewController: UIViewController {
     @IBOutlet var cooldownLabel: UILabel!
     @IBOutlet var plusButton: UIButton!
     var displayLink: CADisplayLink?
-    let presenter = CooldownPresenter()
+    let presenter = Container.cooldownPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +71,7 @@ extension TodayViewController: CooldownView {
 extension TodayViewController: NCWidgetProviding {
     
     func widgetPerformUpdate(completionHandler: @escaping (NCUpdateResult) -> Void) {
-        State.shared.register(NotificationService.shared)
+        Container.initialize()
         completionHandler(.newData)
     }
     

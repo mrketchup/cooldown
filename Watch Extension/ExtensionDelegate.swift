@@ -23,8 +23,7 @@ import Core_watchOS
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     func applicationDidFinishLaunching() {
-        WatchService.shared.activate()
-        State.shared.register(WatchService.shared)
+        Container.initialize()
     }
     
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {

@@ -27,16 +27,19 @@ public class SettingsPresenter {
     
     public weak var view: SettingsView?
     
-    public init() {
-        State.shared.register(self)
+    private let state: State
+    
+    public init(state: State) {
+        self.state = state
+        state.register(self)
     }
     
     public func refresh() {
-        view?.render(interval: State.shared.cooldownInterval)
+        view?.render(interval: state.cooldownInterval)
     }
     
     public func update(interval: TimeInterval) {
-        State.shared.cooldownInterval = interval
+        state.cooldownInterval = interval
     }
 }
 

@@ -21,9 +21,10 @@ import UserNotifications
 
 public class NotificationService: NSObject {
     
-    public static let shared = NotificationService()
+    private let state: State
     
-    private override init() {
+    init(state: State) {
+        self.state = state
         super.init()
         UNUserNotificationCenter.current().delegate = self
     }
@@ -46,7 +47,7 @@ extension NotificationService: UNUserNotificationCenterDelegate {
         defer { completionHandler() }
         
         guard let multiplier = Double(response.actionIdentifier) else { return }
-        State.shared.cooldown += Cooldown(created: Date(), remaining: State.shared.cooldownInterval * multiplier)
+        state.cooldown += Cooldown(created: Date(), remaining: state.cooldownInterval * multiplier)
     }
     
 }

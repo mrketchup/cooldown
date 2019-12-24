@@ -22,9 +22,13 @@ import Core_iOS
 
 class ShortcutService: NSObject {
     
-    static let shared = ShortcutService()
+    private let application: UIApplication
+    private let formatter: DateComponentsFormatter
     
-    private override init() { super.init() }
+    init(application: UIApplication, formatter: DateComponentsFormatter) {
+        self.application = application
+        self.formatter = formatter
+    }
     
 }
 
