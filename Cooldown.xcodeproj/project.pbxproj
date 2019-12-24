@@ -215,6 +215,9 @@
 		34DFE5F81F3B8A64007915D6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F30123E323AC410C0095A815 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		F30123E623AC5A740095A815 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		F31DF28C23B289F30011056A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F31DF28D23B289F40011056A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		F31DF28F23B28A560011056A /* PRIVACY.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PRIVACY.md; sourceTree = "<group>"; };
 		F32A97BB22F757A700FB4721 /* Notification Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Notification Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32A97BC22F757A700FB4721 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		F32A97BE22F757A700FB4721 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -345,6 +348,9 @@
 		344C1C831F3A451F0005BB10 = {
 			isa = PBXGroup;
 			children = (
+				F31DF28C23B289F30011056A /* README.md */,
+				F31DF28F23B28A560011056A /* PRIVACY.md */,
+				F31DF28D23B289F40011056A /* LICENSE */,
 				344C1C8E1F3A451F0005BB10 /* Cooldown */,
 				34432A271F40D2C8006BDE24 /* Widget */,
 				34CD32871F4127720045009B /* Watch */,
