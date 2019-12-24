@@ -20,13 +20,14 @@
 import UIKit
 import Core_iOS
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
-    @IBOutlet var cooldownLabel: UILabel!
-    @IBOutlet var plusButton: UIButton!
-    var displayLink: CADisplayLink?
-    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+    @IBOutlet private var cooldownLabel: UILabel!
+    @IBOutlet private var plusButton: UIButton!
+    private var displayLink: CADisplayLink?
     let presenter = Container.cooldownPresenter()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,22 +38,22 @@ class ViewController: UIViewController {
         displayLink?.add(to: RunLoop.main, forMode: .common)
     }
     
-    @IBAction func addButtonPressed(_ sender: UIButton) {
+    @IBAction private func addButtonPressed(_ sender: UIButton) {
         presenter.incrementCooldown()
     }
     
-    @IBAction func swipeDown(_ sender: UISwipeGestureRecognizer) {
+    @IBAction private func swipeDown(_ sender: UISwipeGestureRecognizer) {
         presenter.decrementCooldown()
     }
     
-    @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
+    @IBAction private func longPress(_ sender: UILongPressGestureRecognizer) {
         if case .began = sender.state {
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
             presenter.loadIntervalOptions()
         }
     }
     
-    @objc func refresh() {
+    @objc private func refresh() {
         presenter.refresh()
     }
     

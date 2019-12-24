@@ -23,7 +23,7 @@ public protocol SettingsView: class {
     func render(interval: TimeInterval)
 }
 
-public class SettingsPresenter {
+public final class SettingsPresenter {
     
     public weak var view: SettingsView?
     

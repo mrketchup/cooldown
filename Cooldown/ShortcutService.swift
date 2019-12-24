@@ -20,7 +20,7 @@
 import UIKit
 import Core_iOS
 
-class ShortcutService: NSObject {
+final class ShortcutService: NSObject {
     
     private let application: UIApplication
     private let formatter: DateComponentsFormatter

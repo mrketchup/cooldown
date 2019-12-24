@@ -21,16 +21,16 @@ import Foundation
 import WatchKit
 import Core_watchOS
 
-class SettingsInterfaceController: WKInterfaceController {
+final class SettingsInterfaceController: WKInterfaceController {
     
-    @IBOutlet var hourPicker: WKInterfacePicker!
-    @IBOutlet var minutePicker: WKInterfacePicker!
+    @IBOutlet private var hourPicker: WKInterfacePicker!
+    @IBOutlet private var minutePicker: WKInterfacePicker!
     
     private let presenter = Container.settingsPresenter()
     
-    var hours = 0
-    var minutes = 0
-    var pendingCorrection: DispatchWorkItem?
+    private var hours = 0
+    private var minutes = 0
+    private var pendingCorrection: DispatchWorkItem?
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -56,17 +56,17 @@ class SettingsInterfaceController: WKInterfaceController {
         presenter.update(interval: TimeInterval(3600 * hours + 60 * minutes))
     }
     
-    @IBAction func hourPickerAction(_ index: Int) {
+    @IBAction private func hourPickerAction(_ index: Int) {
         hours = index
         correctHoursAndMinutesIfNeeded()
     }
     
-    @IBAction func minutePickerAction(_ index: Int) {
+    @IBAction private func minutePickerAction(_ index: Int) {
         minutes = index
         correctHoursAndMinutesIfNeeded()
     }
     
-    func correctHoursAndMinutesIfNeeded() {
+    private func correctHoursAndMinutesIfNeeded() {
         pendingCorrection?.cancel()
         pendingCorrection = nil
         

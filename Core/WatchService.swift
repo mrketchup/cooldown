@@ -20,7 +20,7 @@
 import Foundation
 import WatchConnectivity
 
-public class WatchService: NSObject {
+public final class WatchService: NSObject {
     
     private let state: State
     private var isProcessing = false

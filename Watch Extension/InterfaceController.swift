@@ -21,13 +21,13 @@ import Foundation
 import WatchKit
 import Core_watchOS
 
-class InterfaceController: WKInterfaceController {
+final class InterfaceController: WKInterfaceController {
     
-    @IBOutlet var interfaceGroup: WKInterfaceGroup!
-    @IBOutlet var cooldownTimer: WKInterfaceTimer!
-    weak var timer: Timer?
-    let presenter = Container.cooldownPresenter()
-    var actions: [() -> Void] = []
+    @IBOutlet private var interfaceGroup: WKInterfaceGroup!
+    @IBOutlet private var cooldownTimer: WKInterfaceTimer!
+    private weak var timer: Timer?
+    private let presenter = Container.cooldownPresenter()
+    private var actions: [() -> Void] = []
     
     override func willActivate() {
         super.willActivate()

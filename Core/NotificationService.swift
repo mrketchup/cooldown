@@ -19,7 +19,7 @@
 
 import UserNotifications
 
-public class NotificationService: NSObject {
+public final class NotificationService: NSObject {
     
     private let state: State
     

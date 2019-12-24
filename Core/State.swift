@@ -60,7 +60,7 @@ public extension StateObserver {
     func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval) {}
 }
 
-public class State {
+public final class State {
     
     private struct WeakObserver {
         weak var ref: StateObserver?

@@ -22,9 +22,9 @@ import UserNotifications
 import UserNotificationsUI
 import Core_iOS
 
-class NotificationViewController: UIViewController, UNNotificationContentExtension {
+final class NotificationViewController: UIViewController, UNNotificationContentExtension {
 
-    @IBOutlet var cooldownLabel: UILabel!
+    @IBOutlet private var cooldownLabel: UILabel!
     private let state = Container.state
     
     override func viewDidLoad() {

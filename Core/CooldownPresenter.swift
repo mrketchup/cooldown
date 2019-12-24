@@ -38,7 +38,7 @@ public protocol CooldownView: class {
     func issueRedZoneWarning()
 }
 
-public class CooldownPresenter {
+public final class CooldownPresenter {
     
     public weak var view: CooldownView?
     

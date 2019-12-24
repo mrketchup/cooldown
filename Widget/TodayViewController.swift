@@ -21,12 +21,12 @@ import UIKit
 import NotificationCenter
 import Core_iOS
 
-class TodayViewController: UIViewController {
+final class TodayViewController: UIViewController {
     
-    @IBOutlet var cooldownLabel: UILabel!
-    @IBOutlet var plusButton: UIButton!
-    var displayLink: CADisplayLink?
-    let presenter = Container.cooldownPresenter()
+    @IBOutlet private var cooldownLabel: UILabel!
+    @IBOutlet private var plusButton: UIButton!
+    private var displayLink: CADisplayLink?
+    private let presenter = Container.cooldownPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +37,11 @@ class TodayViewController: UIViewController {
         displayLink?.add(to: RunLoop.main, forMode: .common)
     }
     
-    @IBAction func addButtonPressed(_ sender: UIButton) {
+    @IBAction private func addButtonPressed(_ sender: UIButton) {
         presenter.incrementCooldown()
     }
     
-    @objc func refresh() {
+    @objc private func refresh() {
         presenter.refresh()
     }
     
