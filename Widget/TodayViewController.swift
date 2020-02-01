@@ -32,6 +32,7 @@ final class TodayViewController: UIViewController {
         super.viewDidLoad()
         presenter.view = self
         cooldownLabel.font = .monospacedDigitSystemFont(ofSize: 80, weight: .light)
+        cooldownLabel.textColor = .white
         displayLink = CADisplayLink(target: self, selector: #selector(refresh))
         displayLink?.preferredFramesPerSecond = 4
         displayLink?.add(to: RunLoop.main, forMode: .common)
