@@ -33,11 +33,15 @@ final class NotificationViewController: UIViewController, UNNotificationContentE
         cooldownLabel.text = DateComponentsFormatter.cooldownFormatter.string(from: interval)
         
         let percent = min(interval / state.cooldownInterval / 3, 1)
+        let color: UIColor
         if percent <= 0.5 {
-            view.backgroundColor = UIColor.cooldownGreen.blended(with: .cooldownYellow, percent: CGFloat(percent * 2))
+            color = UIColor.cooldownGreen.blended(with: .cooldownYellow, percent: CGFloat(percent * 2))
         } else {
-            view.backgroundColor = UIColor.cooldownYellow.blended(with: .cooldownRed, percent: CGFloat((percent - 0.5) * 2))
+            color = UIColor.cooldownYellow.blended(with: .cooldownRed, percent: CGFloat((percent - 0.5) * 2))
         }
+        
+        cooldownLabel.textColor = .textColor(from: color, for: traitCollection.userInterfaceStyle)
+        view.backgroundColor = .backgroundColor(from: color, for: traitCollection.userInterfaceStyle)
     }
     
     func didReceive(_ notification: UNNotification) {}

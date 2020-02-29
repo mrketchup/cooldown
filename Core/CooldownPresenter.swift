@@ -31,7 +31,7 @@ public protocol CooldownView: class {
     func render(target: Date, backgroundColor: UIColor)
     func updateIntervalOptions(_ options: [IntervalOption])
     #else
-    func render(timeRemaining: String, backgroundColor: UIColor)
+    func render(timeRemaining: String, color: UIColor)
     func presentIntervalOptions(_ options: [IntervalOption])
     #endif
     func presentSettings()
@@ -53,19 +53,19 @@ public final class CooldownPresenter {
     public func refresh() {
         let interval = max(state.cooldown.target.timeIntervalSinceNow, 0)
         
-        let backgroundColor: UIColor
+        let color: UIColor
         let percent = min(interval / state.cooldownInterval / 3, 1)
         if percent <= 0.5 {
-            backgroundColor = UIColor.cooldownGreen.blended(with: .cooldownYellow, percent: CGFloat(percent * 2))
+            color = UIColor.cooldownGreen.blended(with: .cooldownYellow, percent: CGFloat(percent * 2))
         } else {
-            backgroundColor = UIColor.cooldownYellow.blended(with: .cooldownRed, percent: CGFloat((percent - 0.5) * 2))
+            color = UIColor.cooldownYellow.blended(with: .cooldownRed, percent: CGFloat((percent - 0.5) * 2))
         }
         
         #if os(watchOS)
-        view?.render(target: state.cooldown.target, backgroundColor: backgroundColor)
+        view?.render(target: state.cooldown.target, backgroundColor: color)
         #else
         let timeRemaining = DateComponentsFormatter.cooldownFormatter.string(from: interval)!
-        view?.render(timeRemaining: timeRemaining, backgroundColor: backgroundColor)
+        view?.render(timeRemaining: timeRemaining, color: color)
         #endif
     }
     

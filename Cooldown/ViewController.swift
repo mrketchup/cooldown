@@ -61,9 +61,11 @@ final class ViewController: UIViewController {
 
 extension ViewController: CooldownView {
     
-    func render(timeRemaining: String, backgroundColor: UIColor) {
+    func render(timeRemaining: String, color: UIColor) {
         cooldownLabel.text = timeRemaining
-        view.backgroundColor = backgroundColor
+        cooldownLabel.textColor = .textColor(from: color, for: traitCollection.userInterfaceStyle)
+        plusButton.tintColor = .textColor(from: color, for: traitCollection.userInterfaceStyle)
+        view.backgroundColor = .backgroundColor(from: color, for: traitCollection.userInterfaceStyle)
     }
     
     func presentIntervalOptions(_ options: [IntervalOption]) {

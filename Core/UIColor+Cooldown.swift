@@ -53,4 +53,38 @@ public extension UIColor {
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
     
+    #if os(iOS)
+    static func textColor(from color: UIColor, for interfaceStyle: UIUserInterfaceStyle) -> UIColor {
+        switch interfaceStyle {
+        case .dark: return color
+        case .light, .unspecified: return .white
+        @unknown default: return .white
+        }
+    }
+    
+    @available(iOS 12.0, *)
+    static func backgroundColor(
+        from color: UIColor,
+        for interfaceStyle: UIUserInterfaceStyle,
+        withPreferredDarkBackground darkBackground: UIColor = .darkBackground
+    ) -> UIColor {
+        switch interfaceStyle {
+        case .dark:
+            return darkBackground
+        case .light, .unspecified:
+            return color
+        @unknown default:
+            return color
+        }
+    }
+    
+    static var darkBackground: UIColor {
+        if #available(iOSApplicationExtension 13.0, *) {
+            return .tertiarySystemBackground
+        } else {
+            return UIColor(red: 0.17, green: 0.17, blue: 0.18, alpha: 1)
+        }
+    }
+    #endif
+    
 }
