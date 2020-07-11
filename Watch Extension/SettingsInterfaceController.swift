@@ -24,7 +24,7 @@ import Core_watchOS
 final class SettingsInterfaceController: WKInterfaceController {
     @IBOutlet private var hourPicker: WKInterfacePicker!
     @IBOutlet private var minutePicker: WKInterfacePicker!
-    private let viewModel = Container.settingsViewModel()
+    private let viewModel = ExtensionDelegate.container.settingsViewModel()
     private var cancellables: Set<AnyCancellable> = []
     private var hours = 0
     private var minutes = 0

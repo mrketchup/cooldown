@@ -25,7 +25,7 @@ import Core_iOS
 final class NotificationViewController: UIViewController, UNNotificationContentExtension {
 
     @IBOutlet private var cooldownLabel: UILabel!
-    private let state = Container.state
+    private let state = Container().state
     
     override func viewDidLoad() {
         super.viewDidLoad()

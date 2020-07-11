@@ -24,7 +24,7 @@ import Core_iOS
 final class SettingsViewController: UIViewController {
     @IBOutlet private var shadowView: UIView!
     @IBOutlet private var cooldownDatePicker: UIDatePicker!
-    private let viewModel = Container.settingsViewModel()
+    private let viewModel = AppDelegate.container.settingsViewModel()
     private var cancellables: Set<AnyCancellable> = []
     
     deinit {
@@ -41,6 +41,10 @@ final class SettingsViewController: UIViewController {
         viewModel.$cooldownInterval
             .assign(to: \.countDownDuration, on: cooldownDatePicker)
             .store(in: &cancellables)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         // Workaround for a UIDatePicker bug not firing the first value change event
         DispatchQueue.main.async {

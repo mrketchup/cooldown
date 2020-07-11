@@ -26,7 +26,7 @@ final class TodayViewController: UIViewController {
     @IBOutlet private var cooldownLabel: UILabel!
     @IBOutlet private var plusButton: UIButton!
     private var displayLink: CADisplayLink?
-    private let viewModel = Container.cooldownViewModel()
+    private let viewModel = TodayViewController.container.cooldownViewModel()
     private var cancellables: Set<AnyCancellable> = []
     
     deinit {
@@ -77,8 +77,9 @@ final class TodayViewController: UIViewController {
 }
 
 extension TodayViewController: NCWidgetProviding {
+    static let container = Container()
+    
     func widgetPerformUpdate(completionHandler: @escaping (NCUpdateResult) -> Void) {
-        Container.initialize()
         completionHandler(.newData)
     }
 }

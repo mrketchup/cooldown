@@ -20,10 +20,11 @@
 import Core_iOS
 
 final class Container: Core_iOS.Container {
-    static let shortcutService = ShortcutService(state: state, application: .shared, formatter: .cooldownFormatter)
+    let shortcutService: ShortcutService
     
-    override class func initialize() {
-        super.initialize()
-        state.register(shortcutService)
+    init() {
+        let state = State()
+        shortcutService = ShortcutService(state: state, application: .shared, formatter: .cooldownFormatter)
+        super.init(state: state)
     }
 }

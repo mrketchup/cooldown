@@ -22,19 +22,17 @@ import Core_iOS
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+    static let container = Container()
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window?.tintColor = .cooldownGreen
-        Container.initialize()
         return true
     }
     
     func application(_ application: UIApplication,
                      performActionFor shortcutItem: UIApplicationShortcutItem,
                      completionHandler: @escaping (Bool) -> Void) {
-        completionHandler(Container.shortcutService.performAction(for: shortcutItem))
+        completionHandler(AppDelegate.container.shortcutService.performAction(for: shortcutItem))
     }
-    
 }

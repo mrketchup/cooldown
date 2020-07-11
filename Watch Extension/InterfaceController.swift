@@ -25,7 +25,7 @@ final class InterfaceController: WKInterfaceController {
     @IBOutlet private var interfaceGroup: WKInterfaceGroup!
     @IBOutlet private var cooldownTimer: WKInterfaceTimer!
     private weak var timer: Timer?
-    private let viewModel = Container.cooldownViewModel()
+    private let viewModel = ExtensionDelegate.container.cooldownViewModel()
     private var cancellables: Set<AnyCancellable> = []
     private var actions: [() -> Void] = []
     

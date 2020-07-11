@@ -20,7 +20,7 @@
 import UIKit
 import Core_iOS
 
-final class ShortcutService: NSObject {
+final class ShortcutService {
     
     private let state: State
     private let application: UIApplication
@@ -30,6 +30,7 @@ final class ShortcutService: NSObject {
         self.state = state
         self.application = application
         self.formatter = formatter
+        state.register(self)
     }
     
     func performAction(for shortcutItem: UIApplicationShortcutItem) -> Bool {

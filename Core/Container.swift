@@ -18,21 +18,26 @@
 //
 
 open class Container {
-    public static let state = State()
-    public static func cooldownViewModel() -> CooldownViewModel { CooldownViewModel(state: state) }
-    public static func settingsViewModel() -> SettingsViewModel { SettingsViewModel(state: state) }
-    public static let watchService = WatchService(state: state)
+    public let state: State
+    public let watchService: WatchService
+    public func cooldownViewModel() -> CooldownViewModel { CooldownViewModel(state: state) }
+    public func settingsViewModel() -> SettingsViewModel { SettingsViewModel(state: state) }
     
     #if !os(watchOS)
-    public static let notificationService = NotificationService(state: state)
+    public let notificationService: NotificationService
     #endif
     
-    open class func initialize() {
-        watchService.activate()
-        state.register(watchService)
+    public init(state: State) {
+        self.watchService = WatchService(state: state)
         
         #if !os(watchOS)
-        state.register(notificationService)
+        self.notificationService = NotificationService(state: state)
         #endif
+        
+        self.state = state
+    }
+    
+    public convenience init() {
+        self.init(state: State())
     }
 }

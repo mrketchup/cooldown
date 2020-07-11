@@ -108,6 +108,8 @@ public final class State {
         }
     }
     
+    public init() {}
+    
     public func register(_ observer: StateObserver) {
         guard !observers.contains(where: { $0.ref === observer }) else { return }
         observers.append(WeakObserver(ref: observer))

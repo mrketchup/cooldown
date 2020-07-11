@@ -25,7 +25,7 @@ final class ViewController: UIViewController {
     @IBOutlet private var cooldownLabel: UILabel!
     @IBOutlet private var plusButton: UIButton!
     private var displayLink: CADisplayLink?
-    private let viewModel = Container.cooldownViewModel()
+    private let viewModel = AppDelegate.container.cooldownViewModel()
     private var cancellables: Set<AnyCancellable> = []
     
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }

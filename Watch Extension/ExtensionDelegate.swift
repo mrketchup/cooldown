@@ -21,9 +21,5 @@ import WatchKit
 import Core_watchOS
 
 final class ExtensionDelegate: NSObject, WKExtensionDelegate {
-    
-    func applicationDidFinishLaunching() {
-        Container.initialize()
-    }
-    
+    static let container = Container()
 }

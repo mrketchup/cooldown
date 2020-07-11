@@ -26,6 +26,7 @@ public final class NotificationService: NSObject {
     init(state: State) {
         self.state = state
         super.init()
+        state.register(self)
         UNUserNotificationCenter.current().delegate = self
     }
     

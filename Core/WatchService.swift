@@ -21,7 +21,6 @@ import Foundation
 import WatchConnectivity
 
 public final class WatchService: NSObject {
-    
     private let state: State
     private var isProcessing = false
     
@@ -43,15 +42,14 @@ public final class WatchService: NSObject {
     
     init(state: State) {
         self.state = state
-    }
-    
-    public func activate() {
+        super.init()
+        state.register(self)
+        
         WCSession.default.delegate = self
         if WCSession.isSupported() && WCSession.default.activationState == .notActivated {
             WCSession.default.activate()
         }
     }
-    
 }
 
 extension WatchService: WCSessionDelegate {
