@@ -18,46 +18,41 @@
 //
 
 import UIKit
+import Combine
 import Core_iOS
 
 final class SettingsViewController: UIViewController {
-    
     @IBOutlet private var shadowView: UIView!
     @IBOutlet private var cooldownDatePicker: UIDatePicker!
+    private let viewModel = Container.settingsViewModel()
+    private var cancellables: Set<AnyCancellable> = []
     
-    private let presenter = Container.settingsPresenter()
+    deinit {
+        cancellables.forEach { $0.cancel() }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.view = self
         shadowView.layer.shadowOffset = CGSize(width: 0, height: -2)
         shadowView.layer.shadowColor = UIColor.black.cgColor
         shadowView.layer.shadowOpacity = 0.15
         shadowView.layer.shadowRadius = 2
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        presenter.refresh()
+        
+        viewModel.$cooldownInterval
+            .assign(to: \.countDownDuration, on: cooldownDatePicker)
+            .store(in: &cancellables)
+        
+        // Workaround for a UIDatePicker bug not firing the first value change event
+        DispatchQueue.main.async {
+            self.cooldownDatePicker.countDownDuration = self.viewModel.cooldownInterval
+        }
     }
     
     @IBAction private func cooldownDatePickerValueChanged(_ sender: UIDatePicker) {
-        presenter.update(interval: sender.countDownDuration)
+        viewModel.update(interval: sender.countDownDuration)
     }
     
     @IBAction private func dismiss() {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
-    
-}
-
-extension SettingsViewController: SettingsView {
-    
-    func render(interval: TimeInterval) {
-        DispatchQueue.main.async {
-            // Workaround for a UIDatePicker bug not firing the first value change event
-            self.cooldownDatePicker.countDownDuration = interval
-        }
-    }
-    
 }

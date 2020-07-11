@@ -19,8 +19,8 @@
 
 open class Container {
     public static let state = State()
-    public static func cooldownPresenter() -> CooldownPresenter { CooldownPresenter(state: state) }
-    public static func settingsPresenter() -> SettingsPresenter { SettingsPresenter(state: state) }
+    public static func cooldownViewModel() -> CooldownViewModel { CooldownViewModel(state: state) }
+    public static func settingsViewModel() -> SettingsViewModel { SettingsViewModel(state: state) }
     public static let watchService = WatchService(state: state)
     
     #if !os(watchOS)

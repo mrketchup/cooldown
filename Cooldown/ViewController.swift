@@ -18,60 +18,75 @@
 //
 
 import UIKit
+import Combine
 import Core_iOS
 
 final class ViewController: UIViewController {
-    
     @IBOutlet private var cooldownLabel: UILabel!
     @IBOutlet private var plusButton: UIButton!
     private var displayLink: CADisplayLink?
-    private let presenter = Container.cooldownPresenter()
+    private let viewModel = Container.cooldownViewModel()
+    private var cancellables: Set<AnyCancellable> = []
     
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
     
+    deinit {
+        displayLink?.invalidate()
+        cancellables.forEach { $0.cancel() }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.view = self
         cooldownLabel.font = .monospacedDigitSystemFont(ofSize: 120, weight: .light)
         displayLink = CADisplayLink(target: self, selector: #selector(refresh))
         displayLink?.preferredFramesPerSecond = 4
         displayLink?.add(to: RunLoop.main, forMode: .common)
+        
+        let colorAndStyle = viewModel.$primaryColor
+            .map { [unowned self] in ($0, self.traitCollection.userInterfaceStyle) }
+        colorAndStyle
+            .map { UIColor.backgroundColor(from: $0, for: $1) }
+            .assign(to: \.backgroundColor, on: view)
+            .store(in: &cancellables)
+        
+        let textColor = colorAndStyle
+            .map { UIColor.textColor(from: $0, for: $1) }
+        textColor
+            .assign(to: \.textColor, on: cooldownLabel)
+            .store(in: &cancellables)
+        textColor
+            .assign(to: \.tintColor, on: plusButton)
+            .store(in: &cancellables)
+        
+        viewModel.$timeRemaining
+            .map(Optional.init)
+            .assign(to: \.text, on: cooldownLabel)
+            .store(in: &cancellables)
+        
+        viewModel.presentSettings
+            .sink { [unowned self] in self.performSegue(withIdentifier: "settings", sender: nil) }
+            .store(in: &cancellables)
+        
+        viewModel.redZoneWarning
+            .sink { UINotificationFeedbackGenerator().notificationOccurred(.warning) }
+            .store(in: &cancellables)
     }
     
     @IBAction private func addButtonPressed(_ sender: UIButton) {
-        presenter.incrementCooldown()
+        viewModel.incrementCooldown()
     }
     
     @IBAction private func swipeDown(_ sender: UISwipeGestureRecognizer) {
-        presenter.decrementCooldown()
+        viewModel.decrementCooldown()
     }
     
     @IBAction private func longPress(_ sender: UILongPressGestureRecognizer) {
-        if case .began = sender.state {
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            presenter.loadIntervalOptions()
-        }
-    }
-    
-    @objc private func refresh() {
-        presenter.refresh()
-    }
-    
-}
-
-extension ViewController: CooldownView {
-    
-    func render(timeRemaining: String, color: UIColor) {
-        cooldownLabel.text = timeRemaining
-        cooldownLabel.textColor = .textColor(from: color, for: traitCollection.userInterfaceStyle)
-        plusButton.tintColor = .textColor(from: color, for: traitCollection.userInterfaceStyle)
-        view.backgroundColor = .backgroundColor(from: color, for: traitCollection.userInterfaceStyle)
-    }
-    
-    func presentIntervalOptions(_ options: [IntervalOption]) {
+        guard case .began = sender.state else { return }
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        for option in options {
+        for option in viewModel.intervalOptions {
             let handler: (UIAlertAction) -> Void = { _ in
                 option.action()
             }
@@ -85,12 +100,7 @@ extension ViewController: CooldownView {
         present(sheet, animated: true)
     }
     
-    func presentSettings() {
-        performSegue(withIdentifier: "settings", sender: nil)
+    @objc private func refresh() {
+        viewModel.refresh()
     }
-    
-    func issueRedZoneWarning() {
-        UINotificationFeedbackGenerator().notificationOccurred(.warning)
-    }
-    
 }

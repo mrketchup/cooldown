@@ -31,12 +31,8 @@
 		344E706821A728BB00B2B655 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E706721A728BB00B2B655 /* NotificationService.swift */; };
 		344E706B21A7294500B2B655 /* WatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E706A21A7294500B2B655 /* WatchService.swift */; };
 		344E706C21A7294500B2B655 /* WatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E706A21A7294500B2B655 /* WatchService.swift */; };
-		344E706E21A743ED00B2B655 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E706D21A743ED00B2B655 /* SettingsPresenter.swift */; };
-		344E706F21A743ED00B2B655 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E706D21A743ED00B2B655 /* SettingsPresenter.swift */; };
 		34B28E4C2070567100DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B28E4A2070566A00DFD853 /* DateComponentsFormatter+Cooldown.swift */; };
 		34B28E4D2070567200DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B28E4A2070566A00DFD853 /* DateComponentsFormatter+Cooldown.swift */; };
-		34B28E5A20706D9F00DFD853 /* CooldownPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B28E5920706D9F00DFD853 /* CooldownPresenter.swift */; };
-		34B28E5B20706D9F00DFD853 /* CooldownPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B28E5920706D9F00DFD853 /* CooldownPresenter.swift */; };
 		34CD328A1F4127720045009B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34CD32881F4127720045009B /* Interface.storyboard */; };
 		34CD328C1F4127720045009B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34CD328B1F4127720045009B /* Assets.xcassets */; };
 		34CD32931F4127730045009B /* Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 34CD32921F4127720045009B /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -57,6 +53,10 @@
 		F3308292222327FA0025C9C5 /* ShortcutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3308291222327FA0025C9C5 /* ShortcutService.swift */; };
 		F3708CE72221A31500CFA763 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F3708CE62221A31500CFA763 /* Settings.bundle */; };
 		F3708CF222222D1400CFA763 /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = F3708CEC2221AF1B00CFA763 /* ding.wav */; };
+		F397EED524BA4773003D2397 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397EED424BA4773003D2397 /* SettingsViewModel.swift */; };
+		F397EED624BA4773003D2397 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397EED424BA4773003D2397 /* SettingsViewModel.swift */; };
+		F3CE62AA24B26C970056B1E3 /* CooldownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CE62A824B268F80056B1E3 /* CooldownViewModel.swift */; };
+		F3CE62AB24B26C980056B1E3 /* CooldownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CE62A824B268F80056B1E3 /* CooldownViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,13 +196,11 @@
 		344C1C9B1F3A451F0005BB10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		344E706721A728BB00B2B655 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		344E706A21A7294500B2B655 /* WatchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchService.swift; sourceTree = "<group>"; };
-		344E706D21A743ED00B2B655 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		34A0E75D1F41296D004C3C88 /* Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
 		34A0E75E1F41297B004C3C88 /* Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
 		34A0E7601F4129AF004C3C88 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		34A0E7621F412A35004C3C88 /* Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Debug.entitlements; sourceTree = "<group>"; };
 		34B28E4A2070566A00DFD853 /* DateComponentsFormatter+Cooldown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Cooldown.swift"; sourceTree = "<group>"; };
-		34B28E5920706D9F00DFD853 /* CooldownPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooldownPresenter.swift; sourceTree = "<group>"; };
 		34CD32861F4127720045009B /* Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34CD32891F4127720045009B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		34CD328B1F4127720045009B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -229,6 +227,8 @@
 		F3308291222327FA0025C9C5 /* ShortcutService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutService.swift; sourceTree = "<group>"; };
 		F3708CE62221A31500CFA763 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F3708CEC2221AF1B00CFA763 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ding.wav; sourceTree = "<group>"; };
+		F397EED424BA4773003D2397 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		F3CE62A824B268F80056B1E3 /* CooldownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooldownViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,8 +290,8 @@
 				3422845C206FD94F00EE9548 /* Core.h */,
 				3422845D206FD94F00EE9548 /* Info.plist */,
 				F30123E323AC410C0095A815 /* Container.swift */,
-				34B28E5920706D9F00DFD853 /* CooldownPresenter.swift */,
-				344E706D21A743ED00B2B655 /* SettingsPresenter.swift */,
+				F3CE62A824B268F80056B1E3 /* CooldownViewModel.swift */,
+				F397EED424BA4773003D2397 /* SettingsViewModel.swift */,
 				34432A3B1F40E673006BDE24 /* State.swift */,
 				34432A3E1F40EAB2006BDE24 /* UIColor+Cooldown.swift */,
 				34B28E4A2070566A00DFD853 /* DateComponentsFormatter+Cooldown.swift */,
@@ -787,10 +787,10 @@
 				34B28E4C2070567100DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */,
 				34228468206FD9EB00EE9548 /* State.swift in Sources */,
 				344E706821A728BB00B2B655 /* NotificationService.swift in Sources */,
-				34B28E5A20706D9F00DFD853 /* CooldownPresenter.swift in Sources */,
+				F3CE62AA24B26C970056B1E3 /* CooldownViewModel.swift in Sources */,
 				F30123E423AC410C0095A815 /* Container.swift in Sources */,
 				344E706B21A7294500B2B655 /* WatchService.swift in Sources */,
-				344E706E21A743ED00B2B655 /* SettingsPresenter.swift in Sources */,
+				F397EED524BA4773003D2397 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -801,10 +801,10 @@
 				3422848A20700ABD00EE9548 /* UIColor+Cooldown.swift in Sources */,
 				34B28E4D2070567200DFD853 /* DateComponentsFormatter+Cooldown.swift in Sources */,
 				3422848B20700ABD00EE9548 /* State.swift in Sources */,
-				34B28E5B20706D9F00DFD853 /* CooldownPresenter.swift in Sources */,
+				F3CE62AB24B26C980056B1E3 /* CooldownViewModel.swift in Sources */,
 				F30123E523AC410C0095A815 /* Container.swift in Sources */,
 				344E706C21A7294500B2B655 /* WatchService.swift in Sources */,
-				344E706F21A743ED00B2B655 /* SettingsPresenter.swift in Sources */,
+				F397EED624BA4773003D2397 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

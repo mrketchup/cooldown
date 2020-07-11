@@ -1,5 +1,5 @@
 //
-// Copyright © 2018 Matt Jones. All rights reserved.
+// Copyright © 2020 Matt Jones. All rights reserved.
 //
 // This file is part of Cooldown.
 //
@@ -19,14 +19,8 @@
 
 import Foundation
 
-public protocol SettingsView: class {
-    func render(interval: TimeInterval)
-}
-
-public final class SettingsPresenter {
-    
-    public weak var view: SettingsView?
-    
+public final class SettingsViewModel: StateObserver {
+    @Published public private(set) var cooldownInterval: TimeInterval = 0
     private let state: State
     
     public init(state: State) {
@@ -34,19 +28,11 @@ public final class SettingsPresenter {
         state.register(self)
     }
     
-    public func refresh() {
-        view?.render(interval: state.cooldownInterval)
-    }
-    
     public func update(interval: TimeInterval) {
         state.cooldownInterval = interval
     }
-}
-
-extension SettingsPresenter: StateObserver {
     
     public func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval) {
-        refresh()
+        self.cooldownInterval = cooldownInterval
     }
-    
 }

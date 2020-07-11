@@ -17,27 +17,56 @@
 // along with Cooldown.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import WatchKit
+import Combine
 import Core_watchOS
 
 final class InterfaceController: WKInterfaceController {
-    
     @IBOutlet private var interfaceGroup: WKInterfaceGroup!
     @IBOutlet private var cooldownTimer: WKInterfaceTimer!
     private weak var timer: Timer?
-    private let presenter = Container.cooldownPresenter()
+    private let viewModel = Container.cooldownViewModel()
+    private var cancellables: Set<AnyCancellable> = []
     private var actions: [() -> Void] = []
+    
+    deinit {
+        cancellables.forEach { $0.cancel() }
+    }
     
     override func willActivate() {
         super.willActivate()
-        presenter.view = self
-        presenter.loadIntervalOptions()
-        
-        let timer = Timer(timeInterval: 0.5, target: self, selector: #selector(refresh), userInfo: nil, repeats: true)
+        let timer = Timer(timeInterval: 0.5, repeats: true) { [unowned self] _ in self.viewModel.refresh() }
         RunLoop.main.add(timer, forMode: .common)
         self.timer = timer
         self.timer?.fire()
+        
+        viewModel.$primaryColor
+            .sink { [interfaceGroup] in interfaceGroup?.setBackgroundColor($0) }
+            .store(in: &cancellables)
+        
+        viewModel.$targetDate
+            .sink { [cooldownTimer] target in
+                if target > Date() {
+                    cooldownTimer?.setDate(target)
+                    cooldownTimer?.start()
+                } else {
+                    cooldownTimer?.setDate(Date())
+                    cooldownTimer?.stop()
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$intervalOptions
+            .sink { [unowned self] in self.updateIntervalOptions($0) }
+            .store(in: &cancellables)
+        
+        viewModel.presentSettings
+            .sink { [unowned self] in self.presentController(withName: "SettingsInterfaceController", context: nil) }
+            .store(in: &cancellables)
+        
+        viewModel.redZoneWarning
+            .sink { WKInterfaceDevice.current().play(.failure) }
+            .store(in: &cancellables)
     }
     
     override func didDeactivate() {
@@ -51,34 +80,15 @@ final class InterfaceController: WKInterfaceController {
     @objc private func action3ButtonPressed() { actions[2]() }
     @objc private func action4ButtonPressed() { actions[3]() }
     
-    @objc private func refresh() {
-        presenter.refresh()
-    }
-    
     @IBAction private func swipeDown(_ sender: WKSwipeGestureRecognizer) {
-        presenter.decrementCooldown()
+        viewModel.decrementCooldown()
     }
     
     @IBAction private func addButtonPressed(_ sender: WKInterfaceButton) {
-        presenter.incrementCooldown()
+        viewModel.incrementCooldown()
     }
     
-}
-
-extension InterfaceController: CooldownView {
-    
-    func render(target: Date, backgroundColor: UIColor) {
-        interfaceGroup.setBackgroundColor(backgroundColor)
-        if target > Date() {
-            cooldownTimer.setDate(target)
-            cooldownTimer.start()
-        } else {
-            cooldownTimer.setDate(Date())
-            cooldownTimer.stop()
-        }
-    }
-    
-    func updateIntervalOptions(_ options: [IntervalOption]) {
+    private func updateIntervalOptions(_ options: [IntervalOption]) {
         clearAllMenuItems()
         actions = options.prefix(4).map { $0.action }
         
@@ -99,13 +109,4 @@ extension InterfaceController: CooldownView {
             addMenuItem(with: icon, title: options[index].title, action: selectors[index])
         }
     }
-    
-    func presentSettings() {
-        presentController(withName: "SettingsInterfaceController", context: nil)
-    }
-    
-    func issueRedZoneWarning() {
-        WKInterfaceDevice.current().play(.failure)
-    }
-    
 }

@@ -19,67 +19,66 @@
 
 import UIKit
 import NotificationCenter
+import Combine
 import Core_iOS
 
 final class TodayViewController: UIViewController {
-    
     @IBOutlet private var cooldownLabel: UILabel!
     @IBOutlet private var plusButton: UIButton!
     private var displayLink: CADisplayLink?
-    private let presenter = Container.cooldownPresenter()
+    private let viewModel = Container.cooldownViewModel()
+    private var cancellables: Set<AnyCancellable> = []
+    
+    deinit {
+        displayLink?.invalidate()
+        cancellables.forEach { $0.cancel() }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.view = self
         cooldownLabel.font = .monospacedDigitSystemFont(ofSize: 80, weight: .light)
-        cooldownLabel.textColor = .white
         displayLink = CADisplayLink(target: self, selector: #selector(refresh))
         displayLink?.preferredFramesPerSecond = 4
         displayLink?.add(to: RunLoop.main, forMode: .common)
+        
+        let colorAndStyle = viewModel.$primaryColor
+            .map { [unowned self] in ($0, self.traitCollection.userInterfaceStyle) }
+        colorAndStyle
+            .map { UIColor.backgroundColor(from: $0, for: $1, withPreferredDarkBackground: .clear) }
+            .assign(to: \.backgroundColor, on: view)
+            .store(in: &cancellables)
+        
+        let textColor = colorAndStyle
+            .map { UIColor.textColor(from: $0, for: $1) }
+        textColor
+            .assign(to: \.textColor, on: cooldownLabel)
+            .store(in: &cancellables)
+        textColor
+            .assign(to: \.tintColor, on: plusButton)
+            .store(in: &cancellables)
+        
+        viewModel.$timeRemaining
+            .map(Optional.init)
+            .assign(to: \.text, on: cooldownLabel)
+            .store(in: &cancellables)
+        
+        viewModel.redZoneWarning
+            .sink { UINotificationFeedbackGenerator().notificationOccurred(.warning) }
+            .store(in: &cancellables)
     }
     
     @IBAction private func addButtonPressed(_ sender: UIButton) {
-        presenter.incrementCooldown()
+        viewModel.incrementCooldown()
     }
     
     @objc private func refresh() {
-        presenter.refresh()
+        viewModel.refresh()
     }
-    
-}
-
-extension TodayViewController: CooldownView {
-    
-    func render(timeRemaining: String, color: UIColor) {
-        cooldownLabel.text = timeRemaining
-        cooldownLabel.textColor = .textColor(from: color, for: traitCollection.userInterfaceStyle)
-        plusButton.tintColor = .textColor(from: color, for: traitCollection.userInterfaceStyle)
-        view.backgroundColor = .backgroundColor(
-            from: color,
-            for: traitCollection.userInterfaceStyle,
-            withPreferredDarkBackground: .clear
-        )
-    }
-    
-    func presentIntervalOptions(_ options: [IntervalOption]) {
-        // Currently NOOP
-    }
-    
-    func presentSettings() {
-        // Currently NOOP
-    }
-    
-    func issueRedZoneWarning() {
-        UINotificationFeedbackGenerator().notificationOccurred(.warning)
-    }
-    
 }
 
 extension TodayViewController: NCWidgetProviding {
-    
     func widgetPerformUpdate(completionHandler: @escaping (NCUpdateResult) -> Void) {
         Container.initialize()
         completionHandler(.newData)
     }
-    
 }
