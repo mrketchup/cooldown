@@ -70,7 +70,7 @@ extension NotificationService: StateObserver {
             let content = UNMutableNotificationContent()
             content.categoryIdentifier = "cooldown_complete"
             content.title = "Cooldown complete"
-            content.body = "Time elapsed: \(DateComponentsFormatter.notificationFormatter.string(from: cooldown.remaining) ?? "???")"
+            content.body = "Time elapsed: \(DateComponentsFormatter.notificationFormatter.string(from: cooldown.targetInterval) ?? "???")"
             content.sound = UNNotificationSound(named: UNNotificationSoundName("ding.wav"))
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: cooldown.remaining, repeats: false)

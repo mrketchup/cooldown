@@ -29,7 +29,7 @@ final class NotificationViewController: UIViewController, UNNotificationContentE
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let interval = state.cooldown.remaining
+        let interval = state.cooldown.targetInterval
         cooldownLabel.text = DateComponentsFormatter.cooldownFormatter.string(from: interval)
         
         let percent = min(interval / state.cooldown.interval / 3, 1)

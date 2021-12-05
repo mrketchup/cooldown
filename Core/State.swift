@@ -29,6 +29,7 @@ public struct Cooldown: Codable {
     public var interval: TimeInterval = 3600
     
     public private(set) var target: Date = .distantPast
+    public private(set) var targetInterval: TimeInterval = 0
     public private(set) var bumpCount = 0
     
     public var remaining: TimeInterval {
@@ -36,8 +37,6 @@ public struct Cooldown: Codable {
     }
     
     public mutating func bump(multipliedBy multiplier: Double = 1) {
-        bumpCount += 1
-        
         let interval = interval * multiplier
         switch mode {
         case .accumulate:
@@ -46,6 +45,9 @@ public struct Cooldown: Codable {
         case .reset:
             target = Date(timeIntervalSinceNow: interval)
         }
+        
+        bumpCount += 1
+        targetInterval = remaining
     }
     
     public mutating func resetBumpCount() {
@@ -85,18 +87,38 @@ public final class State {
     
     public var cooldown: Cooldown {
         get {
-            guard let data = storage.data(forKey: "cooldown"),
-                let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data)
+            if let cooldown = cooldowns.first {
+                return cooldown
+            } else {
+                let cooldown = Cooldown()
+                cooldowns = [cooldown]
+                return cooldown
+            }
+        }
+        set {
+            if cooldowns.isEmpty {
+                cooldowns = [newValue]
+            } else {
+                cooldowns[0] = newValue
+            }
+            
+            notify { $0.cooldownUpdated(newValue) }
+        }
+    }
+    
+    public var cooldowns: [Cooldown] {
+        get {
+            guard let data = storage.data(forKey: "cooldowns"),
+                let cooldown = try? JSONDecoder().decode([Cooldown].self, from: data)
                 else {
-                    return Cooldown()
+                    return [Cooldown()]
             }
             
             return cooldown
         }
         set {
             guard let data = try? JSONEncoder().encode(newValue) else { return }
-            storage.set(data, forKey: "cooldown")
-            notify { $0.cooldownUpdated(newValue) }
+            storage.set(data, forKey: "cooldowns")
         }
     }
     
