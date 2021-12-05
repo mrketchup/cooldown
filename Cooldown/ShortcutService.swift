@@ -38,7 +38,7 @@ final class ShortcutService {
             return false
         }
         
-        state.cooldown += Cooldown(created: Date(), remaining: state.cooldownInterval * multiplier.doubleValue)
+        state.cooldown.bump(multipliedBy: multiplier.doubleValue)
         return true
     }
     
@@ -46,13 +46,13 @@ final class ShortcutService {
 
 extension ShortcutService: StateObserver {
     
-    func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval) {
+    func cooldownUpdated(_ cooldown: Cooldown) {
         let formatter = DateComponentsFormatter.cooldownFormatter
         
         UIApplication.shared.shortcutItems =  [2.0, 1.5, 0.5].map { multiplier in
             UIApplicationShortcutItem(
                 type: "bump",
-                localizedTitle: formatter.string(from: cooldownInterval * multiplier)!,
+                localizedTitle: formatter.string(from: cooldown.interval * multiplier)!,
                 localizedSubtitle: nil,
                 icon: UIApplicationShortcutIcon(type: .add),
                 userInfo: ["multiplier": NSNumber(value: multiplier)]

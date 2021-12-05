@@ -48,7 +48,7 @@ extension NotificationService: UNUserNotificationCenterDelegate {
         defer { completionHandler() }
         
         guard let multiplier = Double(response.actionIdentifier) else { return }
-        state.cooldown += Cooldown(created: Date(), remaining: state.cooldownInterval * multiplier)
+        state.cooldown.bump(multipliedBy: multiplier)
     }
     
 }
@@ -80,15 +80,13 @@ extension NotificationService: StateObserver {
                 if let error = error { print(error) }
             }
         }
-    }
-    
-    public func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval) {
+        
         let formatter = DateComponentsFormatter.cooldownFormatter
         
         let actions =  [2.0, 1.5, 1.0, 0.5].map { multiplier in
             UNNotificationAction(
                 identifier: "\(multiplier)",
-                title: "+\(formatter.string(from: cooldownInterval * multiplier)!)",
+                title: "+\(formatter.string(from: cooldown.interval * multiplier)!)",
                 options: []
             )
         }

@@ -73,8 +73,7 @@ extension WatchService: WCSessionDelegate {
     
     private func process(_ dictionary: [String: Any]) {
         guard let data = dictionary["cooldown"] as? Data,
-            let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data),
-            let interval = dictionary["cooldownInterval"] as? TimeInterval
+            let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data)
             else {
                 return
         }
@@ -82,7 +81,6 @@ extension WatchService: WCSessionDelegate {
         DispatchQueue.main.sync {
             self.isProcessing = true
             state.cooldown = cooldown
-            state.cooldownInterval = interval
             self.isProcessing = false
         }
     }

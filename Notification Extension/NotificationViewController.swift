@@ -32,7 +32,7 @@ final class NotificationViewController: UIViewController, UNNotificationContentE
         let interval = state.cooldown.remaining
         cooldownLabel.text = DateComponentsFormatter.cooldownFormatter.string(from: interval)
         
-        let percent = min(interval / state.cooldownInterval / 3, 1)
+        let percent = min(interval / state.cooldown.interval / 3, 1)
         let color: UIColor
         if percent <= 0.5 {
             color = UIColor.cooldownGreen.blended(with: .cooldownYellow, percent: CGFloat(percent * 2))

@@ -20,44 +20,47 @@
 import Foundation
 
 public struct Cooldown: Codable {
-    public var created: Date
-    public var remaining: TimeInterval
-    public init(created: Date, remaining: TimeInterval) {
-        self.created = created
-        self.remaining = remaining
-    }
-}
-
-public extension Cooldown {
-    
-    var target: Date { return created.addingTimeInterval(remaining) }
-    
-    static func + (left: Cooldown, right: Cooldown) -> Cooldown {
-        return add(left: left, right: right)
+    public enum Mode: Codable {
+        case accumulate, reset
     }
     
-    static func += (left: inout Cooldown, right: Cooldown) {
-        left = add(left: left, right: right)
+    public var title: String?
+    public var mode: Mode = .accumulate
+    public var interval: TimeInterval = 3600
+    
+    public private(set) var target: Date = .distantPast
+    public private(set) var bumpCount = 0
+    
+    public var remaining: TimeInterval {
+        max(target.timeIntervalSinceNow, 0)
     }
     
-    private static func add(left: Cooldown, right: Cooldown) -> Cooldown {
-        let delta = right.created.timeIntervalSince(left.created)
-        let remaining = max(left.remaining - delta, 0) + right.remaining
-        return Cooldown(created: right.created, remaining: remaining)
+    public mutating func bump(multipliedBy multiplier: Double = 1) {
+        bumpCount += 1
+        
+        let interval = interval * multiplier
+        switch mode {
+        case .accumulate:
+            let startDate = max(target, Date())
+            target = startDate.addingTimeInterval(interval)
+        case .reset:
+            target = Date(timeIntervalSinceNow: interval)
+        }
     }
     
+    public mutating func resetBumpCount() {
+        bumpCount = 0
+    }
 }
 
 public protocol StateObserver: AnyObject {
     func stateUpdated(_ state: State)
     func cooldownUpdated(_ cooldown: Cooldown)
-    func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval)
 }
 
 public extension StateObserver {
     func stateUpdated(_ state: State) {}
     func cooldownUpdated(_ cooldown: Cooldown) {}
-    func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval) {}
 }
 
 public final class State {
@@ -76,8 +79,7 @@ public final class State {
     
     public var appContext: [String: Any] {
         return [
-            "cooldown": try! JSONEncoder().encode(cooldown), // swiftlint:disable:this force_try
-            "cooldownInterval": cooldownInterval
+            "cooldown": try! JSONEncoder().encode(cooldown) // swiftlint:disable:this force_try
         ]
     }
     
@@ -86,7 +88,7 @@ public final class State {
             guard let data = storage.data(forKey: "cooldown"),
                 let cooldown = try? JSONDecoder().decode(Cooldown.self, from: data)
                 else {
-                    return Cooldown(created: Date(), remaining: 0)
+                    return Cooldown()
             }
             
             return cooldown
@@ -98,23 +100,12 @@ public final class State {
         }
     }
     
-    public var cooldownInterval: TimeInterval {
-        get {
-            return storage.object(forKey: "cooldownInterval") as? TimeInterval ?? 60 * 60
-        }
-        set {
-            storage.set(newValue, forKey: "cooldownInterval")
-            notify { $0.cooldownIntervalUpdated(newValue) }
-        }
-    }
-    
     public init() {}
     
     public func register(_ observer: StateObserver) {
         guard !observers.contains(where: { $0.ref === observer }) else { return }
         observers.append(WeakObserver(ref: observer))
         observer.cooldownUpdated(cooldown)
-        observer.cooldownIntervalUpdated(cooldownInterval)
         observer.stateUpdated(self)
     }
     

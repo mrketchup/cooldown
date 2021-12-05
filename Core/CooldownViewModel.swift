@@ -47,7 +47,7 @@ public final class CooldownViewModel: StateObserver {
     public func refresh() {
         let interval = max(state.cooldown.target.timeIntervalSinceNow, 0)
         
-        let percent = min(interval / state.cooldownInterval / 3, 1)
+        let percent = min(interval / state.cooldown.interval / 3, 1)
         if percent <= 0.5 {
             primaryColor = UIColor.cooldownGreen.blended(with: .cooldownYellow, percent: CGFloat(percent * 2))
         } else {
@@ -67,10 +67,10 @@ public final class CooldownViewModel: StateObserver {
     }
     
     private func bumpCooldown(multipliedBy multiplier: Double) {
-        state.cooldown += Cooldown(created: Date(), remaining: state.cooldownInterval * multiplier)
+        state.cooldown.bump(multipliedBy: multiplier)
         
         let interval = max(state.cooldown.target.timeIntervalSinceNow, 0)
-        let percent = interval / state.cooldownInterval / 3
+        let percent = interval / state.cooldown.interval / 3
         if percent >= 1 && multiplier > 0 {
             redZoneWarning.send()
         }
@@ -80,7 +80,7 @@ public final class CooldownViewModel: StateObserver {
         refresh()
     }
     
-    public func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval) {
+    public func cooldownUpdated(_ cooldown: Cooldown) {
         let formatter = DateComponentsFormatter.cooldownFormatter
 
         #if os(watchOS)
@@ -92,7 +92,7 @@ public final class CooldownViewModel: StateObserver {
         var options = [2.0, 1.5, 0.5]
             .map { multiplier in
                 (
-                    title: "\(prefix)\(formatter.string(from: cooldownInterval * multiplier)!)",
+                    title: "\(prefix)\(formatter.string(from: cooldown.interval * multiplier)!)",
                     action: { [weak self] in self?.bumpCooldown(multipliedBy: multiplier) }
                 )
             }

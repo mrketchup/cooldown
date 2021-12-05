@@ -29,10 +29,10 @@ public final class SettingsViewModel: StateObserver {
     }
     
     public func update(interval: TimeInterval) {
-        state.cooldownInterval = interval
+        state.cooldown.interval = interval
     }
     
-    public func cooldownIntervalUpdated(_ cooldownInterval: TimeInterval) {
-        self.cooldownInterval = cooldownInterval
+    public func cooldownUpdated(_ cooldown: Cooldown) {
+        cooldownInterval = cooldown.interval
     }
 }
